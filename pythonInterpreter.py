@@ -35,7 +35,7 @@ def t_error(t):
 
 # Build the lexer
 import ply.lex as lex
-lex.lex()
+lexer = lex.lex()
 
 # Parsing rules
 
@@ -108,6 +108,7 @@ import ply.yacc as yacc
 yacc.yacc()
 
 while 1:
+    """
     try:
         s = raw_input('calc > ')
     except EOFError:
@@ -115,3 +116,13 @@ while 1:
     if not s:
         continue
     yacc.parse(s)
+    """
+    try:
+        s = raw_input('calc > ')
+    except EOFError:
+        break
+    if not s:
+        continue
+    lexer.input(s)
+    for token in lexer:
+        print(token)
