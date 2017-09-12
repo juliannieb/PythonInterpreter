@@ -6,7 +6,7 @@ if sys.version_info[0] >= 3:
     raw_input = input
 
 tokens = (
-    'NAME', 'NUMBER', 'STRING'
+    'NAME', 'NUMBER', 'STRING', 'LINE_COMMENT'
 )
 
 literals = ['=', '+', '-', '*', '/', '(', ')']
@@ -18,6 +18,8 @@ t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 line = r'.*'
 
 t_STRING = r'("' + line + '"|\'' + line + '\')'
+
+t_LINE_COMMENT = r'\#' + line
 
 
 def t_NUMBER(t):
@@ -96,6 +98,8 @@ def p_expression_string(p):
     "expression : STRING"
     p[0] = p[1]
 
+def p_expression_line_comment(p):
+    "expression : LINE_COMMENT"
 
 def p_expression_name(p):
     "expression : NAME"

@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'left+-left*/rightUMINUSNAME NUMBER STRINGstatement : NAME "=" expressionstatement : expressionexpression : expression \'+\' expression\n                  | expression \'-\' expression\n                  | expression \'*\' expression\n                  | expression \'/\' expressionexpression : \'-\' expression %prec UMINUSexpression : \'(\' expression \')\'expression : NUMBERexpression : STRINGexpression : NAME'
+_lr_signature = 'left+-left*/rightUMINUSNAME NUMBER STRING LINE_COMMENTstatement : NAME "=" expressionstatement : expressionexpression : expression \'+\' expression\n                  | expression \'-\' expression\n                  | expression \'*\' expression\n                  | expression \'/\' expressionexpression : \'-\' expression %prec UMINUSexpression : \'(\' expression \')\'expression : NUMBERexpression : STRINGexpression : LINE_COMMENTexpression : NAME'
     
-_lr_action_items = {'NAME':([0,4,5,8,9,10,11,12,],[2,14,14,14,14,14,14,14,]),'-':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,],[4,-11,10,4,4,-9,-10,4,4,4,4,4,-7,-11,10,10,-3,-4,-5,-6,-8,]),'(':([0,4,5,8,9,10,11,12,],[5,5,5,5,5,5,5,5,]),'NUMBER':([0,4,5,8,9,10,11,12,],[6,6,6,6,6,6,6,6,]),'STRING':([0,4,5,8,9,10,11,12,],[7,7,7,7,7,7,7,7,]),'$end':([1,2,3,6,7,13,14,16,17,18,19,20,21,],[0,-11,-2,-9,-10,-7,-11,-1,-3,-4,-5,-6,-8,]),'=':([2,],[8,]),'+':([2,3,6,7,13,14,15,16,17,18,19,20,21,],[-11,9,-9,-10,-7,-11,9,9,-3,-4,-5,-6,-8,]),'*':([2,3,6,7,13,14,15,16,17,18,19,20,21,],[-11,11,-9,-10,-7,-11,11,11,11,11,-5,-6,-8,]),'/':([2,3,6,7,13,14,15,16,17,18,19,20,21,],[-11,12,-9,-10,-7,-11,12,12,12,12,-5,-6,-8,]),')':([6,7,13,14,15,17,18,19,20,21,],[-9,-10,-7,-11,21,-3,-4,-5,-6,-8,]),}
+_lr_action_items = {'NAME':([0,4,5,9,10,11,12,13,],[2,15,15,15,15,15,15,15,]),'-':([0,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,],[4,-12,11,4,4,-9,-10,-11,4,4,4,4,4,-7,-12,11,11,-3,-4,-5,-6,-8,]),'(':([0,4,5,9,10,11,12,13,],[5,5,5,5,5,5,5,5,]),'NUMBER':([0,4,5,9,10,11,12,13,],[6,6,6,6,6,6,6,6,]),'STRING':([0,4,5,9,10,11,12,13,],[7,7,7,7,7,7,7,7,]),'LINE_COMMENT':([0,4,5,9,10,11,12,13,],[8,8,8,8,8,8,8,8,]),'$end':([1,2,3,6,7,8,14,15,17,18,19,20,21,22,],[0,-12,-2,-9,-10,-11,-7,-12,-1,-3,-4,-5,-6,-8,]),'=':([2,],[9,]),'+':([2,3,6,7,8,14,15,16,17,18,19,20,21,22,],[-12,10,-9,-10,-11,-7,-12,10,10,-3,-4,-5,-6,-8,]),'*':([2,3,6,7,8,14,15,16,17,18,19,20,21,22,],[-12,12,-9,-10,-11,-7,-12,12,12,12,12,-5,-6,-8,]),'/':([2,3,6,7,8,14,15,16,17,18,19,20,21,22,],[-12,13,-9,-10,-11,-7,-12,13,13,13,13,-5,-6,-8,]),')':([6,7,8,14,15,16,18,19,20,21,22,],[-9,-10,-11,-7,-12,22,-3,-4,-5,-6,-8,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'statement':([0,],[1,]),'expression':([0,4,5,8,9,10,11,12,],[3,13,15,16,17,18,19,20,]),}
+_lr_goto_items = {'statement':([0,],[1,]),'expression':([0,4,5,9,10,11,12,13,],[3,14,16,17,18,19,20,21,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,15 +26,16 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> statement","S'",1,None,None,None),
-  ('statement -> NAME = expression','statement',3,'p_statement_assign','pythonInterpreter.py',55),
-  ('statement -> expression','statement',1,'p_statement_expr','pythonInterpreter.py',60),
-  ('expression -> expression + expression','expression',3,'p_expression_binop','pythonInterpreter.py',65),
-  ('expression -> expression - expression','expression',3,'p_expression_binop','pythonInterpreter.py',66),
-  ('expression -> expression * expression','expression',3,'p_expression_binop','pythonInterpreter.py',67),
-  ('expression -> expression / expression','expression',3,'p_expression_binop','pythonInterpreter.py',68),
-  ('expression -> - expression','expression',2,'p_expression_uminus','pythonInterpreter.py',80),
-  ('expression -> ( expression )','expression',3,'p_expression_group','pythonInterpreter.py',85),
-  ('expression -> NUMBER','expression',1,'p_expression_number','pythonInterpreter.py',90),
-  ('expression -> STRING','expression',1,'p_expression_string','pythonInterpreter.py',94),
-  ('expression -> NAME','expression',1,'p_expression_name','pythonInterpreter.py',99),
+  ('statement -> NAME = expression','statement',3,'p_statement_assign','pythonInterpreter.py',59),
+  ('statement -> expression','statement',1,'p_statement_expr','pythonInterpreter.py',64),
+  ('expression -> expression + expression','expression',3,'p_expression_binop','pythonInterpreter.py',69),
+  ('expression -> expression - expression','expression',3,'p_expression_binop','pythonInterpreter.py',70),
+  ('expression -> expression * expression','expression',3,'p_expression_binop','pythonInterpreter.py',71),
+  ('expression -> expression / expression','expression',3,'p_expression_binop','pythonInterpreter.py',72),
+  ('expression -> - expression','expression',2,'p_expression_uminus','pythonInterpreter.py',84),
+  ('expression -> ( expression )','expression',3,'p_expression_group','pythonInterpreter.py',89),
+  ('expression -> NUMBER','expression',1,'p_expression_number','pythonInterpreter.py',94),
+  ('expression -> STRING','expression',1,'p_expression_string','pythonInterpreter.py',98),
+  ('expression -> LINE_COMMENT','expression',1,'p_expression_line_comment','pythonInterpreter.py',102),
+  ('expression -> NAME','expression',1,'p_expression_name','pythonInterpreter.py',105),
 ]
