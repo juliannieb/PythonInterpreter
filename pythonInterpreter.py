@@ -15,7 +15,9 @@ literals = ['=', '+', '-', '*', '/', '(', ')']
 
 t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
 
-t_STRING = r'("[a-zA-Z0-9_]*"|\'[a-zA-Z0-9_]*\')'
+line = r'.*'
+
+t_STRING = r'("' + line + '"|\'' + line + '\')'
 
 
 def t_NUMBER(t):
