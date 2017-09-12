@@ -13,10 +13,11 @@ tokens = (
     'INPUT',
     'PRINT',
     'IF',
-    'ELSE'
+    'ELSE',
+    'WHILE'
 )
 
-literals = ['=', '+', '-', '*', '/', '(', ')']
+literals = ['=', '+', '-', '*', '/', '(', ')', ':']
 
 # Tokens
 
@@ -43,6 +44,10 @@ def t_IF(t):
 
 def t_ELSE(t):
     r'else'
+    return t
+
+def t_WHILE(t):
+    r'while'
     return t
 
 def t_NUMBER(t):
@@ -169,11 +174,13 @@ while 1:
     yacc.parse(s)
     """
     try:
-        s = raw_input('calc > ')
+        s = raw_input('python 5.0 > ')
     except EOFError:
         break
     if not s:
         continue
+    print(s)
     lexer.input(s)
     for token in lexer:
         print(token)
+    print()
