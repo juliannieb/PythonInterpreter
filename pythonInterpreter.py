@@ -6,7 +6,7 @@ if sys.version_info[0] >= 3:
     raw_input = input
 
 tokens = (
-    'NAME', 'NUMBER',
+    'NAME', 'NUMBER', 'STRING'
 )
 
 literals = ['=', '+', '-', '*', '/', '(', ')']
@@ -14,6 +14,8 @@ literals = ['=', '+', '-', '*', '/', '(', ')']
 # Tokens
 
 t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+
+t_STRING = r'("[a-zA-Z0-9_]*"|\'[a-zA-Z0-9_]*\')'
 
 
 def t_NUMBER(t):
@@ -86,6 +88,10 @@ def p_expression_group(p):
 
 def p_expression_number(p):
     "expression : NUMBER"
+    p[0] = p[1]
+
+def p_expression_string(p):
+    "expression : STRING"
     p[0] = p[1]
 
 
