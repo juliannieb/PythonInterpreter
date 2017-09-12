@@ -6,7 +6,14 @@ if sys.version_info[0] >= 3:
     raw_input = input
 
 tokens = (
-    'NAME', 'NUMBER', 'STRING', 'LINE_COMMENT'
+    'NAME',
+    'NUMBER',
+    'STRING',
+    'LINE_COMMENT',
+    'INPUT',
+    'PRINT',
+    'IF',
+    'ELSE'
 )
 
 literals = ['=', '+', '-', '*', '/', '(', ')']
@@ -21,6 +28,22 @@ t_STRING = r'("' + line + '"|\'' + line + '\')'
 
 t_LINE_COMMENT = r'\#' + line
 
+def t_INPUT(t):
+    #r'input\(' + t_STRING + '\)'
+    r'input'
+    return t
+
+def t_PRINT(t):
+    r'print'
+    return t
+
+def t_IF(t):
+    r'if'
+    return t
+
+def t_ELSE(t):
+    r'else'
+    return t
 
 def t_NUMBER(t):
     r'\d+'
@@ -100,6 +123,22 @@ def p_expression_string(p):
 
 def p_expression_line_comment(p):
     "expression : LINE_COMMENT"
+
+def p_expression_input(p):
+    "expression : INPUT"
+    # TODO: handle input
+
+def p_expression_print(p):
+    "expression : PRINT"
+    # TODO: handle print
+
+def p_expression_if(p):
+    "expression : IF"
+    # TODO: handle if
+
+def p_expression_else(p):
+    "expression : ELSE"
+    # TODO: handle else
 
 def p_expression_name(p):
     "expression : NAME"
