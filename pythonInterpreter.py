@@ -14,7 +14,14 @@ tokens = (
     'PRINT',
     'IF',
     'ELSE',
-    'WHILE'
+    'WHILE',
+    'POINT',
+    'EQ',
+    'NEQ',
+    'GT',
+    'LT',
+    'GET',
+    'LET',
 )
 
 literals = ['=', '+', '-', '*', '/', '(', ')', ':']
@@ -28,6 +35,34 @@ line = r'.*'
 t_STRING = r'("' + line + '"|\'' + line + '\')'
 
 t_LINE_COMMENT = r'\#' + line
+
+def t_POINT(t):
+    r'\.'
+    return t
+
+def t_EQ(t):
+    r'=='
+    return t
+
+def t_NEQ(t):
+    r'!='
+    return t
+
+def t_GT(t):
+    r'>'
+    return t
+
+def t_GET(t):
+    r'>='
+    return t
+
+def t_LT(t):
+    r'<'
+    return t
+
+def t_LET(t):
+    r'<='
+    return t
 
 def t_INPUT(t):
     #r'input\(' + t_STRING + '\)'
@@ -117,7 +152,6 @@ def p_expression_group(p):
     "expression : '(' expression ')'"
     p[0] = p[2]
 
-
 def p_expression_number(p):
     "expression : NUMBER"
     p[0] = p[1]
@@ -128,6 +162,34 @@ def p_expression_string(p):
 
 def p_expression_line_comment(p):
     "expression : LINE_COMMENT"
+
+def p_expression_point(p):
+    "expression : POINT"
+    # TODO: handle point in objects
+
+def p_expression_eq(p):
+    "expression : EQ"
+    # TODO: handle equals
+
+def p_expression_neq(p):
+    "expression : NEQ"
+    # TODO: handle not equals
+
+def p_expression_gt(p):
+    "expression : GT"
+    # TODO: handle greater than
+
+def p_expression_get(p):
+    "expression : GET"
+    # TODO: handle greater or equals than
+
+def p_expression_lt(p):
+    "expression : LT"
+    # TODO: handle less than
+
+def p_expression_let(p):
+    "expression : LET"
+    # TODO: handle less or equals than
 
 def p_expression_input(p):
     "expression : INPUT"
@@ -144,6 +206,10 @@ def p_expression_if(p):
 def p_expression_else(p):
     "expression : ELSE"
     # TODO: handle else
+
+def p_expression_while(p):
+    "expression : WHILE"
+    # TODO: handle while
 
 def p_expression_name(p):
     "expression : NAME"
