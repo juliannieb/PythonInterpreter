@@ -5,16 +5,20 @@ import sys
 if sys.version_info[0] >= 3:
     raw_input = input
 
+reserved_words = {
+    'input': 'INPUT',
+    'print': 'PRINT',
+    'if': 'IF',
+    'else': 'ELSE',
+    'while': 'WHILE',
+    'class': 'CLASS'
+}
+
 tokens = (
     'NAME',
     'NUMBER',
     'STRING',
     'LINE_COMMENT',
-    'INPUT',
-    'PRINT',
-    'IF',
-    'ELSE',
-    'WHILE',
     'POINT',
     'EQ',
     'NEQ',
@@ -22,67 +26,22 @@ tokens = (
     'LT',
     'GET',
     'LET',
-)
-
-literals = ['=', '+', '-', '*', '/', '(', ')', ':']
+    'ASSIGN',
+    'SUM',
+    'SUBST',
+    'PROD',
+    'DIV',
+    'LPARENT',
+    'RPARENT',
+    'COL',
+    'SEMCOL'
+) + tuple(reserved_words.values())
 
 # Tokens
 
-t_NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
-
-line = r'.*'
-
-t_STRING = r'("' + line + '"|\'' + line + '\')'
-
-t_LINE_COMMENT = r'\#' + line
-
-def t_POINT(t):
-    r'\.'
-    return t
-
-def t_EQ(t):
-    r'=='
-    return t
-
-def t_NEQ(t):
-    r'!='
-    return t
-
-def t_GT(t):
-    r'>'
-    return t
-
-def t_GET(t):
-    r'>='
-    return t
-
-def t_LT(t):
-    r'<'
-    return t
-
-def t_LET(t):
-    r'<='
-    return t
-
-def t_INPUT(t):
-    #r'input\(' + t_STRING + '\)'
-    r'input'
-    return t
-
-def t_PRINT(t):
-    r'print'
-    return t
-
-def t_IF(t):
-    r'if'
-    return t
-
-def t_ELSE(t):
-    r'else'
-    return t
-
-def t_WHILE(t):
-    r'while'
+def t_NAME(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = reserved_words.get(t.value, 'NAME')
     return t
 
 def t_NUMBER(t):
@@ -90,17 +49,43 @@ def t_NUMBER(t):
     t.value = int(t.value)
     return t
 
-t_ignore = " \t"
+line = r'.*'
 
+t_STRING = r'("' + line + '"|\'' + line + '\')'
+
+t_LINE_COMMENT = r'\#' + line
+
+t_INPUT = r'input'
+t_PRINT = r'print'
+t_IF = r'if'
+t_ELSE = r'else'
+t_WHILE = r'while'
+t_POINT = r'\.'
+t_EQ = r'=='
+t_NEQ = r'!='
+t_GT = r'>'
+t_LT = r'<'
+t_GET = r'>='
+t_LET = r'<='
+t_ASSIGN = r'='
+t_SUM = r'\+'
+t_SUBST = r'-'
+t_PROD = r'\*'
+t_DIV = r'/'
+t_LPARENT = r'\('
+t_RPARENT = r'\)'
+t_COL = r':'
+t_SEMCOL = r';'
 
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += t.value.count("\n")
 
-
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+
+t_ignore = " \t"
 
 # Build the lexer
 import ply.lex as lex
