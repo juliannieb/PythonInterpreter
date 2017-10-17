@@ -11,7 +11,10 @@ reserved_words = {
     'if': 'IF',
     'else': 'ELSE',
     'while': 'WHILE',
-    'class': 'CLASS'
+    'class': 'CLASS',
+    'and': 'AND',
+    'or': 'OR',
+    'not': 'NOT'
 }
 
 tokens = (

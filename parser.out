@@ -12,6 +12,9 @@ Unused terminals:
     COL
     SEMCOL
     CLASS
+    AND
+    OR
+    NOT
 
 Grammar
 
@@ -50,6 +53,7 @@ Terminals, with rules where they appear
 -                    : 4 7
 /                    : 6
 =                    : 1
+AND                  : 
 ASSIGN               : 
 CLASS                : 
 COL                  : 
@@ -66,7 +70,9 @@ LPARENT              :
 LT                   : 17
 NAME                 : 1 24
 NEQ                  : 14
+NOT                  : 
 NUMBER               : 9
+OR                   : 
 POINT                : 12
 PRINT                : 20
 PROD                 : 
