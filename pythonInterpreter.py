@@ -96,117 +96,73 @@ lexer = lex.lex()
 
 # Parsing rules
 
+"""
 precedence = (
     ('left', '+', '-'),
     ('left', '*', '/'),
     ('right', 'UMINUS'),
 )
+"""
 
 # dictionary of names
 names = {}
 
+def p_sum_expr(p):
+    """sumExpr  : sumExpr sumop term
+                | term
+    """
+    pass
 
-def p_statement_assign(p):
-    'statement : NAME "=" expression'
-    names[p[1]] = p[3]
+def p_sumop(p):
+    """sumop    : SUM
+                | SUBST
+    """
+    pass
 
+def p_term(p):
+    """term : term mulop opElement
+            | opElement
+    """
+    pass
 
-def p_statement_expr(p):
-    'statement : expression'
-    print(p[1])
+def p_op_element(p):
+    """opElement    : name
+                    | number
+    """
+    pass
 
+def p_mulop(p):
+    """mulop    : PROD
+                | DIV
+    """
+    pass
 
-def p_expression_binop(p):
-    '''expression : expression '+' expression
-                  | expression '-' expression
-                  | expression '*' expression
-                  | expression '/' expression'''
-    if p[2] == '+':
-        p[0] = p[1] + p[3]
-    elif p[2] == '-':
-        p[0] = p[1] - p[3]
-    elif p[2] == '*':
-        p[0] = p[1] * p[3]
-    elif p[2] == '/':
-        p[0] = p[1] / p[3]
+def p_input_stmt(p):
+    """inputStmt : INPUT LPARENT RPARENT
+    """
+    pass
 
+def p_output_stmt(p):
+    """outputStmt : PRINT LPARENT STRING RPARENT
+    """
+    pass
 
-def p_expression_uminus(p):
-    "expression : '-' expression %prec UMINUS"
-    p[0] = -p[2]
-
-
-def p_expression_group(p):
-    "expression : '(' expression ')'"
-    p[0] = p[2]
-
-def p_expression_number(p):
-    "expression : NUMBER"
+def p_number(p):
+    "number : NUMBER"
     p[0] = p[1]
 
-def p_expression_string(p):
-    "expression : STRING"
+def p_string(p):
+    "string : STRING"
     p[0] = p[1]
 
-def p_expression_line_comment(p):
-    "expression : LINE_COMMENT"
-
-def p_expression_point(p):
-    "expression : POINT"
-    # TODO: handle point in objects
-
-def p_expression_eq(p):
-    "expression : EQ"
-    # TODO: handle equals
-
-def p_expression_neq(p):
-    "expression : NEQ"
-    # TODO: handle not equals
-
-def p_expression_gt(p):
-    "expression : GT"
-    # TODO: handle greater than
-
-def p_expression_get(p):
-    "expression : GET"
-    # TODO: handle greater or equals than
-
-def p_expression_lt(p):
-    "expression : LT"
-    # TODO: handle less than
-
-def p_expression_let(p):
-    "expression : LET"
-    # TODO: handle less or equals than
-
-def p_expression_input(p):
-    "expression : INPUT"
-    # TODO: handle input
-
-def p_expression_print(p):
-    "expression : PRINT"
-    # TODO: handle print
-
-def p_expression_if(p):
-    "expression : IF"
-    # TODO: handle if
-
-def p_expression_else(p):
-    "expression : ELSE"
-    # TODO: handle else
-
-def p_expression_while(p):
-    "expression : WHILE"
-    # TODO: handle while
-
-def p_expression_name(p):
-    "expression : NAME"
-    try:
-        p[0] = names[p[1]]
-    except LookupError:
-        print("Undefined name '%s'" % p[1])
-        p[0] = 0
-
+def p_name(p):
+    "name : NAME"
+    # try:
+        # p[0] = names[p[1]]
+    # except LookupError:
+        # print("Undefined name '%s'" % p[1])
+        # p[0] = 0
+    pass
 
 def p_error(p):
     if p:
@@ -215,17 +171,16 @@ def p_error(p):
         print("Syntax error at EOF")
 
 import ply.yacc as yacc
-yacc.yacc()
+parser = yacc.yacc()
 
 while 1:
-    """
     try:
         s = raw_input('calc > ')
     except EOFError:
         break
     if not s:
         continue
-    yacc.parse(s)
+    parser.parse(s)
     """
     try:
         s = raw_input('python 5.0 > ')
@@ -238,3 +193,4 @@ while 1:
     for token in lexer:
         print(token)
     print()
+    """

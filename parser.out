@@ -2,15 +2,20 @@ Created by PLY version 3.10 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
+    LINE_COMMENT
+    POINT
+    EQ
+    NEQ
+    GT
+    LT
+    GET
+    LET
     ASSIGN
-    SUM
-    SUBST
-    PROD
-    DIV
-    LPARENT
-    RPARENT
     COL
     SEMCOL
+    IF
+    ELSE
+    WHILE
     CLASS
     AND
     OR
@@ -18,827 +23,261 @@ Unused terminals:
 
 Grammar
 
-Rule 0     S' -> statement
-Rule 1     statement -> NAME = expression
-Rule 2     statement -> expression
-Rule 3     expression -> expression + expression
-Rule 4     expression -> expression - expression
-Rule 5     expression -> expression * expression
-Rule 6     expression -> expression / expression
-Rule 7     expression -> - expression
-Rule 8     expression -> ( expression )
-Rule 9     expression -> NUMBER
-Rule 10    expression -> STRING
-Rule 11    expression -> LINE_COMMENT
-Rule 12    expression -> POINT
-Rule 13    expression -> EQ
-Rule 14    expression -> NEQ
-Rule 15    expression -> GT
-Rule 16    expression -> GET
-Rule 17    expression -> LT
-Rule 18    expression -> LET
-Rule 19    expression -> INPUT
-Rule 20    expression -> PRINT
-Rule 21    expression -> IF
-Rule 22    expression -> ELSE
-Rule 23    expression -> WHILE
-Rule 24    expression -> NAME
+Rule 0     S' -> sumExpr
+Rule 1     sumExpr -> sumExpr sumop term
+Rule 2     sumExpr -> term
+Rule 3     sumop -> SUM
+Rule 4     sumop -> SUBST
+Rule 5     term -> term mulop opElement
+Rule 6     term -> opElement
+Rule 7     opElement -> name
+Rule 8     opElement -> number
+Rule 9     mulop -> PROD
+Rule 10    mulop -> DIV
+Rule 11    inputStmt -> INPUT LPARENT RPARENT
+Rule 12    outputStmt -> PRINT LPARENT STRING RPARENT
+Rule 13    number -> NUMBER
+Rule 14    string -> STRING
+Rule 15    name -> NAME
 
 Terminals, with rules where they appear
 
-(                    : 8
-)                    : 8
-*                    : 5
-+                    : 3
--                    : 4 7
-/                    : 6
-=                    : 1
 AND                  : 
 ASSIGN               : 
 CLASS                : 
 COL                  : 
-DIV                  : 
-ELSE                 : 22
-EQ                   : 13
-GET                  : 16
-GT                   : 15
-IF                   : 21
-INPUT                : 19
-LET                  : 18
-LINE_COMMENT         : 11
-LPARENT              : 
-LT                   : 17
-NAME                 : 1 24
-NEQ                  : 14
+DIV                  : 10
+ELSE                 : 
+EQ                   : 
+GET                  : 
+GT                   : 
+IF                   : 
+INPUT                : 11
+LET                  : 
+LINE_COMMENT         : 
+LPARENT              : 11 12
+LT                   : 
+NAME                 : 15
+NEQ                  : 
 NOT                  : 
-NUMBER               : 9
+NUMBER               : 13
 OR                   : 
-POINT                : 12
-PRINT                : 20
-PROD                 : 
-RPARENT              : 
+POINT                : 
+PRINT                : 12
+PROD                 : 9
+RPARENT              : 11 12
 SEMCOL               : 
-STRING               : 10
-SUBST                : 
-SUM                  : 
-WHILE                : 23
+STRING               : 12 14
+SUBST                : 4
+SUM                  : 3
+WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
-expression           : 1 2 3 3 4 4 5 5 6 6 7 8
-statement            : 0
+inputStmt            : 
+mulop                : 5
+name                 : 7
+number               : 8
+opElement            : 5 6
+outputStmt           : 
+string               : 
+sumExpr              : 1 0
+sumop                : 1
+term                 : 1 2 5
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . statement
-    (1) statement -> . NAME = expression
-    (2) statement -> . expression
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
+    (0) S' -> . sumExpr
+    (1) sumExpr -> . sumExpr sumop term
+    (2) sumExpr -> . term
+    (5) term -> . term mulop opElement
+    (6) term -> . opElement
+    (7) opElement -> . name
+    (8) opElement -> . number
+    (15) name -> . NAME
+    (13) number -> . NUMBER
 
-    NAME            shift and go to state 2
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
+    NAME            shift and go to state 6
+    NUMBER          shift and go to state 7
 
-    statement                      shift and go to state 1
-    expression                     shift and go to state 3
+    sumExpr                        shift and go to state 1
+    term                           shift and go to state 2
+    opElement                      shift and go to state 3
+    name                           shift and go to state 4
+    number                         shift and go to state 5
 
 state 1
 
-    (0) S' -> statement .
+    (0) S' -> sumExpr .
+    (1) sumExpr -> sumExpr . sumop term
+    (3) sumop -> . SUM
+    (4) sumop -> . SUBST
 
+    SUM             shift and go to state 9
+    SUBST           shift and go to state 10
 
+    sumop                          shift and go to state 8
 
 state 2
 
-    (1) statement -> NAME . = expression
-    (24) expression -> NAME .
+    (2) sumExpr -> term .
+    (5) term -> term . mulop opElement
+    (9) mulop -> . PROD
+    (10) mulop -> . DIV
 
-    =               shift and go to state 21
-    +               reduce using rule 24 (expression -> NAME .)
-    -               reduce using rule 24 (expression -> NAME .)
-    *               reduce using rule 24 (expression -> NAME .)
-    /               reduce using rule 24 (expression -> NAME .)
-    $end            reduce using rule 24 (expression -> NAME .)
+    SUM             reduce using rule 2 (sumExpr -> term .)
+    SUBST           reduce using rule 2 (sumExpr -> term .)
+    $end            reduce using rule 2 (sumExpr -> term .)
+    PROD            shift and go to state 12
+    DIV             shift and go to state 13
 
+    mulop                          shift and go to state 11
 
 state 3
 
-    (2) statement -> expression .
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
+    (6) term -> opElement .
 
-    $end            reduce using rule 2 (statement -> expression .)
-    +               shift and go to state 22
-    -               shift and go to state 23
-    *               shift and go to state 24
-    /               shift and go to state 25
+    PROD            reduce using rule 6 (term -> opElement .)
+    DIV             reduce using rule 6 (term -> opElement .)
+    SUM             reduce using rule 6 (term -> opElement .)
+    SUBST           reduce using rule 6 (term -> opElement .)
+    $end            reduce using rule 6 (term -> opElement .)
 
 
 state 4
 
-    (7) expression -> - . expression
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
+    (7) opElement -> name .
 
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
-    NAME            shift and go to state 27
+    PROD            reduce using rule 7 (opElement -> name .)
+    DIV             reduce using rule 7 (opElement -> name .)
+    SUM             reduce using rule 7 (opElement -> name .)
+    SUBST           reduce using rule 7 (opElement -> name .)
+    $end            reduce using rule 7 (opElement -> name .)
 
-    expression                     shift and go to state 26
 
 state 5
 
-    (8) expression -> ( . expression )
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
+    (8) opElement -> number .
 
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
-    NAME            shift and go to state 27
+    PROD            reduce using rule 8 (opElement -> number .)
+    DIV             reduce using rule 8 (opElement -> number .)
+    SUM             reduce using rule 8 (opElement -> number .)
+    SUBST           reduce using rule 8 (opElement -> number .)
+    $end            reduce using rule 8 (opElement -> number .)
 
-    expression                     shift and go to state 28
 
 state 6
 
-    (9) expression -> NUMBER .
+    (15) name -> NAME .
 
-    +               reduce using rule 9 (expression -> NUMBER .)
-    -               reduce using rule 9 (expression -> NUMBER .)
-    *               reduce using rule 9 (expression -> NUMBER .)
-    /               reduce using rule 9 (expression -> NUMBER .)
-    $end            reduce using rule 9 (expression -> NUMBER .)
-    )               reduce using rule 9 (expression -> NUMBER .)
+    PROD            reduce using rule 15 (name -> NAME .)
+    DIV             reduce using rule 15 (name -> NAME .)
+    SUM             reduce using rule 15 (name -> NAME .)
+    SUBST           reduce using rule 15 (name -> NAME .)
+    $end            reduce using rule 15 (name -> NAME .)
 
 
 state 7
 
-    (10) expression -> STRING .
+    (13) number -> NUMBER .
 
-    +               reduce using rule 10 (expression -> STRING .)
-    -               reduce using rule 10 (expression -> STRING .)
-    *               reduce using rule 10 (expression -> STRING .)
-    /               reduce using rule 10 (expression -> STRING .)
-    $end            reduce using rule 10 (expression -> STRING .)
-    )               reduce using rule 10 (expression -> STRING .)
+    PROD            reduce using rule 13 (number -> NUMBER .)
+    DIV             reduce using rule 13 (number -> NUMBER .)
+    SUM             reduce using rule 13 (number -> NUMBER .)
+    SUBST           reduce using rule 13 (number -> NUMBER .)
+    $end            reduce using rule 13 (number -> NUMBER .)
 
 
 state 8
 
-    (11) expression -> LINE_COMMENT .
+    (1) sumExpr -> sumExpr sumop . term
+    (5) term -> . term mulop opElement
+    (6) term -> . opElement
+    (7) opElement -> . name
+    (8) opElement -> . number
+    (15) name -> . NAME
+    (13) number -> . NUMBER
 
-    +               reduce using rule 11 (expression -> LINE_COMMENT .)
-    -               reduce using rule 11 (expression -> LINE_COMMENT .)
-    *               reduce using rule 11 (expression -> LINE_COMMENT .)
-    /               reduce using rule 11 (expression -> LINE_COMMENT .)
-    $end            reduce using rule 11 (expression -> LINE_COMMENT .)
-    )               reduce using rule 11 (expression -> LINE_COMMENT .)
+    NAME            shift and go to state 6
+    NUMBER          shift and go to state 7
 
+    term                           shift and go to state 14
+    opElement                      shift and go to state 3
+    name                           shift and go to state 4
+    number                         shift and go to state 5
 
 state 9
 
-    (12) expression -> POINT .
+    (3) sumop -> SUM .
 
-    +               reduce using rule 12 (expression -> POINT .)
-    -               reduce using rule 12 (expression -> POINT .)
-    *               reduce using rule 12 (expression -> POINT .)
-    /               reduce using rule 12 (expression -> POINT .)
-    $end            reduce using rule 12 (expression -> POINT .)
-    )               reduce using rule 12 (expression -> POINT .)
+    NAME            reduce using rule 3 (sumop -> SUM .)
+    NUMBER          reduce using rule 3 (sumop -> SUM .)
 
 
 state 10
 
-    (13) expression -> EQ .
+    (4) sumop -> SUBST .
 
-    +               reduce using rule 13 (expression -> EQ .)
-    -               reduce using rule 13 (expression -> EQ .)
-    *               reduce using rule 13 (expression -> EQ .)
-    /               reduce using rule 13 (expression -> EQ .)
-    $end            reduce using rule 13 (expression -> EQ .)
-    )               reduce using rule 13 (expression -> EQ .)
+    NAME            reduce using rule 4 (sumop -> SUBST .)
+    NUMBER          reduce using rule 4 (sumop -> SUBST .)
 
 
 state 11
 
-    (14) expression -> NEQ .
+    (5) term -> term mulop . opElement
+    (7) opElement -> . name
+    (8) opElement -> . number
+    (15) name -> . NAME
+    (13) number -> . NUMBER
 
-    +               reduce using rule 14 (expression -> NEQ .)
-    -               reduce using rule 14 (expression -> NEQ .)
-    *               reduce using rule 14 (expression -> NEQ .)
-    /               reduce using rule 14 (expression -> NEQ .)
-    $end            reduce using rule 14 (expression -> NEQ .)
-    )               reduce using rule 14 (expression -> NEQ .)
+    NAME            shift and go to state 6
+    NUMBER          shift and go to state 7
 
+    opElement                      shift and go to state 15
+    name                           shift and go to state 4
+    number                         shift and go to state 5
 
 state 12
 
-    (15) expression -> GT .
+    (9) mulop -> PROD .
 
-    +               reduce using rule 15 (expression -> GT .)
-    -               reduce using rule 15 (expression -> GT .)
-    *               reduce using rule 15 (expression -> GT .)
-    /               reduce using rule 15 (expression -> GT .)
-    $end            reduce using rule 15 (expression -> GT .)
-    )               reduce using rule 15 (expression -> GT .)
+    NAME            reduce using rule 9 (mulop -> PROD .)
+    NUMBER          reduce using rule 9 (mulop -> PROD .)
 
 
 state 13
 
-    (16) expression -> GET .
+    (10) mulop -> DIV .
 
-    +               reduce using rule 16 (expression -> GET .)
-    -               reduce using rule 16 (expression -> GET .)
-    *               reduce using rule 16 (expression -> GET .)
-    /               reduce using rule 16 (expression -> GET .)
-    $end            reduce using rule 16 (expression -> GET .)
-    )               reduce using rule 16 (expression -> GET .)
+    NAME            reduce using rule 10 (mulop -> DIV .)
+    NUMBER          reduce using rule 10 (mulop -> DIV .)
 
 
 state 14
 
-    (17) expression -> LT .
+    (1) sumExpr -> sumExpr sumop term .
+    (5) term -> term . mulop opElement
+    (9) mulop -> . PROD
+    (10) mulop -> . DIV
 
-    +               reduce using rule 17 (expression -> LT .)
-    -               reduce using rule 17 (expression -> LT .)
-    *               reduce using rule 17 (expression -> LT .)
-    /               reduce using rule 17 (expression -> LT .)
-    $end            reduce using rule 17 (expression -> LT .)
-    )               reduce using rule 17 (expression -> LT .)
+    SUM             reduce using rule 1 (sumExpr -> sumExpr sumop term .)
+    SUBST           reduce using rule 1 (sumExpr -> sumExpr sumop term .)
+    $end            reduce using rule 1 (sumExpr -> sumExpr sumop term .)
+    PROD            shift and go to state 12
+    DIV             shift and go to state 13
 
+    mulop                          shift and go to state 11
 
 state 15
 
-    (18) expression -> LET .
-
-    +               reduce using rule 18 (expression -> LET .)
-    -               reduce using rule 18 (expression -> LET .)
-    *               reduce using rule 18 (expression -> LET .)
-    /               reduce using rule 18 (expression -> LET .)
-    $end            reduce using rule 18 (expression -> LET .)
-    )               reduce using rule 18 (expression -> LET .)
-
-
-state 16
-
-    (19) expression -> INPUT .
-
-    +               reduce using rule 19 (expression -> INPUT .)
-    -               reduce using rule 19 (expression -> INPUT .)
-    *               reduce using rule 19 (expression -> INPUT .)
-    /               reduce using rule 19 (expression -> INPUT .)
-    $end            reduce using rule 19 (expression -> INPUT .)
-    )               reduce using rule 19 (expression -> INPUT .)
-
-
-state 17
-
-    (20) expression -> PRINT .
-
-    +               reduce using rule 20 (expression -> PRINT .)
-    -               reduce using rule 20 (expression -> PRINT .)
-    *               reduce using rule 20 (expression -> PRINT .)
-    /               reduce using rule 20 (expression -> PRINT .)
-    $end            reduce using rule 20 (expression -> PRINT .)
-    )               reduce using rule 20 (expression -> PRINT .)
-
-
-state 18
-
-    (21) expression -> IF .
-
-    +               reduce using rule 21 (expression -> IF .)
-    -               reduce using rule 21 (expression -> IF .)
-    *               reduce using rule 21 (expression -> IF .)
-    /               reduce using rule 21 (expression -> IF .)
-    $end            reduce using rule 21 (expression -> IF .)
-    )               reduce using rule 21 (expression -> IF .)
-
-
-state 19
-
-    (22) expression -> ELSE .
-
-    +               reduce using rule 22 (expression -> ELSE .)
-    -               reduce using rule 22 (expression -> ELSE .)
-    *               reduce using rule 22 (expression -> ELSE .)
-    /               reduce using rule 22 (expression -> ELSE .)
-    $end            reduce using rule 22 (expression -> ELSE .)
-    )               reduce using rule 22 (expression -> ELSE .)
-
-
-state 20
-
-    (23) expression -> WHILE .
-
-    +               reduce using rule 23 (expression -> WHILE .)
-    -               reduce using rule 23 (expression -> WHILE .)
-    *               reduce using rule 23 (expression -> WHILE .)
-    /               reduce using rule 23 (expression -> WHILE .)
-    $end            reduce using rule 23 (expression -> WHILE .)
-    )               reduce using rule 23 (expression -> WHILE .)
-
-
-state 21
-
-    (1) statement -> NAME = . expression
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
-
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
-    NAME            shift and go to state 27
-
-    expression                     shift and go to state 29
-
-state 22
-
-    (3) expression -> expression + . expression
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
-
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
-    NAME            shift and go to state 27
-
-    expression                     shift and go to state 30
-
-state 23
-
-    (4) expression -> expression - . expression
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
-
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
-    NAME            shift and go to state 27
-
-    expression                     shift and go to state 31
-
-state 24
-
-    (5) expression -> expression * . expression
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
-
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
-    NAME            shift and go to state 27
-
-    expression                     shift and go to state 32
-
-state 25
-
-    (6) expression -> expression / . expression
-    (3) expression -> . expression + expression
-    (4) expression -> . expression - expression
-    (5) expression -> . expression * expression
-    (6) expression -> . expression / expression
-    (7) expression -> . - expression
-    (8) expression -> . ( expression )
-    (9) expression -> . NUMBER
-    (10) expression -> . STRING
-    (11) expression -> . LINE_COMMENT
-    (12) expression -> . POINT
-    (13) expression -> . EQ
-    (14) expression -> . NEQ
-    (15) expression -> . GT
-    (16) expression -> . GET
-    (17) expression -> . LT
-    (18) expression -> . LET
-    (19) expression -> . INPUT
-    (20) expression -> . PRINT
-    (21) expression -> . IF
-    (22) expression -> . ELSE
-    (23) expression -> . WHILE
-    (24) expression -> . NAME
-
-    -               shift and go to state 4
-    (               shift and go to state 5
-    NUMBER          shift and go to state 6
-    STRING          shift and go to state 7
-    LINE_COMMENT    shift and go to state 8
-    POINT           shift and go to state 9
-    EQ              shift and go to state 10
-    NEQ             shift and go to state 11
-    GT              shift and go to state 12
-    GET             shift and go to state 13
-    LT              shift and go to state 14
-    LET             shift and go to state 15
-    INPUT           shift and go to state 16
-    PRINT           shift and go to state 17
-    IF              shift and go to state 18
-    ELSE            shift and go to state 19
-    WHILE           shift and go to state 20
-    NAME            shift and go to state 27
-
-    expression                     shift and go to state 33
-
-state 26
-
-    (7) expression -> - expression .
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
-
-    +               reduce using rule 7 (expression -> - expression .)
-    -               reduce using rule 7 (expression -> - expression .)
-    *               reduce using rule 7 (expression -> - expression .)
-    /               reduce using rule 7 (expression -> - expression .)
-    $end            reduce using rule 7 (expression -> - expression .)
-    )               reduce using rule 7 (expression -> - expression .)
-
-  ! +               [ shift and go to state 22 ]
-  ! -               [ shift and go to state 23 ]
-  ! *               [ shift and go to state 24 ]
-  ! /               [ shift and go to state 25 ]
-
-
-state 27
-
-    (24) expression -> NAME .
-
-    +               reduce using rule 24 (expression -> NAME .)
-    -               reduce using rule 24 (expression -> NAME .)
-    *               reduce using rule 24 (expression -> NAME .)
-    /               reduce using rule 24 (expression -> NAME .)
-    $end            reduce using rule 24 (expression -> NAME .)
-    )               reduce using rule 24 (expression -> NAME .)
-
-
-state 28
-
-    (8) expression -> ( expression . )
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
-
-    )               shift and go to state 34
-    +               shift and go to state 22
-    -               shift and go to state 23
-    *               shift and go to state 24
-    /               shift and go to state 25
-
-
-state 29
-
-    (1) statement -> NAME = expression .
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
-
-    $end            reduce using rule 1 (statement -> NAME = expression .)
-    +               shift and go to state 22
-    -               shift and go to state 23
-    *               shift and go to state 24
-    /               shift and go to state 25
-
-
-state 30
-
-    (3) expression -> expression + expression .
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
-
-    +               reduce using rule 3 (expression -> expression + expression .)
-    -               reduce using rule 3 (expression -> expression + expression .)
-    $end            reduce using rule 3 (expression -> expression + expression .)
-    )               reduce using rule 3 (expression -> expression + expression .)
-    *               shift and go to state 24
-    /               shift and go to state 25
-
-  ! *               [ reduce using rule 3 (expression -> expression + expression .) ]
-  ! /               [ reduce using rule 3 (expression -> expression + expression .) ]
-  ! +               [ shift and go to state 22 ]
-  ! -               [ shift and go to state 23 ]
-
-
-state 31
-
-    (4) expression -> expression - expression .
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
-
-    +               reduce using rule 4 (expression -> expression - expression .)
-    -               reduce using rule 4 (expression -> expression - expression .)
-    $end            reduce using rule 4 (expression -> expression - expression .)
-    )               reduce using rule 4 (expression -> expression - expression .)
-    *               shift and go to state 24
-    /               shift and go to state 25
-
-  ! *               [ reduce using rule 4 (expression -> expression - expression .) ]
-  ! /               [ reduce using rule 4 (expression -> expression - expression .) ]
-  ! +               [ shift and go to state 22 ]
-  ! -               [ shift and go to state 23 ]
-
-
-state 32
-
-    (5) expression -> expression * expression .
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
-
-    +               reduce using rule 5 (expression -> expression * expression .)
-    -               reduce using rule 5 (expression -> expression * expression .)
-    *               reduce using rule 5 (expression -> expression * expression .)
-    /               reduce using rule 5 (expression -> expression * expression .)
-    $end            reduce using rule 5 (expression -> expression * expression .)
-    )               reduce using rule 5 (expression -> expression * expression .)
-
-  ! +               [ shift and go to state 22 ]
-  ! -               [ shift and go to state 23 ]
-  ! *               [ shift and go to state 24 ]
-  ! /               [ shift and go to state 25 ]
-
-
-state 33
-
-    (6) expression -> expression / expression .
-    (3) expression -> expression . + expression
-    (4) expression -> expression . - expression
-    (5) expression -> expression . * expression
-    (6) expression -> expression . / expression
-
-    +               reduce using rule 6 (expression -> expression / expression .)
-    -               reduce using rule 6 (expression -> expression / expression .)
-    *               reduce using rule 6 (expression -> expression / expression .)
-    /               reduce using rule 6 (expression -> expression / expression .)
-    $end            reduce using rule 6 (expression -> expression / expression .)
-    )               reduce using rule 6 (expression -> expression / expression .)
-
-  ! +               [ shift and go to state 22 ]
-  ! -               [ shift and go to state 23 ]
-  ! *               [ shift and go to state 24 ]
-  ! /               [ shift and go to state 25 ]
-
-
-state 34
-
-    (8) expression -> ( expression ) .
-
-    +               reduce using rule 8 (expression -> ( expression ) .)
-    -               reduce using rule 8 (expression -> ( expression ) .)
-    *               reduce using rule 8 (expression -> ( expression ) .)
-    /               reduce using rule 8 (expression -> ( expression ) .)
-    $end            reduce using rule 8 (expression -> ( expression ) .)
-    )               reduce using rule 8 (expression -> ( expression ) .)
+    (5) term -> term mulop opElement .
+
+    PROD            reduce using rule 5 (term -> term mulop opElement .)
+    DIV             reduce using rule 5 (term -> term mulop opElement .)
+    SUM             reduce using rule 5 (term -> term mulop opElement .)
+    SUBST           reduce using rule 5 (term -> term mulop opElement .)
+    $end            reduce using rule 5 (term -> term mulop opElement .)
 
