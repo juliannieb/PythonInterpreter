@@ -14,7 +14,8 @@ reserved_words = {
     'class': 'CLASS',
     'and': 'AND',
     'or': 'OR',
-    'not': 'NOT'
+    'not': 'NOT',
+    'return': 'RETURN'
 }
 
 tokens = (
@@ -106,6 +107,37 @@ precedence = (
 
 # dictionary of names
 names = {}
+
+def p_suite(p):
+    """suite    : stmt
+                | stmt suite
+    """
+    pass
+
+def p_stmt(p):
+    """stmt : selectionStmt
+            | iterationStmt
+            | returnStmt SEMCOL
+            | inputStmt SEMCOL
+            | outputStmt SEMCOL
+    """
+
+def p_selection_stmt(p):
+    """selectionStmt    : IF simpleExpr COL suite
+                        | IF simpleExpr COL suite ELSE COL suite
+    """
+    pass
+
+def p_iteration_stmt(p):
+    """iterationStmt    : WHILE simpleExpr COL suite
+    """
+    pass
+
+def p_return(p):
+    """returnStmt   : RETURN
+                    | RETURN simpleExpr
+    """
+    pass
 
 def p_simple_expr(p):
     """simpleExpr   : simpleExpr OR andExpr

@@ -5,548 +5,1046 @@ Unused terminals:
     LINE_COMMENT
     POINT
     ASSIGN
-    COL
-    SEMCOL
-    IF
-    ELSE
-    WHILE
     CLASS
 
 Grammar
 
-Rule 0     S' -> simpleExpr
-Rule 1     simpleExpr -> simpleExpr OR andExpr
-Rule 2     simpleExpr -> andExpr
-Rule 3     andExpr -> andExpr AND unaryRelExpr
-Rule 4     andExpr -> unaryRelExpr
-Rule 5     unaryRelExpr -> NOT unaryRelExpr
-Rule 6     unaryRelExpr -> relExpr
-Rule 7     relExpr -> sumExpr relop sumExpr
-Rule 8     relExpr -> sumExpr
-Rule 9     relop -> LTE
-Rule 10    relop -> LT
-Rule 11    relop -> GTE
-Rule 12    relop -> GT
-Rule 13    relop -> EQ
-Rule 14    relop -> NEQ
-Rule 15    sumExpr -> sumExpr sumop term
-Rule 16    sumExpr -> term
-Rule 17    sumop -> SUM
-Rule 18    sumop -> SUBST
-Rule 19    term -> term mulop opElement
-Rule 20    term -> opElement
-Rule 21    opElement -> NAME
-Rule 22    opElement -> NUMBER
-Rule 23    mulop -> PROD
-Rule 24    mulop -> DIV
-Rule 25    inputStmt -> INPUT LPARENT RPARENT
-Rule 26    outputStmt -> PRINT LPARENT STRING RPARENT
-Rule 27    name -> NAME
+Rule 0     S' -> suite
+Rule 1     suite -> stmt
+Rule 2     suite -> stmt suite
+Rule 3     stmt -> selectionStmt
+Rule 4     stmt -> iterationStmt
+Rule 5     stmt -> returnStmt SEMCOL
+Rule 6     stmt -> inputStmt SEMCOL
+Rule 7     stmt -> outputStmt SEMCOL
+Rule 8     selectionStmt -> IF simpleExpr COL suite
+Rule 9     selectionStmt -> IF simpleExpr COL suite ELSE COL suite
+Rule 10    iterationStmt -> WHILE simpleExpr COL suite
+Rule 11    returnStmt -> RETURN
+Rule 12    returnStmt -> RETURN simpleExpr
+Rule 13    simpleExpr -> simpleExpr OR andExpr
+Rule 14    simpleExpr -> andExpr
+Rule 15    andExpr -> andExpr AND unaryRelExpr
+Rule 16    andExpr -> unaryRelExpr
+Rule 17    unaryRelExpr -> NOT unaryRelExpr
+Rule 18    unaryRelExpr -> relExpr
+Rule 19    relExpr -> sumExpr relop sumExpr
+Rule 20    relExpr -> sumExpr
+Rule 21    relop -> LTE
+Rule 22    relop -> LT
+Rule 23    relop -> GTE
+Rule 24    relop -> GT
+Rule 25    relop -> EQ
+Rule 26    relop -> NEQ
+Rule 27    sumExpr -> sumExpr sumop term
+Rule 28    sumExpr -> term
+Rule 29    sumop -> SUM
+Rule 30    sumop -> SUBST
+Rule 31    term -> term mulop opElement
+Rule 32    term -> opElement
+Rule 33    opElement -> NAME
+Rule 34    opElement -> NUMBER
+Rule 35    mulop -> PROD
+Rule 36    mulop -> DIV
+Rule 37    inputStmt -> INPUT LPARENT RPARENT
+Rule 38    outputStmt -> PRINT LPARENT STRING RPARENT
+Rule 39    name -> NAME
 
 Terminals, with rules where they appear
 
-AND                  : 3
+AND                  : 15
 ASSIGN               : 
 CLASS                : 
-COL                  : 
-DIV                  : 24
-ELSE                 : 
-EQ                   : 13
-GT                   : 12
-GTE                  : 11
-IF                   : 
-INPUT                : 25
+COL                  : 8 9 9 10
+DIV                  : 36
+ELSE                 : 9
+EQ                   : 25
+GT                   : 24
+GTE                  : 23
+IF                   : 8 9
+INPUT                : 37
 LINE_COMMENT         : 
-LPARENT              : 25 26
-LT                   : 10
-LTE                  : 9
-NAME                 : 21 27
-NEQ                  : 14
-NOT                  : 5
-NUMBER               : 22
-OR                   : 1
+LPARENT              : 37 38
+LT                   : 22
+LTE                  : 21
+NAME                 : 33 39
+NEQ                  : 26
+NOT                  : 17
+NUMBER               : 34
+OR                   : 13
 POINT                : 
-PRINT                : 26
-PROD                 : 23
-RPARENT              : 25 26
-SEMCOL               : 
-STRING               : 26
-SUBST                : 18
-SUM                  : 17
-WHILE                : 
+PRINT                : 38
+PROD                 : 35
+RETURN               : 11 12
+RPARENT              : 37 38
+SEMCOL               : 5 6 7
+STRING               : 38
+SUBST                : 30
+SUM                  : 29
+WHILE                : 10
 error                : 
 
 Nonterminals, with rules where they appear
 
-andExpr              : 1 2 3
-inputStmt            : 
-mulop                : 19
+andExpr              : 13 14 15
+inputStmt            : 6
+iterationStmt        : 4
+mulop                : 31
 name                 : 
-opElement            : 19 20
-outputStmt           : 
-relExpr              : 6
-relop                : 7
-simpleExpr           : 1 0
-sumExpr              : 7 7 8 15
-sumop                : 15
-term                 : 15 16 19
-unaryRelExpr         : 3 4 5
+opElement            : 31 32
+outputStmt           : 7
+relExpr              : 18
+relop                : 19
+returnStmt           : 5
+selectionStmt        : 3
+simpleExpr           : 8 9 10 12 13
+stmt                 : 1 2
+suite                : 2 8 9 9 10 0
+sumExpr              : 19 19 20 27
+sumop                : 27
+term                 : 27 28 31
+unaryRelExpr         : 15 16 17
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . simpleExpr
-    (1) simpleExpr -> . simpleExpr OR andExpr
-    (2) simpleExpr -> . andExpr
-    (3) andExpr -> . andExpr AND unaryRelExpr
-    (4) andExpr -> . unaryRelExpr
-    (5) unaryRelExpr -> . NOT unaryRelExpr
-    (6) unaryRelExpr -> . relExpr
-    (7) relExpr -> . sumExpr relop sumExpr
-    (8) relExpr -> . sumExpr
-    (15) sumExpr -> . sumExpr sumop term
-    (16) sumExpr -> . term
-    (19) term -> . term mulop opElement
-    (20) term -> . opElement
-    (21) opElement -> . NAME
-    (22) opElement -> . NUMBER
+    (0) S' -> . suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . selectionStmt
+    (4) stmt -> . iterationStmt
+    (5) stmt -> . returnStmt SEMCOL
+    (6) stmt -> . inputStmt SEMCOL
+    (7) stmt -> . outputStmt SEMCOL
+    (8) selectionStmt -> . IF simpleExpr COL suite
+    (9) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (10) iterationStmt -> . WHILE simpleExpr COL suite
+    (11) returnStmt -> . RETURN
+    (12) returnStmt -> . RETURN simpleExpr
+    (37) inputStmt -> . INPUT LPARENT RPARENT
+    (38) outputStmt -> . PRINT LPARENT STRING RPARENT
 
-    NOT             shift and go to state 4
-    NAME            shift and go to state 9
-    NUMBER          shift and go to state 10
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    RETURN          shift and go to state 10
+    INPUT           shift and go to state 11
+    PRINT           shift and go to state 12
 
-    simpleExpr                     shift and go to state 1
-    andExpr                        shift and go to state 2
-    unaryRelExpr                   shift and go to state 3
-    relExpr                        shift and go to state 5
-    sumExpr                        shift and go to state 6
-    term                           shift and go to state 7
-    opElement                      shift and go to state 8
+    suite                          shift and go to state 1
+    stmt                           shift and go to state 2
+    selectionStmt                  shift and go to state 3
+    iterationStmt                  shift and go to state 4
+    returnStmt                     shift and go to state 5
+    inputStmt                      shift and go to state 6
+    outputStmt                     shift and go to state 7
 
 state 1
 
-    (0) S' -> simpleExpr .
-    (1) simpleExpr -> simpleExpr . OR andExpr
+    (0) S' -> suite .
 
-    OR              shift and go to state 11
 
 
 state 2
 
-    (2) simpleExpr -> andExpr .
-    (3) andExpr -> andExpr . AND unaryRelExpr
+    (1) suite -> stmt .
+    (2) suite -> stmt . suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . selectionStmt
+    (4) stmt -> . iterationStmt
+    (5) stmt -> . returnStmt SEMCOL
+    (6) stmt -> . inputStmt SEMCOL
+    (7) stmt -> . outputStmt SEMCOL
+    (8) selectionStmt -> . IF simpleExpr COL suite
+    (9) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (10) iterationStmt -> . WHILE simpleExpr COL suite
+    (11) returnStmt -> . RETURN
+    (12) returnStmt -> . RETURN simpleExpr
+    (37) inputStmt -> . INPUT LPARENT RPARENT
+    (38) outputStmt -> . PRINT LPARENT STRING RPARENT
 
-    OR              reduce using rule 2 (simpleExpr -> andExpr .)
-    $end            reduce using rule 2 (simpleExpr -> andExpr .)
-    AND             shift and go to state 12
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for RETURN resolved as shift
+  ! shift/reduce conflict for INPUT resolved as shift
+  ! shift/reduce conflict for PRINT resolved as shift
+    $end            reduce using rule 1 (suite -> stmt .)
+    ELSE            reduce using rule 1 (suite -> stmt .)
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    RETURN          shift and go to state 10
+    INPUT           shift and go to state 11
+    PRINT           shift and go to state 12
 
+  ! IF              [ reduce using rule 1 (suite -> stmt .) ]
+  ! WHILE           [ reduce using rule 1 (suite -> stmt .) ]
+  ! RETURN          [ reduce using rule 1 (suite -> stmt .) ]
+  ! INPUT           [ reduce using rule 1 (suite -> stmt .) ]
+  ! PRINT           [ reduce using rule 1 (suite -> stmt .) ]
+
+    stmt                           shift and go to state 2
+    suite                          shift and go to state 13
+    selectionStmt                  shift and go to state 3
+    iterationStmt                  shift and go to state 4
+    returnStmt                     shift and go to state 5
+    inputStmt                      shift and go to state 6
+    outputStmt                     shift and go to state 7
 
 state 3
 
-    (4) andExpr -> unaryRelExpr .
+    (3) stmt -> selectionStmt .
 
-    AND             reduce using rule 4 (andExpr -> unaryRelExpr .)
-    OR              reduce using rule 4 (andExpr -> unaryRelExpr .)
-    $end            reduce using rule 4 (andExpr -> unaryRelExpr .)
+    IF              reduce using rule 3 (stmt -> selectionStmt .)
+    WHILE           reduce using rule 3 (stmt -> selectionStmt .)
+    RETURN          reduce using rule 3 (stmt -> selectionStmt .)
+    INPUT           reduce using rule 3 (stmt -> selectionStmt .)
+    PRINT           reduce using rule 3 (stmt -> selectionStmt .)
+    $end            reduce using rule 3 (stmt -> selectionStmt .)
+    ELSE            reduce using rule 3 (stmt -> selectionStmt .)
 
 
 state 4
 
-    (5) unaryRelExpr -> NOT . unaryRelExpr
-    (5) unaryRelExpr -> . NOT unaryRelExpr
-    (6) unaryRelExpr -> . relExpr
-    (7) relExpr -> . sumExpr relop sumExpr
-    (8) relExpr -> . sumExpr
-    (15) sumExpr -> . sumExpr sumop term
-    (16) sumExpr -> . term
-    (19) term -> . term mulop opElement
-    (20) term -> . opElement
-    (21) opElement -> . NAME
-    (22) opElement -> . NUMBER
+    (4) stmt -> iterationStmt .
 
-    NOT             shift and go to state 4
-    NAME            shift and go to state 9
-    NUMBER          shift and go to state 10
+    IF              reduce using rule 4 (stmt -> iterationStmt .)
+    WHILE           reduce using rule 4 (stmt -> iterationStmt .)
+    RETURN          reduce using rule 4 (stmt -> iterationStmt .)
+    INPUT           reduce using rule 4 (stmt -> iterationStmt .)
+    PRINT           reduce using rule 4 (stmt -> iterationStmt .)
+    $end            reduce using rule 4 (stmt -> iterationStmt .)
+    ELSE            reduce using rule 4 (stmt -> iterationStmt .)
 
-    unaryRelExpr                   shift and go to state 13
-    relExpr                        shift and go to state 5
-    sumExpr                        shift and go to state 6
-    term                           shift and go to state 7
-    opElement                      shift and go to state 8
 
 state 5
 
-    (6) unaryRelExpr -> relExpr .
+    (5) stmt -> returnStmt . SEMCOL
 
-    AND             reduce using rule 6 (unaryRelExpr -> relExpr .)
-    OR              reduce using rule 6 (unaryRelExpr -> relExpr .)
-    $end            reduce using rule 6 (unaryRelExpr -> relExpr .)
+    SEMCOL          shift and go to state 14
 
 
 state 6
 
-    (7) relExpr -> sumExpr . relop sumExpr
-    (8) relExpr -> sumExpr .
-    (15) sumExpr -> sumExpr . sumop term
-    (9) relop -> . LTE
-    (10) relop -> . LT
-    (11) relop -> . GTE
-    (12) relop -> . GT
-    (13) relop -> . EQ
-    (14) relop -> . NEQ
-    (17) sumop -> . SUM
-    (18) sumop -> . SUBST
+    (6) stmt -> inputStmt . SEMCOL
 
-    AND             reduce using rule 8 (relExpr -> sumExpr .)
-    OR              reduce using rule 8 (relExpr -> sumExpr .)
-    $end            reduce using rule 8 (relExpr -> sumExpr .)
-    LTE             shift and go to state 16
-    LT              shift and go to state 17
-    GTE             shift and go to state 18
-    GT              shift and go to state 19
-    EQ              shift and go to state 20
-    NEQ             shift and go to state 21
-    SUM             shift and go to state 22
-    SUBST           shift and go to state 23
+    SEMCOL          shift and go to state 15
 
-    relop                          shift and go to state 14
-    sumop                          shift and go to state 15
 
 state 7
 
-    (16) sumExpr -> term .
-    (19) term -> term . mulop opElement
-    (23) mulop -> . PROD
-    (24) mulop -> . DIV
+    (7) stmt -> outputStmt . SEMCOL
 
-    LTE             reduce using rule 16 (sumExpr -> term .)
-    LT              reduce using rule 16 (sumExpr -> term .)
-    GTE             reduce using rule 16 (sumExpr -> term .)
-    GT              reduce using rule 16 (sumExpr -> term .)
-    EQ              reduce using rule 16 (sumExpr -> term .)
-    NEQ             reduce using rule 16 (sumExpr -> term .)
-    SUM             reduce using rule 16 (sumExpr -> term .)
-    SUBST           reduce using rule 16 (sumExpr -> term .)
-    AND             reduce using rule 16 (sumExpr -> term .)
-    OR              reduce using rule 16 (sumExpr -> term .)
-    $end            reduce using rule 16 (sumExpr -> term .)
-    PROD            shift and go to state 25
-    DIV             shift and go to state 26
+    SEMCOL          shift and go to state 16
 
-    mulop                          shift and go to state 24
 
 state 8
 
-    (20) term -> opElement .
+    (8) selectionStmt -> IF . simpleExpr COL suite
+    (9) selectionStmt -> IF . simpleExpr COL suite ELSE COL suite
+    (13) simpleExpr -> . simpleExpr OR andExpr
+    (14) simpleExpr -> . andExpr
+    (15) andExpr -> . andExpr AND unaryRelExpr
+    (16) andExpr -> . unaryRelExpr
+    (17) unaryRelExpr -> . NOT unaryRelExpr
+    (18) unaryRelExpr -> . relExpr
+    (19) relExpr -> . sumExpr relop sumExpr
+    (20) relExpr -> . sumExpr
+    (27) sumExpr -> . sumExpr sumop term
+    (28) sumExpr -> . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
 
-    PROD            reduce using rule 20 (term -> opElement .)
-    DIV             reduce using rule 20 (term -> opElement .)
-    LTE             reduce using rule 20 (term -> opElement .)
-    LT              reduce using rule 20 (term -> opElement .)
-    GTE             reduce using rule 20 (term -> opElement .)
-    GT              reduce using rule 20 (term -> opElement .)
-    EQ              reduce using rule 20 (term -> opElement .)
-    NEQ             reduce using rule 20 (term -> opElement .)
-    SUM             reduce using rule 20 (term -> opElement .)
-    SUBST           reduce using rule 20 (term -> opElement .)
-    AND             reduce using rule 20 (term -> opElement .)
-    OR              reduce using rule 20 (term -> opElement .)
-    $end            reduce using rule 20 (term -> opElement .)
+    NOT             shift and go to state 20
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
 
+    simpleExpr                     shift and go to state 17
+    andExpr                        shift and go to state 18
+    unaryRelExpr                   shift and go to state 19
+    relExpr                        shift and go to state 21
+    sumExpr                        shift and go to state 22
+    term                           shift and go to state 23
+    opElement                      shift and go to state 24
 
 state 9
 
-    (21) opElement -> NAME .
+    (10) iterationStmt -> WHILE . simpleExpr COL suite
+    (13) simpleExpr -> . simpleExpr OR andExpr
+    (14) simpleExpr -> . andExpr
+    (15) andExpr -> . andExpr AND unaryRelExpr
+    (16) andExpr -> . unaryRelExpr
+    (17) unaryRelExpr -> . NOT unaryRelExpr
+    (18) unaryRelExpr -> . relExpr
+    (19) relExpr -> . sumExpr relop sumExpr
+    (20) relExpr -> . sumExpr
+    (27) sumExpr -> . sumExpr sumop term
+    (28) sumExpr -> . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
 
-    PROD            reduce using rule 21 (opElement -> NAME .)
-    DIV             reduce using rule 21 (opElement -> NAME .)
-    LTE             reduce using rule 21 (opElement -> NAME .)
-    LT              reduce using rule 21 (opElement -> NAME .)
-    GTE             reduce using rule 21 (opElement -> NAME .)
-    GT              reduce using rule 21 (opElement -> NAME .)
-    EQ              reduce using rule 21 (opElement -> NAME .)
-    NEQ             reduce using rule 21 (opElement -> NAME .)
-    SUM             reduce using rule 21 (opElement -> NAME .)
-    SUBST           reduce using rule 21 (opElement -> NAME .)
-    AND             reduce using rule 21 (opElement -> NAME .)
-    OR              reduce using rule 21 (opElement -> NAME .)
-    $end            reduce using rule 21 (opElement -> NAME .)
+    NOT             shift and go to state 20
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
 
+    simpleExpr                     shift and go to state 27
+    andExpr                        shift and go to state 18
+    unaryRelExpr                   shift and go to state 19
+    relExpr                        shift and go to state 21
+    sumExpr                        shift and go to state 22
+    term                           shift and go to state 23
+    opElement                      shift and go to state 24
 
 state 10
 
-    (22) opElement -> NUMBER .
+    (11) returnStmt -> RETURN .
+    (12) returnStmt -> RETURN . simpleExpr
+    (13) simpleExpr -> . simpleExpr OR andExpr
+    (14) simpleExpr -> . andExpr
+    (15) andExpr -> . andExpr AND unaryRelExpr
+    (16) andExpr -> . unaryRelExpr
+    (17) unaryRelExpr -> . NOT unaryRelExpr
+    (18) unaryRelExpr -> . relExpr
+    (19) relExpr -> . sumExpr relop sumExpr
+    (20) relExpr -> . sumExpr
+    (27) sumExpr -> . sumExpr sumop term
+    (28) sumExpr -> . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
 
-    PROD            reduce using rule 22 (opElement -> NUMBER .)
-    DIV             reduce using rule 22 (opElement -> NUMBER .)
-    LTE             reduce using rule 22 (opElement -> NUMBER .)
-    LT              reduce using rule 22 (opElement -> NUMBER .)
-    GTE             reduce using rule 22 (opElement -> NUMBER .)
-    GT              reduce using rule 22 (opElement -> NUMBER .)
-    EQ              reduce using rule 22 (opElement -> NUMBER .)
-    NEQ             reduce using rule 22 (opElement -> NUMBER .)
-    SUM             reduce using rule 22 (opElement -> NUMBER .)
-    SUBST           reduce using rule 22 (opElement -> NUMBER .)
-    AND             reduce using rule 22 (opElement -> NUMBER .)
-    OR              reduce using rule 22 (opElement -> NUMBER .)
-    $end            reduce using rule 22 (opElement -> NUMBER .)
+    SEMCOL          reduce using rule 11 (returnStmt -> RETURN .)
+    NOT             shift and go to state 20
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
 
+    simpleExpr                     shift and go to state 28
+    andExpr                        shift and go to state 18
+    unaryRelExpr                   shift and go to state 19
+    relExpr                        shift and go to state 21
+    sumExpr                        shift and go to state 22
+    term                           shift and go to state 23
+    opElement                      shift and go to state 24
 
 state 11
 
-    (1) simpleExpr -> simpleExpr OR . andExpr
-    (3) andExpr -> . andExpr AND unaryRelExpr
-    (4) andExpr -> . unaryRelExpr
-    (5) unaryRelExpr -> . NOT unaryRelExpr
-    (6) unaryRelExpr -> . relExpr
-    (7) relExpr -> . sumExpr relop sumExpr
-    (8) relExpr -> . sumExpr
-    (15) sumExpr -> . sumExpr sumop term
-    (16) sumExpr -> . term
-    (19) term -> . term mulop opElement
-    (20) term -> . opElement
-    (21) opElement -> . NAME
-    (22) opElement -> . NUMBER
+    (37) inputStmt -> INPUT . LPARENT RPARENT
 
-    NOT             shift and go to state 4
-    NAME            shift and go to state 9
-    NUMBER          shift and go to state 10
+    LPARENT         shift and go to state 29
 
-    andExpr                        shift and go to state 27
-    unaryRelExpr                   shift and go to state 3
-    relExpr                        shift and go to state 5
-    sumExpr                        shift and go to state 6
-    term                           shift and go to state 7
-    opElement                      shift and go to state 8
 
 state 12
 
-    (3) andExpr -> andExpr AND . unaryRelExpr
-    (5) unaryRelExpr -> . NOT unaryRelExpr
-    (6) unaryRelExpr -> . relExpr
-    (7) relExpr -> . sumExpr relop sumExpr
-    (8) relExpr -> . sumExpr
-    (15) sumExpr -> . sumExpr sumop term
-    (16) sumExpr -> . term
-    (19) term -> . term mulop opElement
-    (20) term -> . opElement
-    (21) opElement -> . NAME
-    (22) opElement -> . NUMBER
+    (38) outputStmt -> PRINT . LPARENT STRING RPARENT
 
-    NOT             shift and go to state 4
-    NAME            shift and go to state 9
-    NUMBER          shift and go to state 10
+    LPARENT         shift and go to state 30
 
-    unaryRelExpr                   shift and go to state 28
-    relExpr                        shift and go to state 5
-    sumExpr                        shift and go to state 6
-    term                           shift and go to state 7
-    opElement                      shift and go to state 8
 
 state 13
 
-    (5) unaryRelExpr -> NOT unaryRelExpr .
+    (2) suite -> stmt suite .
 
-    AND             reduce using rule 5 (unaryRelExpr -> NOT unaryRelExpr .)
-    OR              reduce using rule 5 (unaryRelExpr -> NOT unaryRelExpr .)
-    $end            reduce using rule 5 (unaryRelExpr -> NOT unaryRelExpr .)
+    $end            reduce using rule 2 (suite -> stmt suite .)
+    ELSE            reduce using rule 2 (suite -> stmt suite .)
+    IF              reduce using rule 2 (suite -> stmt suite .)
+    WHILE           reduce using rule 2 (suite -> stmt suite .)
+    RETURN          reduce using rule 2 (suite -> stmt suite .)
+    INPUT           reduce using rule 2 (suite -> stmt suite .)
+    PRINT           reduce using rule 2 (suite -> stmt suite .)
 
 
 state 14
 
-    (7) relExpr -> sumExpr relop . sumExpr
-    (15) sumExpr -> . sumExpr sumop term
-    (16) sumExpr -> . term
-    (19) term -> . term mulop opElement
-    (20) term -> . opElement
-    (21) opElement -> . NAME
-    (22) opElement -> . NUMBER
+    (5) stmt -> returnStmt SEMCOL .
 
-    NAME            shift and go to state 9
-    NUMBER          shift and go to state 10
+    IF              reduce using rule 5 (stmt -> returnStmt SEMCOL .)
+    WHILE           reduce using rule 5 (stmt -> returnStmt SEMCOL .)
+    RETURN          reduce using rule 5 (stmt -> returnStmt SEMCOL .)
+    INPUT           reduce using rule 5 (stmt -> returnStmt SEMCOL .)
+    PRINT           reduce using rule 5 (stmt -> returnStmt SEMCOL .)
+    $end            reduce using rule 5 (stmt -> returnStmt SEMCOL .)
+    ELSE            reduce using rule 5 (stmt -> returnStmt SEMCOL .)
 
-    sumExpr                        shift and go to state 29
-    term                           shift and go to state 7
-    opElement                      shift and go to state 8
 
 state 15
 
-    (15) sumExpr -> sumExpr sumop . term
-    (19) term -> . term mulop opElement
-    (20) term -> . opElement
-    (21) opElement -> . NAME
-    (22) opElement -> . NUMBER
+    (6) stmt -> inputStmt SEMCOL .
 
-    NAME            shift and go to state 9
-    NUMBER          shift and go to state 10
+    IF              reduce using rule 6 (stmt -> inputStmt SEMCOL .)
+    WHILE           reduce using rule 6 (stmt -> inputStmt SEMCOL .)
+    RETURN          reduce using rule 6 (stmt -> inputStmt SEMCOL .)
+    INPUT           reduce using rule 6 (stmt -> inputStmt SEMCOL .)
+    PRINT           reduce using rule 6 (stmt -> inputStmt SEMCOL .)
+    $end            reduce using rule 6 (stmt -> inputStmt SEMCOL .)
+    ELSE            reduce using rule 6 (stmt -> inputStmt SEMCOL .)
 
-    term                           shift and go to state 30
-    opElement                      shift and go to state 8
 
 state 16
 
-    (9) relop -> LTE .
+    (7) stmt -> outputStmt SEMCOL .
 
-    NAME            reduce using rule 9 (relop -> LTE .)
-    NUMBER          reduce using rule 9 (relop -> LTE .)
+    IF              reduce using rule 7 (stmt -> outputStmt SEMCOL .)
+    WHILE           reduce using rule 7 (stmt -> outputStmt SEMCOL .)
+    RETURN          reduce using rule 7 (stmt -> outputStmt SEMCOL .)
+    INPUT           reduce using rule 7 (stmt -> outputStmt SEMCOL .)
+    PRINT           reduce using rule 7 (stmt -> outputStmt SEMCOL .)
+    $end            reduce using rule 7 (stmt -> outputStmt SEMCOL .)
+    ELSE            reduce using rule 7 (stmt -> outputStmt SEMCOL .)
 
 
 state 17
 
-    (10) relop -> LT .
+    (8) selectionStmt -> IF simpleExpr . COL suite
+    (9) selectionStmt -> IF simpleExpr . COL suite ELSE COL suite
+    (13) simpleExpr -> simpleExpr . OR andExpr
 
-    NAME            reduce using rule 10 (relop -> LT .)
-    NUMBER          reduce using rule 10 (relop -> LT .)
+    COL             shift and go to state 31
+    OR              shift and go to state 32
 
 
 state 18
 
-    (11) relop -> GTE .
+    (14) simpleExpr -> andExpr .
+    (15) andExpr -> andExpr . AND unaryRelExpr
 
-    NAME            reduce using rule 11 (relop -> GTE .)
-    NUMBER          reduce using rule 11 (relop -> GTE .)
+    COL             reduce using rule 14 (simpleExpr -> andExpr .)
+    OR              reduce using rule 14 (simpleExpr -> andExpr .)
+    SEMCOL          reduce using rule 14 (simpleExpr -> andExpr .)
+    AND             shift and go to state 33
 
 
 state 19
 
-    (12) relop -> GT .
+    (16) andExpr -> unaryRelExpr .
 
-    NAME            reduce using rule 12 (relop -> GT .)
-    NUMBER          reduce using rule 12 (relop -> GT .)
+    AND             reduce using rule 16 (andExpr -> unaryRelExpr .)
+    COL             reduce using rule 16 (andExpr -> unaryRelExpr .)
+    OR              reduce using rule 16 (andExpr -> unaryRelExpr .)
+    SEMCOL          reduce using rule 16 (andExpr -> unaryRelExpr .)
 
 
 state 20
 
-    (13) relop -> EQ .
+    (17) unaryRelExpr -> NOT . unaryRelExpr
+    (17) unaryRelExpr -> . NOT unaryRelExpr
+    (18) unaryRelExpr -> . relExpr
+    (19) relExpr -> . sumExpr relop sumExpr
+    (20) relExpr -> . sumExpr
+    (27) sumExpr -> . sumExpr sumop term
+    (28) sumExpr -> . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
 
-    NAME            reduce using rule 13 (relop -> EQ .)
-    NUMBER          reduce using rule 13 (relop -> EQ .)
+    NOT             shift and go to state 20
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
 
+    unaryRelExpr                   shift and go to state 34
+    relExpr                        shift and go to state 21
+    sumExpr                        shift and go to state 22
+    term                           shift and go to state 23
+    opElement                      shift and go to state 24
 
 state 21
 
-    (14) relop -> NEQ .
+    (18) unaryRelExpr -> relExpr .
 
-    NAME            reduce using rule 14 (relop -> NEQ .)
-    NUMBER          reduce using rule 14 (relop -> NEQ .)
+    AND             reduce using rule 18 (unaryRelExpr -> relExpr .)
+    COL             reduce using rule 18 (unaryRelExpr -> relExpr .)
+    OR              reduce using rule 18 (unaryRelExpr -> relExpr .)
+    SEMCOL          reduce using rule 18 (unaryRelExpr -> relExpr .)
 
 
 state 22
 
-    (17) sumop -> SUM .
+    (19) relExpr -> sumExpr . relop sumExpr
+    (20) relExpr -> sumExpr .
+    (27) sumExpr -> sumExpr . sumop term
+    (21) relop -> . LTE
+    (22) relop -> . LT
+    (23) relop -> . GTE
+    (24) relop -> . GT
+    (25) relop -> . EQ
+    (26) relop -> . NEQ
+    (29) sumop -> . SUM
+    (30) sumop -> . SUBST
 
-    NAME            reduce using rule 17 (sumop -> SUM .)
-    NUMBER          reduce using rule 17 (sumop -> SUM .)
+    AND             reduce using rule 20 (relExpr -> sumExpr .)
+    COL             reduce using rule 20 (relExpr -> sumExpr .)
+    OR              reduce using rule 20 (relExpr -> sumExpr .)
+    SEMCOL          reduce using rule 20 (relExpr -> sumExpr .)
+    LTE             shift and go to state 37
+    LT              shift and go to state 38
+    GTE             shift and go to state 39
+    GT              shift and go to state 40
+    EQ              shift and go to state 41
+    NEQ             shift and go to state 42
+    SUM             shift and go to state 43
+    SUBST           shift and go to state 44
 
+    relop                          shift and go to state 35
+    sumop                          shift and go to state 36
 
 state 23
 
-    (18) sumop -> SUBST .
+    (28) sumExpr -> term .
+    (31) term -> term . mulop opElement
+    (35) mulop -> . PROD
+    (36) mulop -> . DIV
 
-    NAME            reduce using rule 18 (sumop -> SUBST .)
-    NUMBER          reduce using rule 18 (sumop -> SUBST .)
+    LTE             reduce using rule 28 (sumExpr -> term .)
+    LT              reduce using rule 28 (sumExpr -> term .)
+    GTE             reduce using rule 28 (sumExpr -> term .)
+    GT              reduce using rule 28 (sumExpr -> term .)
+    EQ              reduce using rule 28 (sumExpr -> term .)
+    NEQ             reduce using rule 28 (sumExpr -> term .)
+    SUM             reduce using rule 28 (sumExpr -> term .)
+    SUBST           reduce using rule 28 (sumExpr -> term .)
+    AND             reduce using rule 28 (sumExpr -> term .)
+    COL             reduce using rule 28 (sumExpr -> term .)
+    OR              reduce using rule 28 (sumExpr -> term .)
+    SEMCOL          reduce using rule 28 (sumExpr -> term .)
+    PROD            shift and go to state 46
+    DIV             shift and go to state 47
 
+    mulop                          shift and go to state 45
 
 state 24
 
-    (19) term -> term mulop . opElement
-    (21) opElement -> . NAME
-    (22) opElement -> . NUMBER
+    (32) term -> opElement .
 
-    NAME            shift and go to state 9
-    NUMBER          shift and go to state 10
+    PROD            reduce using rule 32 (term -> opElement .)
+    DIV             reduce using rule 32 (term -> opElement .)
+    LTE             reduce using rule 32 (term -> opElement .)
+    LT              reduce using rule 32 (term -> opElement .)
+    GTE             reduce using rule 32 (term -> opElement .)
+    GT              reduce using rule 32 (term -> opElement .)
+    EQ              reduce using rule 32 (term -> opElement .)
+    NEQ             reduce using rule 32 (term -> opElement .)
+    SUM             reduce using rule 32 (term -> opElement .)
+    SUBST           reduce using rule 32 (term -> opElement .)
+    AND             reduce using rule 32 (term -> opElement .)
+    COL             reduce using rule 32 (term -> opElement .)
+    OR              reduce using rule 32 (term -> opElement .)
+    SEMCOL          reduce using rule 32 (term -> opElement .)
 
-    opElement                      shift and go to state 31
 
 state 25
 
-    (23) mulop -> PROD .
+    (33) opElement -> NAME .
 
-    NAME            reduce using rule 23 (mulop -> PROD .)
-    NUMBER          reduce using rule 23 (mulop -> PROD .)
+    PROD            reduce using rule 33 (opElement -> NAME .)
+    DIV             reduce using rule 33 (opElement -> NAME .)
+    LTE             reduce using rule 33 (opElement -> NAME .)
+    LT              reduce using rule 33 (opElement -> NAME .)
+    GTE             reduce using rule 33 (opElement -> NAME .)
+    GT              reduce using rule 33 (opElement -> NAME .)
+    EQ              reduce using rule 33 (opElement -> NAME .)
+    NEQ             reduce using rule 33 (opElement -> NAME .)
+    SUM             reduce using rule 33 (opElement -> NAME .)
+    SUBST           reduce using rule 33 (opElement -> NAME .)
+    AND             reduce using rule 33 (opElement -> NAME .)
+    COL             reduce using rule 33 (opElement -> NAME .)
+    OR              reduce using rule 33 (opElement -> NAME .)
+    SEMCOL          reduce using rule 33 (opElement -> NAME .)
 
 
 state 26
 
-    (24) mulop -> DIV .
+    (34) opElement -> NUMBER .
 
-    NAME            reduce using rule 24 (mulop -> DIV .)
-    NUMBER          reduce using rule 24 (mulop -> DIV .)
+    PROD            reduce using rule 34 (opElement -> NUMBER .)
+    DIV             reduce using rule 34 (opElement -> NUMBER .)
+    LTE             reduce using rule 34 (opElement -> NUMBER .)
+    LT              reduce using rule 34 (opElement -> NUMBER .)
+    GTE             reduce using rule 34 (opElement -> NUMBER .)
+    GT              reduce using rule 34 (opElement -> NUMBER .)
+    EQ              reduce using rule 34 (opElement -> NUMBER .)
+    NEQ             reduce using rule 34 (opElement -> NUMBER .)
+    SUM             reduce using rule 34 (opElement -> NUMBER .)
+    SUBST           reduce using rule 34 (opElement -> NUMBER .)
+    AND             reduce using rule 34 (opElement -> NUMBER .)
+    COL             reduce using rule 34 (opElement -> NUMBER .)
+    OR              reduce using rule 34 (opElement -> NUMBER .)
+    SEMCOL          reduce using rule 34 (opElement -> NUMBER .)
 
 
 state 27
 
-    (1) simpleExpr -> simpleExpr OR andExpr .
-    (3) andExpr -> andExpr . AND unaryRelExpr
+    (10) iterationStmt -> WHILE simpleExpr . COL suite
+    (13) simpleExpr -> simpleExpr . OR andExpr
 
-    OR              reduce using rule 1 (simpleExpr -> simpleExpr OR andExpr .)
-    $end            reduce using rule 1 (simpleExpr -> simpleExpr OR andExpr .)
-    AND             shift and go to state 12
+    COL             shift and go to state 48
+    OR              shift and go to state 32
 
 
 state 28
 
-    (3) andExpr -> andExpr AND unaryRelExpr .
+    (12) returnStmt -> RETURN simpleExpr .
+    (13) simpleExpr -> simpleExpr . OR andExpr
 
-    AND             reduce using rule 3 (andExpr -> andExpr AND unaryRelExpr .)
-    OR              reduce using rule 3 (andExpr -> andExpr AND unaryRelExpr .)
-    $end            reduce using rule 3 (andExpr -> andExpr AND unaryRelExpr .)
+    SEMCOL          reduce using rule 12 (returnStmt -> RETURN simpleExpr .)
+    OR              shift and go to state 32
 
 
 state 29
 
-    (7) relExpr -> sumExpr relop sumExpr .
-    (15) sumExpr -> sumExpr . sumop term
-    (17) sumop -> . SUM
-    (18) sumop -> . SUBST
+    (37) inputStmt -> INPUT LPARENT . RPARENT
 
-    AND             reduce using rule 7 (relExpr -> sumExpr relop sumExpr .)
-    OR              reduce using rule 7 (relExpr -> sumExpr relop sumExpr .)
-    $end            reduce using rule 7 (relExpr -> sumExpr relop sumExpr .)
-    SUM             shift and go to state 22
-    SUBST           shift and go to state 23
+    RPARENT         shift and go to state 49
 
-    sumop                          shift and go to state 15
 
 state 30
 
-    (15) sumExpr -> sumExpr sumop term .
-    (19) term -> term . mulop opElement
-    (23) mulop -> . PROD
-    (24) mulop -> . DIV
+    (38) outputStmt -> PRINT LPARENT . STRING RPARENT
 
-    LTE             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    LT              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    GTE             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    GT              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    EQ              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    NEQ             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    SUM             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    SUBST           reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    AND             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    OR              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    $end            reduce using rule 15 (sumExpr -> sumExpr sumop term .)
-    PROD            shift and go to state 25
-    DIV             shift and go to state 26
+    STRING          shift and go to state 50
 
-    mulop                          shift and go to state 24
 
 state 31
 
-    (19) term -> term mulop opElement .
+    (8) selectionStmt -> IF simpleExpr COL . suite
+    (9) selectionStmt -> IF simpleExpr COL . suite ELSE COL suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . selectionStmt
+    (4) stmt -> . iterationStmt
+    (5) stmt -> . returnStmt SEMCOL
+    (6) stmt -> . inputStmt SEMCOL
+    (7) stmt -> . outputStmt SEMCOL
+    (8) selectionStmt -> . IF simpleExpr COL suite
+    (9) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (10) iterationStmt -> . WHILE simpleExpr COL suite
+    (11) returnStmt -> . RETURN
+    (12) returnStmt -> . RETURN simpleExpr
+    (37) inputStmt -> . INPUT LPARENT RPARENT
+    (38) outputStmt -> . PRINT LPARENT STRING RPARENT
 
-    PROD            reduce using rule 19 (term -> term mulop opElement .)
-    DIV             reduce using rule 19 (term -> term mulop opElement .)
-    LTE             reduce using rule 19 (term -> term mulop opElement .)
-    LT              reduce using rule 19 (term -> term mulop opElement .)
-    GTE             reduce using rule 19 (term -> term mulop opElement .)
-    GT              reduce using rule 19 (term -> term mulop opElement .)
-    EQ              reduce using rule 19 (term -> term mulop opElement .)
-    NEQ             reduce using rule 19 (term -> term mulop opElement .)
-    SUM             reduce using rule 19 (term -> term mulop opElement .)
-    SUBST           reduce using rule 19 (term -> term mulop opElement .)
-    AND             reduce using rule 19 (term -> term mulop opElement .)
-    OR              reduce using rule 19 (term -> term mulop opElement .)
-    $end            reduce using rule 19 (term -> term mulop opElement .)
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    RETURN          shift and go to state 10
+    INPUT           shift and go to state 11
+    PRINT           shift and go to state 12
 
+    suite                          shift and go to state 51
+    stmt                           shift and go to state 2
+    selectionStmt                  shift and go to state 3
+    iterationStmt                  shift and go to state 4
+    returnStmt                     shift and go to state 5
+    inputStmt                      shift and go to state 6
+    outputStmt                     shift and go to state 7
+
+state 32
+
+    (13) simpleExpr -> simpleExpr OR . andExpr
+    (15) andExpr -> . andExpr AND unaryRelExpr
+    (16) andExpr -> . unaryRelExpr
+    (17) unaryRelExpr -> . NOT unaryRelExpr
+    (18) unaryRelExpr -> . relExpr
+    (19) relExpr -> . sumExpr relop sumExpr
+    (20) relExpr -> . sumExpr
+    (27) sumExpr -> . sumExpr sumop term
+    (28) sumExpr -> . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
+
+    NOT             shift and go to state 20
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
+
+    andExpr                        shift and go to state 52
+    unaryRelExpr                   shift and go to state 19
+    relExpr                        shift and go to state 21
+    sumExpr                        shift and go to state 22
+    term                           shift and go to state 23
+    opElement                      shift and go to state 24
+
+state 33
+
+    (15) andExpr -> andExpr AND . unaryRelExpr
+    (17) unaryRelExpr -> . NOT unaryRelExpr
+    (18) unaryRelExpr -> . relExpr
+    (19) relExpr -> . sumExpr relop sumExpr
+    (20) relExpr -> . sumExpr
+    (27) sumExpr -> . sumExpr sumop term
+    (28) sumExpr -> . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
+
+    NOT             shift and go to state 20
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
+
+    unaryRelExpr                   shift and go to state 53
+    relExpr                        shift and go to state 21
+    sumExpr                        shift and go to state 22
+    term                           shift and go to state 23
+    opElement                      shift and go to state 24
+
+state 34
+
+    (17) unaryRelExpr -> NOT unaryRelExpr .
+
+    AND             reduce using rule 17 (unaryRelExpr -> NOT unaryRelExpr .)
+    COL             reduce using rule 17 (unaryRelExpr -> NOT unaryRelExpr .)
+    OR              reduce using rule 17 (unaryRelExpr -> NOT unaryRelExpr .)
+    SEMCOL          reduce using rule 17 (unaryRelExpr -> NOT unaryRelExpr .)
+
+
+state 35
+
+    (19) relExpr -> sumExpr relop . sumExpr
+    (27) sumExpr -> . sumExpr sumop term
+    (28) sumExpr -> . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
+
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
+
+    sumExpr                        shift and go to state 54
+    term                           shift and go to state 23
+    opElement                      shift and go to state 24
+
+state 36
+
+    (27) sumExpr -> sumExpr sumop . term
+    (31) term -> . term mulop opElement
+    (32) term -> . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
+
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
+
+    term                           shift and go to state 55
+    opElement                      shift and go to state 24
+
+state 37
+
+    (21) relop -> LTE .
+
+    NAME            reduce using rule 21 (relop -> LTE .)
+    NUMBER          reduce using rule 21 (relop -> LTE .)
+
+
+state 38
+
+    (22) relop -> LT .
+
+    NAME            reduce using rule 22 (relop -> LT .)
+    NUMBER          reduce using rule 22 (relop -> LT .)
+
+
+state 39
+
+    (23) relop -> GTE .
+
+    NAME            reduce using rule 23 (relop -> GTE .)
+    NUMBER          reduce using rule 23 (relop -> GTE .)
+
+
+state 40
+
+    (24) relop -> GT .
+
+    NAME            reduce using rule 24 (relop -> GT .)
+    NUMBER          reduce using rule 24 (relop -> GT .)
+
+
+state 41
+
+    (25) relop -> EQ .
+
+    NAME            reduce using rule 25 (relop -> EQ .)
+    NUMBER          reduce using rule 25 (relop -> EQ .)
+
+
+state 42
+
+    (26) relop -> NEQ .
+
+    NAME            reduce using rule 26 (relop -> NEQ .)
+    NUMBER          reduce using rule 26 (relop -> NEQ .)
+
+
+state 43
+
+    (29) sumop -> SUM .
+
+    NAME            reduce using rule 29 (sumop -> SUM .)
+    NUMBER          reduce using rule 29 (sumop -> SUM .)
+
+
+state 44
+
+    (30) sumop -> SUBST .
+
+    NAME            reduce using rule 30 (sumop -> SUBST .)
+    NUMBER          reduce using rule 30 (sumop -> SUBST .)
+
+
+state 45
+
+    (31) term -> term mulop . opElement
+    (33) opElement -> . NAME
+    (34) opElement -> . NUMBER
+
+    NAME            shift and go to state 25
+    NUMBER          shift and go to state 26
+
+    opElement                      shift and go to state 56
+
+state 46
+
+    (35) mulop -> PROD .
+
+    NAME            reduce using rule 35 (mulop -> PROD .)
+    NUMBER          reduce using rule 35 (mulop -> PROD .)
+
+
+state 47
+
+    (36) mulop -> DIV .
+
+    NAME            reduce using rule 36 (mulop -> DIV .)
+    NUMBER          reduce using rule 36 (mulop -> DIV .)
+
+
+state 48
+
+    (10) iterationStmt -> WHILE simpleExpr COL . suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . selectionStmt
+    (4) stmt -> . iterationStmt
+    (5) stmt -> . returnStmt SEMCOL
+    (6) stmt -> . inputStmt SEMCOL
+    (7) stmt -> . outputStmt SEMCOL
+    (8) selectionStmt -> . IF simpleExpr COL suite
+    (9) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (10) iterationStmt -> . WHILE simpleExpr COL suite
+    (11) returnStmt -> . RETURN
+    (12) returnStmt -> . RETURN simpleExpr
+    (37) inputStmt -> . INPUT LPARENT RPARENT
+    (38) outputStmt -> . PRINT LPARENT STRING RPARENT
+
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    RETURN          shift and go to state 10
+    INPUT           shift and go to state 11
+    PRINT           shift and go to state 12
+
+    suite                          shift and go to state 57
+    stmt                           shift and go to state 2
+    selectionStmt                  shift and go to state 3
+    iterationStmt                  shift and go to state 4
+    returnStmt                     shift and go to state 5
+    inputStmt                      shift and go to state 6
+    outputStmt                     shift and go to state 7
+
+state 49
+
+    (37) inputStmt -> INPUT LPARENT RPARENT .
+
+    SEMCOL          reduce using rule 37 (inputStmt -> INPUT LPARENT RPARENT .)
+
+
+state 50
+
+    (38) outputStmt -> PRINT LPARENT STRING . RPARENT
+
+    RPARENT         shift and go to state 58
+
+
+state 51
+
+    (8) selectionStmt -> IF simpleExpr COL suite .
+    (9) selectionStmt -> IF simpleExpr COL suite . ELSE COL suite
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    IF              reduce using rule 8 (selectionStmt -> IF simpleExpr COL suite .)
+    WHILE           reduce using rule 8 (selectionStmt -> IF simpleExpr COL suite .)
+    RETURN          reduce using rule 8 (selectionStmt -> IF simpleExpr COL suite .)
+    INPUT           reduce using rule 8 (selectionStmt -> IF simpleExpr COL suite .)
+    PRINT           reduce using rule 8 (selectionStmt -> IF simpleExpr COL suite .)
+    $end            reduce using rule 8 (selectionStmt -> IF simpleExpr COL suite .)
+    ELSE            shift and go to state 59
+
+  ! ELSE            [ reduce using rule 8 (selectionStmt -> IF simpleExpr COL suite .) ]
+
+
+state 52
+
+    (13) simpleExpr -> simpleExpr OR andExpr .
+    (15) andExpr -> andExpr . AND unaryRelExpr
+
+    COL             reduce using rule 13 (simpleExpr -> simpleExpr OR andExpr .)
+    OR              reduce using rule 13 (simpleExpr -> simpleExpr OR andExpr .)
+    SEMCOL          reduce using rule 13 (simpleExpr -> simpleExpr OR andExpr .)
+    AND             shift and go to state 33
+
+
+state 53
+
+    (15) andExpr -> andExpr AND unaryRelExpr .
+
+    AND             reduce using rule 15 (andExpr -> andExpr AND unaryRelExpr .)
+    COL             reduce using rule 15 (andExpr -> andExpr AND unaryRelExpr .)
+    OR              reduce using rule 15 (andExpr -> andExpr AND unaryRelExpr .)
+    SEMCOL          reduce using rule 15 (andExpr -> andExpr AND unaryRelExpr .)
+
+
+state 54
+
+    (19) relExpr -> sumExpr relop sumExpr .
+    (27) sumExpr -> sumExpr . sumop term
+    (29) sumop -> . SUM
+    (30) sumop -> . SUBST
+
+    AND             reduce using rule 19 (relExpr -> sumExpr relop sumExpr .)
+    COL             reduce using rule 19 (relExpr -> sumExpr relop sumExpr .)
+    OR              reduce using rule 19 (relExpr -> sumExpr relop sumExpr .)
+    SEMCOL          reduce using rule 19 (relExpr -> sumExpr relop sumExpr .)
+    SUM             shift and go to state 43
+    SUBST           shift and go to state 44
+
+    sumop                          shift and go to state 36
+
+state 55
+
+    (27) sumExpr -> sumExpr sumop term .
+    (31) term -> term . mulop opElement
+    (35) mulop -> . PROD
+    (36) mulop -> . DIV
+
+    LTE             reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    LT              reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    GTE             reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    GT              reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    EQ              reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    NEQ             reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    SUM             reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    SUBST           reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    AND             reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    COL             reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    OR              reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    SEMCOL          reduce using rule 27 (sumExpr -> sumExpr sumop term .)
+    PROD            shift and go to state 46
+    DIV             shift and go to state 47
+
+    mulop                          shift and go to state 45
+
+state 56
+
+    (31) term -> term mulop opElement .
+
+    PROD            reduce using rule 31 (term -> term mulop opElement .)
+    DIV             reduce using rule 31 (term -> term mulop opElement .)
+    LTE             reduce using rule 31 (term -> term mulop opElement .)
+    LT              reduce using rule 31 (term -> term mulop opElement .)
+    GTE             reduce using rule 31 (term -> term mulop opElement .)
+    GT              reduce using rule 31 (term -> term mulop opElement .)
+    EQ              reduce using rule 31 (term -> term mulop opElement .)
+    NEQ             reduce using rule 31 (term -> term mulop opElement .)
+    SUM             reduce using rule 31 (term -> term mulop opElement .)
+    SUBST           reduce using rule 31 (term -> term mulop opElement .)
+    AND             reduce using rule 31 (term -> term mulop opElement .)
+    COL             reduce using rule 31 (term -> term mulop opElement .)
+    OR              reduce using rule 31 (term -> term mulop opElement .)
+    SEMCOL          reduce using rule 31 (term -> term mulop opElement .)
+
+
+state 57
+
+    (10) iterationStmt -> WHILE simpleExpr COL suite .
+
+    IF              reduce using rule 10 (iterationStmt -> WHILE simpleExpr COL suite .)
+    WHILE           reduce using rule 10 (iterationStmt -> WHILE simpleExpr COL suite .)
+    RETURN          reduce using rule 10 (iterationStmt -> WHILE simpleExpr COL suite .)
+    INPUT           reduce using rule 10 (iterationStmt -> WHILE simpleExpr COL suite .)
+    PRINT           reduce using rule 10 (iterationStmt -> WHILE simpleExpr COL suite .)
+    $end            reduce using rule 10 (iterationStmt -> WHILE simpleExpr COL suite .)
+    ELSE            reduce using rule 10 (iterationStmt -> WHILE simpleExpr COL suite .)
+
+
+state 58
+
+    (38) outputStmt -> PRINT LPARENT STRING RPARENT .
+
+    SEMCOL          reduce using rule 38 (outputStmt -> PRINT LPARENT STRING RPARENT .)
+
+
+state 59
+
+    (9) selectionStmt -> IF simpleExpr COL suite ELSE . COL suite
+
+    COL             shift and go to state 60
+
+
+state 60
+
+    (9) selectionStmt -> IF simpleExpr COL suite ELSE COL . suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . selectionStmt
+    (4) stmt -> . iterationStmt
+    (5) stmt -> . returnStmt SEMCOL
+    (6) stmt -> . inputStmt SEMCOL
+    (7) stmt -> . outputStmt SEMCOL
+    (8) selectionStmt -> . IF simpleExpr COL suite
+    (9) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (10) iterationStmt -> . WHILE simpleExpr COL suite
+    (11) returnStmt -> . RETURN
+    (12) returnStmt -> . RETURN simpleExpr
+    (37) inputStmt -> . INPUT LPARENT RPARENT
+    (38) outputStmt -> . PRINT LPARENT STRING RPARENT
+
+    IF              shift and go to state 8
+    WHILE           shift and go to state 9
+    RETURN          shift and go to state 10
+    INPUT           shift and go to state 11
+    PRINT           shift and go to state 12
+
+    suite                          shift and go to state 61
+    stmt                           shift and go to state 2
+    selectionStmt                  shift and go to state 3
+    iterationStmt                  shift and go to state 4
+    returnStmt                     shift and go to state 5
+    inputStmt                      shift and go to state 6
+    outputStmt                     shift and go to state 7
+
+state 61
+
+    (9) selectionStmt -> IF simpleExpr COL suite ELSE COL suite .
+
+    IF              reduce using rule 9 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    WHILE           reduce using rule 9 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    RETURN          reduce using rule 9 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    INPUT           reduce using rule 9 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    PRINT           reduce using rule 9 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    $end            reduce using rule 9 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    ELSE            reduce using rule 9 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for IF in state 2 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 2 resolved as shift
+WARNING: shift/reduce conflict for RETURN in state 2 resolved as shift
+WARNING: shift/reduce conflict for INPUT in state 2 resolved as shift
+WARNING: shift/reduce conflict for PRINT in state 2 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 51 resolved as shift
