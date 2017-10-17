@@ -15,7 +15,8 @@ reserved_words = {
     'and': 'AND',
     'or': 'OR',
     'not': 'NOT',
-    'return': 'RETURN'
+    'return': 'RETURN',
+    'def': 'DEF'
 }
 
 tokens = (
@@ -38,7 +39,8 @@ tokens = (
     'LPARENT',
     'RPARENT',
     'COL',
-    'SEMCOL'
+    'SEMCOL',
+    'COMA'
 ) + tuple(reserved_words.values())
 
 # Tokens
@@ -80,6 +82,7 @@ t_LPARENT = r'\('
 t_RPARENT = r'\)'
 t_COL = r':'
 t_SEMCOL = r';'
+t_COMA = r','
 
 def t_newline(t):
     r'\n+'
@@ -115,12 +118,61 @@ def p_suite(p):
     pass
 
 def p_stmt(p):
-    """stmt : selectionStmt
+    """stmt : exprStmt
+            | declar SEMCOL
+            | selectionStmt
             | iterationStmt
             | returnStmt SEMCOL
             | inputStmt SEMCOL
             | outputStmt SEMCOL
+            | commentLine
     """
+
+def p_declar(p):
+    """declar   : varDeclar
+                | funcDeclar
+                | objDeclar
+    """
+    pass
+
+def p_var_declar(p):
+    """varDeclar    : NAME ASSIGN STRING
+                    | NAME ASSIGN NUMBER
+                    | NAME ASSIGN NAME
+                    | NAME ASSIGN objConstruct
+    """
+    pass
+
+def p_func_declar(p):
+    """funcDeclar   : DEF NAME LPARENT params RPARENT COL suite
+    """
+    pass
+
+def p_params(p):
+    """params   : paramsList
+    """
+    pass
+
+def p_params_list(p):
+    """paramsList   : NAME COMA paramsList
+                    | NAME
+    """
+    pass
+
+def p_obj_declaration(p):
+    """objDeclar    : CLASS NAME COL suite
+    """
+    pass
+
+def p_obj_construct(p):
+    """objConstruct : NAME LPARENT params RPARENT
+    """
+    pass
+
+def p_expr_stmt(p):
+    """exprStmt : simpleExpr
+    """
+    pass
 
 def p_selection_stmt(p):
     """selectionStmt    : IF simpleExpr COL suite
@@ -213,6 +265,11 @@ def p_output_stmt(p):
     """
     pass
 
+def p_comment_line(p):
+    """commentLine  : LINE_COMMENT
+    """
+    pass
+
 """
 def p_number(p):
     "number : NUMBER"
@@ -221,7 +278,6 @@ def p_number(p):
 def p_string(p):
     "string : STRING"
     p[0] = p[1]
-"""
 
 def p_name(p):
     "name : NAME"
@@ -231,6 +287,7 @@ def p_name(p):
         # print("Undefined name '%s'" % p[1])
         # p[0] = 0
     pass
+"""
 
 def p_error(p):
     if p:

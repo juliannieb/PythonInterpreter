@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'NAME NUMBER STRING LINE_COMMENT POINT EQ NEQ GT LT GTE LTE ASSIGN SUM SUBST PROD DIV LPARENT RPARENT COL SEMCOL INPUT PRINT IF ELSE WHILE CLASS AND OR NOT RETURNsuite    : stmt\n                | stmt suite\n    stmt : selectionStmt\n            | iterationStmt\n            | returnStmt SEMCOL\n            | inputStmt SEMCOL\n            | outputStmt SEMCOL\n    selectionStmt    : IF simpleExpr COL suite\n                        | IF simpleExpr COL suite ELSE COL suite\n    iterationStmt    : WHILE simpleExpr COL suite\n    returnStmt   : RETURN\n                    | RETURN simpleExpr\n    simpleExpr   : simpleExpr OR andExpr\n                    | andExpr\n    andExpr  : andExpr AND unaryRelExpr\n                | unaryRelExpr\n    unaryRelExpr : NOT unaryRelExpr\n                    | relExpr\n    relExpr  : sumExpr relop sumExpr\n                | sumExpr\n    relop    : LTE\n                | LT\n                | GTE\n                | GT\n                | EQ\n                | NEQ\n    sumExpr  : sumExpr sumop term\n                | term\n    sumop    : SUM\n                | SUBST\n    term : term mulop opElement\n            | opElement\n    opElement    : NAME\n                    | NUMBER\n    mulop    : PROD\n                | DIV\n    inputStmt : INPUT LPARENT RPARENT\n    outputStmt : PRINT LPARENT STRING RPARENT\n    name : NAME'
+_lr_signature = 'NAME NUMBER STRING LINE_COMMENT POINT EQ NEQ GT LT GTE LTE ASSIGN SUM SUBST PROD DIV LPARENT RPARENT COL SEMCOL COMA INPUT PRINT IF ELSE WHILE CLASS AND OR NOT RETURN DEFsuite    : stmt\n                | stmt suite\n    stmt : exprStmt\n            | declar SEMCOL\n            | selectionStmt\n            | iterationStmt\n            | returnStmt SEMCOL\n            | inputStmt SEMCOL\n            | outputStmt SEMCOL\n            | commentLine\n    declar   : varDeclar\n                | funcDeclar\n                | objDeclar\n    varDeclar    : NAME ASSIGN STRING\n                    | NAME ASSIGN NUMBER\n                    | NAME ASSIGN NAME\n                    | NAME ASSIGN objConstruct\n    funcDeclar   : DEF NAME LPARENT params RPARENT COL suite\n    params   : paramsList\n    paramsList   : NAME COMA paramsList\n                    | NAME\n    objDeclar    : CLASS NAME COL suite\n    objConstruct : NAME LPARENT params RPARENT\n    exprStmt : simpleExpr\n    selectionStmt    : IF simpleExpr COL suite\n                        | IF simpleExpr COL suite ELSE COL suite\n    iterationStmt    : WHILE simpleExpr COL suite\n    returnStmt   : RETURN\n                    | RETURN simpleExpr\n    simpleExpr   : simpleExpr OR andExpr\n                    | andExpr\n    andExpr  : andExpr AND unaryRelExpr\n                | unaryRelExpr\n    unaryRelExpr : NOT unaryRelExpr\n                    | relExpr\n    relExpr  : sumExpr relop sumExpr\n                | sumExpr\n    relop    : LTE\n                | LT\n                | GTE\n                | GT\n                | EQ\n                | NEQ\n    sumExpr  : sumExpr sumop term\n                | term\n    sumop    : SUM\n                | SUBST\n    term : term mulop opElement\n            | opElement\n    opElement    : NAME\n                    | NUMBER\n    mulop    : PROD\n                | DIV\n    inputStmt : INPUT LPARENT RPARENT\n    outputStmt : PRINT LPARENT STRING RPARENT\n    commentLine  : LINE_COMMENT\n    '
     
-_lr_action_items = {'IF':([0,2,3,4,13,14,15,16,31,48,51,57,60,61,],[8,8,-3,-4,-2,-5,-6,-7,8,8,-8,-10,8,-9,]),'WHILE':([0,2,3,4,13,14,15,16,31,48,51,57,60,61,],[9,9,-3,-4,-2,-5,-6,-7,9,9,-8,-10,9,-9,]),'RETURN':([0,2,3,4,13,14,15,16,31,48,51,57,60,61,],[10,10,-3,-4,-2,-5,-6,-7,10,10,-8,-10,10,-9,]),'INPUT':([0,2,3,4,13,14,15,16,31,48,51,57,60,61,],[11,11,-3,-4,-2,-5,-6,-7,11,11,-8,-10,11,-9,]),'PRINT':([0,2,3,4,13,14,15,16,31,48,51,57,60,61,],[12,12,-3,-4,-2,-5,-6,-7,12,12,-8,-10,12,-9,]),'$end':([1,2,3,4,13,14,15,16,51,57,61,],[0,-1,-3,-4,-2,-5,-6,-7,-8,-10,-9,]),'ELSE':([2,3,4,13,14,15,16,51,57,61,],[-1,-3,-4,-2,-5,-6,-7,59,-10,-9,]),'SEMCOL':([5,6,7,10,18,19,21,22,23,24,25,26,28,34,49,52,53,54,55,56,58,],[14,15,16,-11,-14,-16,-18,-20,-28,-32,-33,-34,-12,-17,-37,-13,-15,-19,-27,-31,-38,]),'NOT':([8,9,10,20,32,33,],[20,20,20,20,20,20,]),'NAME':([8,9,10,20,32,33,35,36,37,38,39,40,41,42,43,44,45,46,47,],[25,25,25,25,25,25,25,25,-21,-22,-23,-24,-25,-26,-29,-30,25,-35,-36,]),'NUMBER':([8,9,10,20,32,33,35,36,37,38,39,40,41,42,43,44,45,46,47,],[26,26,26,26,26,26,26,26,-21,-22,-23,-24,-25,-26,-29,-30,26,-35,-36,]),'LPARENT':([11,12,],[29,30,]),'COL':([17,18,19,21,22,23,24,25,26,27,34,52,53,54,55,56,59,],[31,-14,-16,-18,-20,-28,-32,-33,-34,48,-17,-13,-15,-19,-27,-31,60,]),'OR':([17,18,19,21,22,23,24,25,26,27,28,34,52,53,54,55,56,],[32,-14,-16,-18,-20,-28,-32,-33,-34,32,32,-17,-13,-15,-19,-27,-31,]),'AND':([18,19,21,22,23,24,25,26,34,52,53,54,55,56,],[33,-16,-18,-20,-28,-32,-33,-34,-17,33,-15,-19,-27,-31,]),'LTE':([22,23,24,25,26,55,56,],[37,-28,-32,-33,-34,-27,-31,]),'LT':([22,23,24,25,26,55,56,],[38,-28,-32,-33,-34,-27,-31,]),'GTE':([22,23,24,25,26,55,56,],[39,-28,-32,-33,-34,-27,-31,]),'GT':([22,23,24,25,26,55,56,],[40,-28,-32,-33,-34,-27,-31,]),'EQ':([22,23,24,25,26,55,56,],[41,-28,-32,-33,-34,-27,-31,]),'NEQ':([22,23,24,25,26,55,56,],[42,-28,-32,-33,-34,-27,-31,]),'SUM':([22,23,24,25,26,54,55,56,],[43,-28,-32,-33,-34,43,-27,-31,]),'SUBST':([22,23,24,25,26,54,55,56,],[44,-28,-32,-33,-34,44,-27,-31,]),'PROD':([23,24,25,26,55,56,],[46,-32,-33,-34,46,-31,]),'DIV':([23,24,25,26,55,56,],[47,-32,-33,-34,47,-31,]),'RPARENT':([29,50,],[49,58,]),'STRING':([30,],[50,]),}
+_lr_action_items = {'IF':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[15,15,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,15,15,-32,15,-36,-44,-48,-25,-27,15,15,-26,]),'WHILE':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[16,16,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,16,16,-32,16,-36,-44,-48,-25,-27,16,16,-26,]),'RETURN':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[17,17,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,17,17,-32,17,-36,-44,-48,-25,-27,17,17,-26,]),'INPUT':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[18,18,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,18,18,-32,18,-36,-44,-48,-25,-27,18,18,-26,]),'PRINT':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[19,19,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,19,19,-32,19,-36,-44,-48,-25,-27,19,19,-26,]),'LINE_COMMENT':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[20,20,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,20,20,-32,20,-36,-44,-48,-25,-27,20,20,-26,]),'NAME':([0,2,3,5,6,10,11,15,16,17,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,39,44,45,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,67,72,73,74,75,76,77,78,80,87,89,92,93,],[22,22,-3,-5,-6,-10,-24,39,39,39,-56,-31,-50,-51,46,47,-33,39,-35,-37,-45,-49,-2,-4,-7,-8,-9,39,-50,39,68,-34,39,39,-38,-39,-40,-41,-42,-43,-46,-47,39,-52,-53,-30,22,22,-32,81,22,-36,-44,-48,-25,-27,81,81,22,22,-26,]),'DEF':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[24,24,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,24,24,-32,24,-36,-44,-48,-25,-27,24,24,-26,]),'CLASS':([0,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[25,25,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,25,25,-32,25,-36,-44,-48,-25,-27,25,25,-26,]),'NOT':([0,2,3,5,6,10,11,15,16,17,20,21,22,23,26,27,28,29,30,31,32,33,34,35,36,37,39,44,48,62,63,64,67,73,74,75,76,77,78,89,92,93,],[27,27,-3,-5,-6,-10,-24,27,27,27,-56,-31,-50,-51,-33,27,-35,-37,-45,-49,-2,-4,-7,-8,-9,27,-50,27,-34,-30,27,27,-32,27,-36,-44,-48,-25,-27,27,27,-26,]),'NUMBER':([0,2,3,5,6,10,11,15,16,17,20,21,22,23,26,27,28,29,30,31,32,33,34,35,36,37,39,44,45,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,67,73,74,75,76,77,78,89,92,93,],[23,23,-3,-5,-6,-10,-24,23,23,23,-56,-31,-50,-51,-33,23,-35,-37,-45,-49,-2,-4,-7,-8,-9,23,-50,23,70,-34,23,23,-38,-39,-40,-41,-42,-43,-46,-47,23,-52,-53,-30,23,23,-32,23,-36,-44,-48,-25,-27,23,23,-26,]),'$end':([1,2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,67,74,75,76,77,78,93,],[0,-1,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,-32,-36,-44,-48,-25,-27,-26,]),'ELSE':([2,3,5,6,10,11,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,48,62,67,74,75,76,77,78,93,],[-1,-3,-5,-6,-10,-24,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-34,-30,-32,-36,-44,-48,85,-27,-26,]),'SEMCOL':([2,3,4,5,6,7,8,9,10,11,12,13,14,17,20,21,22,23,26,28,29,30,31,32,33,34,35,36,39,41,48,62,65,67,68,69,70,71,74,75,76,77,78,79,84,90,93,94,],[-1,-3,33,-5,-6,34,35,36,-10,-24,-11,-12,-13,-28,-56,-31,-50,-51,-33,-35,-37,-45,-49,-2,-4,-7,-8,-9,-50,-29,-34,-30,-54,-32,-16,-14,-15,-17,-36,-44,-48,-25,-27,-55,-22,-23,-26,-18,]),'OR':([11,21,22,23,26,28,29,30,31,38,39,40,41,48,62,67,74,75,76,],[37,-31,-50,-51,-33,-35,-37,-45,-49,37,-50,37,37,-34,-30,-32,-36,-44,-48,]),'LPARENT':([18,19,46,68,],[42,43,72,80,]),'COL':([21,23,26,28,29,30,31,38,39,40,47,48,62,67,74,75,76,85,88,],[-31,-51,-33,-35,-37,-45,-49,63,-50,64,73,-34,-30,-32,-36,-44,-48,89,92,]),'AND':([21,22,23,26,28,29,30,31,39,48,62,67,74,75,76,],[44,-50,-51,-33,-35,-37,-45,-49,-50,-34,44,-32,-36,-44,-48,]),'ASSIGN':([22,],[45,]),'PROD':([22,23,30,31,39,75,76,],[-50,-51,60,-49,-50,60,-48,]),'DIV':([22,23,30,31,39,75,76,],[-50,-51,61,-49,-50,61,-48,]),'LTE':([22,23,29,30,31,39,75,76,],[-50,-51,51,-45,-49,-50,-44,-48,]),'LT':([22,23,29,30,31,39,75,76,],[-50,-51,52,-45,-49,-50,-44,-48,]),'GTE':([22,23,29,30,31,39,75,76,],[-50,-51,53,-45,-49,-50,-44,-48,]),'GT':([22,23,29,30,31,39,75,76,],[-50,-51,54,-45,-49,-50,-44,-48,]),'EQ':([22,23,29,30,31,39,75,76,],[-50,-51,55,-45,-49,-50,-44,-48,]),'NEQ':([22,23,29,30,31,39,75,76,],[-50,-51,56,-45,-49,-50,-44,-48,]),'SUM':([22,23,29,30,31,39,74,75,76,],[-50,-51,57,-45,-49,-50,57,-44,-48,]),'SUBST':([22,23,29,30,31,39,74,75,76,],[-50,-51,58,-45,-49,-50,58,-44,-48,]),'RPARENT':([42,66,81,82,83,86,91,],[65,79,-21,88,-19,90,-20,]),'STRING':([43,45,],[66,69,]),'COMA':([81,],[87,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'suite':([0,2,31,48,60,],[1,13,51,57,61,]),'stmt':([0,2,31,48,60,],[2,2,2,2,2,]),'selectionStmt':([0,2,31,48,60,],[3,3,3,3,3,]),'iterationStmt':([0,2,31,48,60,],[4,4,4,4,4,]),'returnStmt':([0,2,31,48,60,],[5,5,5,5,5,]),'inputStmt':([0,2,31,48,60,],[6,6,6,6,6,]),'outputStmt':([0,2,31,48,60,],[7,7,7,7,7,]),'simpleExpr':([8,9,10,],[17,27,28,]),'andExpr':([8,9,10,32,],[18,18,18,52,]),'unaryRelExpr':([8,9,10,20,32,33,],[19,19,19,34,19,53,]),'relExpr':([8,9,10,20,32,33,],[21,21,21,21,21,21,]),'sumExpr':([8,9,10,20,32,33,35,],[22,22,22,22,22,22,54,]),'term':([8,9,10,20,32,33,35,36,],[23,23,23,23,23,23,23,55,]),'opElement':([8,9,10,20,32,33,35,36,45,],[24,24,24,24,24,24,24,24,56,]),'relop':([22,],[35,]),'sumop':([22,54,],[36,36,]),'mulop':([23,55,],[45,45,]),}
+_lr_goto_items = {'suite':([0,2,63,64,73,89,92,],[1,32,77,78,84,93,94,]),'stmt':([0,2,63,64,73,89,92,],[2,2,2,2,2,2,2,]),'exprStmt':([0,2,63,64,73,89,92,],[3,3,3,3,3,3,3,]),'declar':([0,2,63,64,73,89,92,],[4,4,4,4,4,4,4,]),'selectionStmt':([0,2,63,64,73,89,92,],[5,5,5,5,5,5,5,]),'iterationStmt':([0,2,63,64,73,89,92,],[6,6,6,6,6,6,6,]),'returnStmt':([0,2,63,64,73,89,92,],[7,7,7,7,7,7,7,]),'inputStmt':([0,2,63,64,73,89,92,],[8,8,8,8,8,8,8,]),'outputStmt':([0,2,63,64,73,89,92,],[9,9,9,9,9,9,9,]),'commentLine':([0,2,63,64,73,89,92,],[10,10,10,10,10,10,10,]),'simpleExpr':([0,2,15,16,17,63,64,73,89,92,],[11,11,38,40,41,11,11,11,11,11,]),'varDeclar':([0,2,63,64,73,89,92,],[12,12,12,12,12,12,12,]),'funcDeclar':([0,2,63,64,73,89,92,],[13,13,13,13,13,13,13,]),'objDeclar':([0,2,63,64,73,89,92,],[14,14,14,14,14,14,14,]),'andExpr':([0,2,15,16,17,37,63,64,73,89,92,],[21,21,21,21,21,62,21,21,21,21,21,]),'unaryRelExpr':([0,2,15,16,17,27,37,44,63,64,73,89,92,],[26,26,26,26,26,48,26,67,26,26,26,26,26,]),'relExpr':([0,2,15,16,17,27,37,44,63,64,73,89,92,],[28,28,28,28,28,28,28,28,28,28,28,28,28,]),'sumExpr':([0,2,15,16,17,27,37,44,49,63,64,73,89,92,],[29,29,29,29,29,29,29,29,74,29,29,29,29,29,]),'term':([0,2,15,16,17,27,37,44,49,50,63,64,73,89,92,],[30,30,30,30,30,30,30,30,30,75,30,30,30,30,30,]),'opElement':([0,2,15,16,17,27,37,44,49,50,59,63,64,73,89,92,],[31,31,31,31,31,31,31,31,31,31,76,31,31,31,31,31,]),'relop':([29,],[49,]),'sumop':([29,74,],[50,50,]),'mulop':([30,75,],[59,59,]),'objConstruct':([45,],[71,]),'params':([72,80,],[82,86,]),'paramsList':([72,80,87,],[83,83,91,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,43 +26,60 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> suite","S'",1,None,None,None),
-  ('suite -> stmt','suite',1,'p_suite','pythonInterpreter.py',112),
-  ('suite -> stmt suite','suite',2,'p_suite','pythonInterpreter.py',113),
-  ('stmt -> selectionStmt','stmt',1,'p_stmt','pythonInterpreter.py',118),
-  ('stmt -> iterationStmt','stmt',1,'p_stmt','pythonInterpreter.py',119),
-  ('stmt -> returnStmt SEMCOL','stmt',2,'p_stmt','pythonInterpreter.py',120),
-  ('stmt -> inputStmt SEMCOL','stmt',2,'p_stmt','pythonInterpreter.py',121),
-  ('stmt -> outputStmt SEMCOL','stmt',2,'p_stmt','pythonInterpreter.py',122),
-  ('selectionStmt -> IF simpleExpr COL suite','selectionStmt',4,'p_selection_stmt','pythonInterpreter.py',126),
-  ('selectionStmt -> IF simpleExpr COL suite ELSE COL suite','selectionStmt',7,'p_selection_stmt','pythonInterpreter.py',127),
-  ('iterationStmt -> WHILE simpleExpr COL suite','iterationStmt',4,'p_iteration_stmt','pythonInterpreter.py',132),
-  ('returnStmt -> RETURN','returnStmt',1,'p_return','pythonInterpreter.py',137),
-  ('returnStmt -> RETURN simpleExpr','returnStmt',2,'p_return','pythonInterpreter.py',138),
-  ('simpleExpr -> simpleExpr OR andExpr','simpleExpr',3,'p_simple_expr','pythonInterpreter.py',143),
-  ('simpleExpr -> andExpr','simpleExpr',1,'p_simple_expr','pythonInterpreter.py',144),
-  ('andExpr -> andExpr AND unaryRelExpr','andExpr',3,'p_and_expr','pythonInterpreter.py',149),
-  ('andExpr -> unaryRelExpr','andExpr',1,'p_and_expr','pythonInterpreter.py',150),
-  ('unaryRelExpr -> NOT unaryRelExpr','unaryRelExpr',2,'p_unary_rel_expr','pythonInterpreter.py',155),
-  ('unaryRelExpr -> relExpr','unaryRelExpr',1,'p_unary_rel_expr','pythonInterpreter.py',156),
-  ('relExpr -> sumExpr relop sumExpr','relExpr',3,'p_rel_expr','pythonInterpreter.py',161),
-  ('relExpr -> sumExpr','relExpr',1,'p_rel_expr','pythonInterpreter.py',162),
-  ('relop -> LTE','relop',1,'p_relop','pythonInterpreter.py',167),
-  ('relop -> LT','relop',1,'p_relop','pythonInterpreter.py',168),
-  ('relop -> GTE','relop',1,'p_relop','pythonInterpreter.py',169),
-  ('relop -> GT','relop',1,'p_relop','pythonInterpreter.py',170),
-  ('relop -> EQ','relop',1,'p_relop','pythonInterpreter.py',171),
-  ('relop -> NEQ','relop',1,'p_relop','pythonInterpreter.py',172),
-  ('sumExpr -> sumExpr sumop term','sumExpr',3,'p_sum_expr','pythonInterpreter.py',177),
-  ('sumExpr -> term','sumExpr',1,'p_sum_expr','pythonInterpreter.py',178),
-  ('sumop -> SUM','sumop',1,'p_sumop','pythonInterpreter.py',183),
-  ('sumop -> SUBST','sumop',1,'p_sumop','pythonInterpreter.py',184),
-  ('term -> term mulop opElement','term',3,'p_term','pythonInterpreter.py',189),
-  ('term -> opElement','term',1,'p_term','pythonInterpreter.py',190),
-  ('opElement -> NAME','opElement',1,'p_op_element','pythonInterpreter.py',195),
-  ('opElement -> NUMBER','opElement',1,'p_op_element','pythonInterpreter.py',196),
-  ('mulop -> PROD','mulop',1,'p_mulop','pythonInterpreter.py',201),
-  ('mulop -> DIV','mulop',1,'p_mulop','pythonInterpreter.py',202),
-  ('inputStmt -> INPUT LPARENT RPARENT','inputStmt',3,'p_input_stmt','pythonInterpreter.py',207),
-  ('outputStmt -> PRINT LPARENT STRING RPARENT','outputStmt',4,'p_output_stmt','pythonInterpreter.py',212),
-  ('name -> NAME','name',1,'p_name','pythonInterpreter.py',227),
+  ('suite -> stmt','suite',1,'p_suite','pythonInterpreter.py',115),
+  ('suite -> stmt suite','suite',2,'p_suite','pythonInterpreter.py',116),
+  ('stmt -> exprStmt','stmt',1,'p_stmt','pythonInterpreter.py',121),
+  ('stmt -> declar SEMCOL','stmt',2,'p_stmt','pythonInterpreter.py',122),
+  ('stmt -> selectionStmt','stmt',1,'p_stmt','pythonInterpreter.py',123),
+  ('stmt -> iterationStmt','stmt',1,'p_stmt','pythonInterpreter.py',124),
+  ('stmt -> returnStmt SEMCOL','stmt',2,'p_stmt','pythonInterpreter.py',125),
+  ('stmt -> inputStmt SEMCOL','stmt',2,'p_stmt','pythonInterpreter.py',126),
+  ('stmt -> outputStmt SEMCOL','stmt',2,'p_stmt','pythonInterpreter.py',127),
+  ('stmt -> commentLine','stmt',1,'p_stmt','pythonInterpreter.py',128),
+  ('declar -> varDeclar','declar',1,'p_declar','pythonInterpreter.py',132),
+  ('declar -> funcDeclar','declar',1,'p_declar','pythonInterpreter.py',133),
+  ('declar -> objDeclar','declar',1,'p_declar','pythonInterpreter.py',134),
+  ('varDeclar -> NAME ASSIGN STRING','varDeclar',3,'p_var_declar','pythonInterpreter.py',139),
+  ('varDeclar -> NAME ASSIGN NUMBER','varDeclar',3,'p_var_declar','pythonInterpreter.py',140),
+  ('varDeclar -> NAME ASSIGN NAME','varDeclar',3,'p_var_declar','pythonInterpreter.py',141),
+  ('varDeclar -> NAME ASSIGN objConstruct','varDeclar',3,'p_var_declar','pythonInterpreter.py',142),
+  ('funcDeclar -> DEF NAME LPARENT params RPARENT COL suite','funcDeclar',7,'p_func_declar','pythonInterpreter.py',147),
+  ('params -> paramsList','params',1,'p_params','pythonInterpreter.py',152),
+  ('paramsList -> NAME COMA paramsList','paramsList',3,'p_params_list','pythonInterpreter.py',157),
+  ('paramsList -> NAME','paramsList',1,'p_params_list','pythonInterpreter.py',158),
+  ('objDeclar -> CLASS NAME COL suite','objDeclar',4,'p_obj_declaration','pythonInterpreter.py',163),
+  ('objConstruct -> NAME LPARENT params RPARENT','objConstruct',4,'p_obj_construct','pythonInterpreter.py',168),
+  ('exprStmt -> simpleExpr','exprStmt',1,'p_expr_stmt','pythonInterpreter.py',173),
+  ('selectionStmt -> IF simpleExpr COL suite','selectionStmt',4,'p_selection_stmt','pythonInterpreter.py',178),
+  ('selectionStmt -> IF simpleExpr COL suite ELSE COL suite','selectionStmt',7,'p_selection_stmt','pythonInterpreter.py',179),
+  ('iterationStmt -> WHILE simpleExpr COL suite','iterationStmt',4,'p_iteration_stmt','pythonInterpreter.py',184),
+  ('returnStmt -> RETURN','returnStmt',1,'p_return','pythonInterpreter.py',189),
+  ('returnStmt -> RETURN simpleExpr','returnStmt',2,'p_return','pythonInterpreter.py',190),
+  ('simpleExpr -> simpleExpr OR andExpr','simpleExpr',3,'p_simple_expr','pythonInterpreter.py',195),
+  ('simpleExpr -> andExpr','simpleExpr',1,'p_simple_expr','pythonInterpreter.py',196),
+  ('andExpr -> andExpr AND unaryRelExpr','andExpr',3,'p_and_expr','pythonInterpreter.py',201),
+  ('andExpr -> unaryRelExpr','andExpr',1,'p_and_expr','pythonInterpreter.py',202),
+  ('unaryRelExpr -> NOT unaryRelExpr','unaryRelExpr',2,'p_unary_rel_expr','pythonInterpreter.py',207),
+  ('unaryRelExpr -> relExpr','unaryRelExpr',1,'p_unary_rel_expr','pythonInterpreter.py',208),
+  ('relExpr -> sumExpr relop sumExpr','relExpr',3,'p_rel_expr','pythonInterpreter.py',213),
+  ('relExpr -> sumExpr','relExpr',1,'p_rel_expr','pythonInterpreter.py',214),
+  ('relop -> LTE','relop',1,'p_relop','pythonInterpreter.py',219),
+  ('relop -> LT','relop',1,'p_relop','pythonInterpreter.py',220),
+  ('relop -> GTE','relop',1,'p_relop','pythonInterpreter.py',221),
+  ('relop -> GT','relop',1,'p_relop','pythonInterpreter.py',222),
+  ('relop -> EQ','relop',1,'p_relop','pythonInterpreter.py',223),
+  ('relop -> NEQ','relop',1,'p_relop','pythonInterpreter.py',224),
+  ('sumExpr -> sumExpr sumop term','sumExpr',3,'p_sum_expr','pythonInterpreter.py',229),
+  ('sumExpr -> term','sumExpr',1,'p_sum_expr','pythonInterpreter.py',230),
+  ('sumop -> SUM','sumop',1,'p_sumop','pythonInterpreter.py',235),
+  ('sumop -> SUBST','sumop',1,'p_sumop','pythonInterpreter.py',236),
+  ('term -> term mulop opElement','term',3,'p_term','pythonInterpreter.py',241),
+  ('term -> opElement','term',1,'p_term','pythonInterpreter.py',242),
+  ('opElement -> NAME','opElement',1,'p_op_element','pythonInterpreter.py',247),
+  ('opElement -> NUMBER','opElement',1,'p_op_element','pythonInterpreter.py',248),
+  ('mulop -> PROD','mulop',1,'p_mulop','pythonInterpreter.py',253),
+  ('mulop -> DIV','mulop',1,'p_mulop','pythonInterpreter.py',254),
+  ('inputStmt -> INPUT LPARENT RPARENT','inputStmt',3,'p_input_stmt','pythonInterpreter.py',259),
+  ('outputStmt -> PRINT LPARENT STRING RPARENT','outputStmt',4,'p_output_stmt','pythonInterpreter.py',264),
+  ('commentLine -> LINE_COMMENT','commentLine',1,'p_comment_line','pythonInterpreter.py',269),
 ]
