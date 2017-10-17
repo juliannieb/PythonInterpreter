@@ -27,8 +27,8 @@ tokens = (
     'NEQ',
     'GT',
     'LT',
-    'GET',
-    'LET',
+    'GTE',
+    'LTE',
     'ASSIGN',
     'SUM',
     'SUBST',
@@ -68,8 +68,8 @@ t_EQ = r'=='
 t_NEQ = r'!='
 t_GT = r'>'
 t_LT = r'<'
-t_GET = r'>='
-t_LET = r'<='
+t_GTE = r'>='
+t_LTE = r'<='
 t_ASSIGN = r'='
 t_SUM = r'\+'
 t_SUBST = r'-'
@@ -107,6 +107,40 @@ precedence = (
 # dictionary of names
 names = {}
 
+def p_simple_expr(p):
+    """simpleExpr   : simpleExpr OR andExpr
+                    | andExpr
+    """
+    pass
+
+def p_and_expr(p):
+    """andExpr  : andExpr AND unaryRelExpr
+                | unaryRelExpr
+    """
+    pass
+
+def p_unary_rel_expr(p):
+    """unaryRelExpr : NOT unaryRelExpr
+                    | relExpr
+    """
+    pass
+
+def p_rel_expr(p):
+    """relExpr  : sumExpr relop sumExpr
+                | sumExpr
+    """
+    pass
+
+def p_relop(p):
+    """relop    : LTE
+                | LT
+                | GTE
+                | GT
+                | EQ
+                | NEQ
+    """
+    pass
+
 def p_sum_expr(p):
     """sumExpr  : sumExpr sumop term
                 | term
@@ -126,8 +160,8 @@ def p_term(p):
     pass
 
 def p_op_element(p):
-    """opElement    : name
-                    | number
+    """opElement    : NAME
+                    | NUMBER
     """
     pass
 
@@ -147,6 +181,7 @@ def p_output_stmt(p):
     """
     pass
 
+"""
 def p_number(p):
     "number : NUMBER"
     p[0] = p[1]
@@ -154,6 +189,7 @@ def p_number(p):
 def p_string(p):
     "string : STRING"
     p[0] = p[1]
+"""
 
 def p_name(p):
     "name : NAME"
@@ -175,7 +211,7 @@ parser = yacc.yacc()
 
 while 1:
     try:
-        s = raw_input('calc > ')
+        s = raw_input('python -2.7 > ')
     except EOFError:
         break
     if not s:

@@ -4,12 +4,6 @@ Unused terminals:
 
     LINE_COMMENT
     POINT
-    EQ
-    NEQ
-    GT
-    LT
-    GET
-    LET
     ASSIGN
     COL
     SEMCOL
@@ -17,267 +11,542 @@ Unused terminals:
     ELSE
     WHILE
     CLASS
-    AND
-    OR
-    NOT
 
 Grammar
 
-Rule 0     S' -> sumExpr
-Rule 1     sumExpr -> sumExpr sumop term
-Rule 2     sumExpr -> term
-Rule 3     sumop -> SUM
-Rule 4     sumop -> SUBST
-Rule 5     term -> term mulop opElement
-Rule 6     term -> opElement
-Rule 7     opElement -> name
-Rule 8     opElement -> number
-Rule 9     mulop -> PROD
-Rule 10    mulop -> DIV
-Rule 11    inputStmt -> INPUT LPARENT RPARENT
-Rule 12    outputStmt -> PRINT LPARENT STRING RPARENT
-Rule 13    number -> NUMBER
-Rule 14    string -> STRING
-Rule 15    name -> NAME
+Rule 0     S' -> simpleExpr
+Rule 1     simpleExpr -> simpleExpr OR andExpr
+Rule 2     simpleExpr -> andExpr
+Rule 3     andExpr -> andExpr AND unaryRelExpr
+Rule 4     andExpr -> unaryRelExpr
+Rule 5     unaryRelExpr -> NOT unaryRelExpr
+Rule 6     unaryRelExpr -> relExpr
+Rule 7     relExpr -> sumExpr relop sumExpr
+Rule 8     relExpr -> sumExpr
+Rule 9     relop -> LTE
+Rule 10    relop -> LT
+Rule 11    relop -> GTE
+Rule 12    relop -> GT
+Rule 13    relop -> EQ
+Rule 14    relop -> NEQ
+Rule 15    sumExpr -> sumExpr sumop term
+Rule 16    sumExpr -> term
+Rule 17    sumop -> SUM
+Rule 18    sumop -> SUBST
+Rule 19    term -> term mulop opElement
+Rule 20    term -> opElement
+Rule 21    opElement -> NAME
+Rule 22    opElement -> NUMBER
+Rule 23    mulop -> PROD
+Rule 24    mulop -> DIV
+Rule 25    inputStmt -> INPUT LPARENT RPARENT
+Rule 26    outputStmt -> PRINT LPARENT STRING RPARENT
+Rule 27    name -> NAME
 
 Terminals, with rules where they appear
 
-AND                  : 
+AND                  : 3
 ASSIGN               : 
 CLASS                : 
 COL                  : 
-DIV                  : 10
+DIV                  : 24
 ELSE                 : 
-EQ                   : 
-GET                  : 
-GT                   : 
+EQ                   : 13
+GT                   : 12
+GTE                  : 11
 IF                   : 
-INPUT                : 11
-LET                  : 
+INPUT                : 25
 LINE_COMMENT         : 
-LPARENT              : 11 12
-LT                   : 
-NAME                 : 15
-NEQ                  : 
-NOT                  : 
-NUMBER               : 13
-OR                   : 
+LPARENT              : 25 26
+LT                   : 10
+LTE                  : 9
+NAME                 : 21 27
+NEQ                  : 14
+NOT                  : 5
+NUMBER               : 22
+OR                   : 1
 POINT                : 
-PRINT                : 12
-PROD                 : 9
-RPARENT              : 11 12
+PRINT                : 26
+PROD                 : 23
+RPARENT              : 25 26
 SEMCOL               : 
-STRING               : 12 14
-SUBST                : 4
-SUM                  : 3
+STRING               : 26
+SUBST                : 18
+SUM                  : 17
 WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
+andExpr              : 1 2 3
 inputStmt            : 
-mulop                : 5
-name                 : 7
-number               : 8
-opElement            : 5 6
+mulop                : 19
+name                 : 
+opElement            : 19 20
 outputStmt           : 
-string               : 
-sumExpr              : 1 0
-sumop                : 1
-term                 : 1 2 5
+relExpr              : 6
+relop                : 7
+simpleExpr           : 1 0
+sumExpr              : 7 7 8 15
+sumop                : 15
+term                 : 15 16 19
+unaryRelExpr         : 3 4 5
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . sumExpr
-    (1) sumExpr -> . sumExpr sumop term
-    (2) sumExpr -> . term
-    (5) term -> . term mulop opElement
-    (6) term -> . opElement
-    (7) opElement -> . name
-    (8) opElement -> . number
-    (15) name -> . NAME
-    (13) number -> . NUMBER
+    (0) S' -> . simpleExpr
+    (1) simpleExpr -> . simpleExpr OR andExpr
+    (2) simpleExpr -> . andExpr
+    (3) andExpr -> . andExpr AND unaryRelExpr
+    (4) andExpr -> . unaryRelExpr
+    (5) unaryRelExpr -> . NOT unaryRelExpr
+    (6) unaryRelExpr -> . relExpr
+    (7) relExpr -> . sumExpr relop sumExpr
+    (8) relExpr -> . sumExpr
+    (15) sumExpr -> . sumExpr sumop term
+    (16) sumExpr -> . term
+    (19) term -> . term mulop opElement
+    (20) term -> . opElement
+    (21) opElement -> . NAME
+    (22) opElement -> . NUMBER
 
-    NAME            shift and go to state 6
-    NUMBER          shift and go to state 7
+    NOT             shift and go to state 4
+    NAME            shift and go to state 9
+    NUMBER          shift and go to state 10
 
-    sumExpr                        shift and go to state 1
-    term                           shift and go to state 2
-    opElement                      shift and go to state 3
-    name                           shift and go to state 4
-    number                         shift and go to state 5
+    simpleExpr                     shift and go to state 1
+    andExpr                        shift and go to state 2
+    unaryRelExpr                   shift and go to state 3
+    relExpr                        shift and go to state 5
+    sumExpr                        shift and go to state 6
+    term                           shift and go to state 7
+    opElement                      shift and go to state 8
 
 state 1
 
-    (0) S' -> sumExpr .
-    (1) sumExpr -> sumExpr . sumop term
-    (3) sumop -> . SUM
-    (4) sumop -> . SUBST
+    (0) S' -> simpleExpr .
+    (1) simpleExpr -> simpleExpr . OR andExpr
 
-    SUM             shift and go to state 9
-    SUBST           shift and go to state 10
+    OR              shift and go to state 11
 
-    sumop                          shift and go to state 8
 
 state 2
 
-    (2) sumExpr -> term .
-    (5) term -> term . mulop opElement
-    (9) mulop -> . PROD
-    (10) mulop -> . DIV
+    (2) simpleExpr -> andExpr .
+    (3) andExpr -> andExpr . AND unaryRelExpr
 
-    SUM             reduce using rule 2 (sumExpr -> term .)
-    SUBST           reduce using rule 2 (sumExpr -> term .)
-    $end            reduce using rule 2 (sumExpr -> term .)
-    PROD            shift and go to state 12
-    DIV             shift and go to state 13
+    OR              reduce using rule 2 (simpleExpr -> andExpr .)
+    $end            reduce using rule 2 (simpleExpr -> andExpr .)
+    AND             shift and go to state 12
 
-    mulop                          shift and go to state 11
 
 state 3
 
-    (6) term -> opElement .
+    (4) andExpr -> unaryRelExpr .
 
-    PROD            reduce using rule 6 (term -> opElement .)
-    DIV             reduce using rule 6 (term -> opElement .)
-    SUM             reduce using rule 6 (term -> opElement .)
-    SUBST           reduce using rule 6 (term -> opElement .)
-    $end            reduce using rule 6 (term -> opElement .)
+    AND             reduce using rule 4 (andExpr -> unaryRelExpr .)
+    OR              reduce using rule 4 (andExpr -> unaryRelExpr .)
+    $end            reduce using rule 4 (andExpr -> unaryRelExpr .)
 
 
 state 4
 
-    (7) opElement -> name .
+    (5) unaryRelExpr -> NOT . unaryRelExpr
+    (5) unaryRelExpr -> . NOT unaryRelExpr
+    (6) unaryRelExpr -> . relExpr
+    (7) relExpr -> . sumExpr relop sumExpr
+    (8) relExpr -> . sumExpr
+    (15) sumExpr -> . sumExpr sumop term
+    (16) sumExpr -> . term
+    (19) term -> . term mulop opElement
+    (20) term -> . opElement
+    (21) opElement -> . NAME
+    (22) opElement -> . NUMBER
 
-    PROD            reduce using rule 7 (opElement -> name .)
-    DIV             reduce using rule 7 (opElement -> name .)
-    SUM             reduce using rule 7 (opElement -> name .)
-    SUBST           reduce using rule 7 (opElement -> name .)
-    $end            reduce using rule 7 (opElement -> name .)
+    NOT             shift and go to state 4
+    NAME            shift and go to state 9
+    NUMBER          shift and go to state 10
 
+    unaryRelExpr                   shift and go to state 13
+    relExpr                        shift and go to state 5
+    sumExpr                        shift and go to state 6
+    term                           shift and go to state 7
+    opElement                      shift and go to state 8
 
 state 5
 
-    (8) opElement -> number .
+    (6) unaryRelExpr -> relExpr .
 
-    PROD            reduce using rule 8 (opElement -> number .)
-    DIV             reduce using rule 8 (opElement -> number .)
-    SUM             reduce using rule 8 (opElement -> number .)
-    SUBST           reduce using rule 8 (opElement -> number .)
-    $end            reduce using rule 8 (opElement -> number .)
+    AND             reduce using rule 6 (unaryRelExpr -> relExpr .)
+    OR              reduce using rule 6 (unaryRelExpr -> relExpr .)
+    $end            reduce using rule 6 (unaryRelExpr -> relExpr .)
 
 
 state 6
 
-    (15) name -> NAME .
+    (7) relExpr -> sumExpr . relop sumExpr
+    (8) relExpr -> sumExpr .
+    (15) sumExpr -> sumExpr . sumop term
+    (9) relop -> . LTE
+    (10) relop -> . LT
+    (11) relop -> . GTE
+    (12) relop -> . GT
+    (13) relop -> . EQ
+    (14) relop -> . NEQ
+    (17) sumop -> . SUM
+    (18) sumop -> . SUBST
 
-    PROD            reduce using rule 15 (name -> NAME .)
-    DIV             reduce using rule 15 (name -> NAME .)
-    SUM             reduce using rule 15 (name -> NAME .)
-    SUBST           reduce using rule 15 (name -> NAME .)
-    $end            reduce using rule 15 (name -> NAME .)
+    AND             reduce using rule 8 (relExpr -> sumExpr .)
+    OR              reduce using rule 8 (relExpr -> sumExpr .)
+    $end            reduce using rule 8 (relExpr -> sumExpr .)
+    LTE             shift and go to state 16
+    LT              shift and go to state 17
+    GTE             shift and go to state 18
+    GT              shift and go to state 19
+    EQ              shift and go to state 20
+    NEQ             shift and go to state 21
+    SUM             shift and go to state 22
+    SUBST           shift and go to state 23
 
+    relop                          shift and go to state 14
+    sumop                          shift and go to state 15
 
 state 7
 
-    (13) number -> NUMBER .
+    (16) sumExpr -> term .
+    (19) term -> term . mulop opElement
+    (23) mulop -> . PROD
+    (24) mulop -> . DIV
 
-    PROD            reduce using rule 13 (number -> NUMBER .)
-    DIV             reduce using rule 13 (number -> NUMBER .)
-    SUM             reduce using rule 13 (number -> NUMBER .)
-    SUBST           reduce using rule 13 (number -> NUMBER .)
-    $end            reduce using rule 13 (number -> NUMBER .)
+    LTE             reduce using rule 16 (sumExpr -> term .)
+    LT              reduce using rule 16 (sumExpr -> term .)
+    GTE             reduce using rule 16 (sumExpr -> term .)
+    GT              reduce using rule 16 (sumExpr -> term .)
+    EQ              reduce using rule 16 (sumExpr -> term .)
+    NEQ             reduce using rule 16 (sumExpr -> term .)
+    SUM             reduce using rule 16 (sumExpr -> term .)
+    SUBST           reduce using rule 16 (sumExpr -> term .)
+    AND             reduce using rule 16 (sumExpr -> term .)
+    OR              reduce using rule 16 (sumExpr -> term .)
+    $end            reduce using rule 16 (sumExpr -> term .)
+    PROD            shift and go to state 25
+    DIV             shift and go to state 26
 
+    mulop                          shift and go to state 24
 
 state 8
 
-    (1) sumExpr -> sumExpr sumop . term
-    (5) term -> . term mulop opElement
-    (6) term -> . opElement
-    (7) opElement -> . name
-    (8) opElement -> . number
-    (15) name -> . NAME
-    (13) number -> . NUMBER
+    (20) term -> opElement .
 
-    NAME            shift and go to state 6
-    NUMBER          shift and go to state 7
+    PROD            reduce using rule 20 (term -> opElement .)
+    DIV             reduce using rule 20 (term -> opElement .)
+    LTE             reduce using rule 20 (term -> opElement .)
+    LT              reduce using rule 20 (term -> opElement .)
+    GTE             reduce using rule 20 (term -> opElement .)
+    GT              reduce using rule 20 (term -> opElement .)
+    EQ              reduce using rule 20 (term -> opElement .)
+    NEQ             reduce using rule 20 (term -> opElement .)
+    SUM             reduce using rule 20 (term -> opElement .)
+    SUBST           reduce using rule 20 (term -> opElement .)
+    AND             reduce using rule 20 (term -> opElement .)
+    OR              reduce using rule 20 (term -> opElement .)
+    $end            reduce using rule 20 (term -> opElement .)
 
-    term                           shift and go to state 14
-    opElement                      shift and go to state 3
-    name                           shift and go to state 4
-    number                         shift and go to state 5
 
 state 9
 
-    (3) sumop -> SUM .
+    (21) opElement -> NAME .
 
-    NAME            reduce using rule 3 (sumop -> SUM .)
-    NUMBER          reduce using rule 3 (sumop -> SUM .)
+    PROD            reduce using rule 21 (opElement -> NAME .)
+    DIV             reduce using rule 21 (opElement -> NAME .)
+    LTE             reduce using rule 21 (opElement -> NAME .)
+    LT              reduce using rule 21 (opElement -> NAME .)
+    GTE             reduce using rule 21 (opElement -> NAME .)
+    GT              reduce using rule 21 (opElement -> NAME .)
+    EQ              reduce using rule 21 (opElement -> NAME .)
+    NEQ             reduce using rule 21 (opElement -> NAME .)
+    SUM             reduce using rule 21 (opElement -> NAME .)
+    SUBST           reduce using rule 21 (opElement -> NAME .)
+    AND             reduce using rule 21 (opElement -> NAME .)
+    OR              reduce using rule 21 (opElement -> NAME .)
+    $end            reduce using rule 21 (opElement -> NAME .)
 
 
 state 10
 
-    (4) sumop -> SUBST .
+    (22) opElement -> NUMBER .
 
-    NAME            reduce using rule 4 (sumop -> SUBST .)
-    NUMBER          reduce using rule 4 (sumop -> SUBST .)
+    PROD            reduce using rule 22 (opElement -> NUMBER .)
+    DIV             reduce using rule 22 (opElement -> NUMBER .)
+    LTE             reduce using rule 22 (opElement -> NUMBER .)
+    LT              reduce using rule 22 (opElement -> NUMBER .)
+    GTE             reduce using rule 22 (opElement -> NUMBER .)
+    GT              reduce using rule 22 (opElement -> NUMBER .)
+    EQ              reduce using rule 22 (opElement -> NUMBER .)
+    NEQ             reduce using rule 22 (opElement -> NUMBER .)
+    SUM             reduce using rule 22 (opElement -> NUMBER .)
+    SUBST           reduce using rule 22 (opElement -> NUMBER .)
+    AND             reduce using rule 22 (opElement -> NUMBER .)
+    OR              reduce using rule 22 (opElement -> NUMBER .)
+    $end            reduce using rule 22 (opElement -> NUMBER .)
 
 
 state 11
 
-    (5) term -> term mulop . opElement
-    (7) opElement -> . name
-    (8) opElement -> . number
-    (15) name -> . NAME
-    (13) number -> . NUMBER
+    (1) simpleExpr -> simpleExpr OR . andExpr
+    (3) andExpr -> . andExpr AND unaryRelExpr
+    (4) andExpr -> . unaryRelExpr
+    (5) unaryRelExpr -> . NOT unaryRelExpr
+    (6) unaryRelExpr -> . relExpr
+    (7) relExpr -> . sumExpr relop sumExpr
+    (8) relExpr -> . sumExpr
+    (15) sumExpr -> . sumExpr sumop term
+    (16) sumExpr -> . term
+    (19) term -> . term mulop opElement
+    (20) term -> . opElement
+    (21) opElement -> . NAME
+    (22) opElement -> . NUMBER
 
-    NAME            shift and go to state 6
-    NUMBER          shift and go to state 7
+    NOT             shift and go to state 4
+    NAME            shift and go to state 9
+    NUMBER          shift and go to state 10
 
-    opElement                      shift and go to state 15
-    name                           shift and go to state 4
-    number                         shift and go to state 5
+    andExpr                        shift and go to state 27
+    unaryRelExpr                   shift and go to state 3
+    relExpr                        shift and go to state 5
+    sumExpr                        shift and go to state 6
+    term                           shift and go to state 7
+    opElement                      shift and go to state 8
 
 state 12
 
-    (9) mulop -> PROD .
+    (3) andExpr -> andExpr AND . unaryRelExpr
+    (5) unaryRelExpr -> . NOT unaryRelExpr
+    (6) unaryRelExpr -> . relExpr
+    (7) relExpr -> . sumExpr relop sumExpr
+    (8) relExpr -> . sumExpr
+    (15) sumExpr -> . sumExpr sumop term
+    (16) sumExpr -> . term
+    (19) term -> . term mulop opElement
+    (20) term -> . opElement
+    (21) opElement -> . NAME
+    (22) opElement -> . NUMBER
 
-    NAME            reduce using rule 9 (mulop -> PROD .)
-    NUMBER          reduce using rule 9 (mulop -> PROD .)
+    NOT             shift and go to state 4
+    NAME            shift and go to state 9
+    NUMBER          shift and go to state 10
 
+    unaryRelExpr                   shift and go to state 28
+    relExpr                        shift and go to state 5
+    sumExpr                        shift and go to state 6
+    term                           shift and go to state 7
+    opElement                      shift and go to state 8
 
 state 13
 
-    (10) mulop -> DIV .
+    (5) unaryRelExpr -> NOT unaryRelExpr .
 
-    NAME            reduce using rule 10 (mulop -> DIV .)
-    NUMBER          reduce using rule 10 (mulop -> DIV .)
+    AND             reduce using rule 5 (unaryRelExpr -> NOT unaryRelExpr .)
+    OR              reduce using rule 5 (unaryRelExpr -> NOT unaryRelExpr .)
+    $end            reduce using rule 5 (unaryRelExpr -> NOT unaryRelExpr .)
 
 
 state 14
 
-    (1) sumExpr -> sumExpr sumop term .
-    (5) term -> term . mulop opElement
-    (9) mulop -> . PROD
-    (10) mulop -> . DIV
+    (7) relExpr -> sumExpr relop . sumExpr
+    (15) sumExpr -> . sumExpr sumop term
+    (16) sumExpr -> . term
+    (19) term -> . term mulop opElement
+    (20) term -> . opElement
+    (21) opElement -> . NAME
+    (22) opElement -> . NUMBER
 
-    SUM             reduce using rule 1 (sumExpr -> sumExpr sumop term .)
-    SUBST           reduce using rule 1 (sumExpr -> sumExpr sumop term .)
-    $end            reduce using rule 1 (sumExpr -> sumExpr sumop term .)
-    PROD            shift and go to state 12
-    DIV             shift and go to state 13
+    NAME            shift and go to state 9
+    NUMBER          shift and go to state 10
 
-    mulop                          shift and go to state 11
+    sumExpr                        shift and go to state 29
+    term                           shift and go to state 7
+    opElement                      shift and go to state 8
 
 state 15
 
-    (5) term -> term mulop opElement .
+    (15) sumExpr -> sumExpr sumop . term
+    (19) term -> . term mulop opElement
+    (20) term -> . opElement
+    (21) opElement -> . NAME
+    (22) opElement -> . NUMBER
 
-    PROD            reduce using rule 5 (term -> term mulop opElement .)
-    DIV             reduce using rule 5 (term -> term mulop opElement .)
-    SUM             reduce using rule 5 (term -> term mulop opElement .)
-    SUBST           reduce using rule 5 (term -> term mulop opElement .)
-    $end            reduce using rule 5 (term -> term mulop opElement .)
+    NAME            shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    term                           shift and go to state 30
+    opElement                      shift and go to state 8
+
+state 16
+
+    (9) relop -> LTE .
+
+    NAME            reduce using rule 9 (relop -> LTE .)
+    NUMBER          reduce using rule 9 (relop -> LTE .)
+
+
+state 17
+
+    (10) relop -> LT .
+
+    NAME            reduce using rule 10 (relop -> LT .)
+    NUMBER          reduce using rule 10 (relop -> LT .)
+
+
+state 18
+
+    (11) relop -> GTE .
+
+    NAME            reduce using rule 11 (relop -> GTE .)
+    NUMBER          reduce using rule 11 (relop -> GTE .)
+
+
+state 19
+
+    (12) relop -> GT .
+
+    NAME            reduce using rule 12 (relop -> GT .)
+    NUMBER          reduce using rule 12 (relop -> GT .)
+
+
+state 20
+
+    (13) relop -> EQ .
+
+    NAME            reduce using rule 13 (relop -> EQ .)
+    NUMBER          reduce using rule 13 (relop -> EQ .)
+
+
+state 21
+
+    (14) relop -> NEQ .
+
+    NAME            reduce using rule 14 (relop -> NEQ .)
+    NUMBER          reduce using rule 14 (relop -> NEQ .)
+
+
+state 22
+
+    (17) sumop -> SUM .
+
+    NAME            reduce using rule 17 (sumop -> SUM .)
+    NUMBER          reduce using rule 17 (sumop -> SUM .)
+
+
+state 23
+
+    (18) sumop -> SUBST .
+
+    NAME            reduce using rule 18 (sumop -> SUBST .)
+    NUMBER          reduce using rule 18 (sumop -> SUBST .)
+
+
+state 24
+
+    (19) term -> term mulop . opElement
+    (21) opElement -> . NAME
+    (22) opElement -> . NUMBER
+
+    NAME            shift and go to state 9
+    NUMBER          shift and go to state 10
+
+    opElement                      shift and go to state 31
+
+state 25
+
+    (23) mulop -> PROD .
+
+    NAME            reduce using rule 23 (mulop -> PROD .)
+    NUMBER          reduce using rule 23 (mulop -> PROD .)
+
+
+state 26
+
+    (24) mulop -> DIV .
+
+    NAME            reduce using rule 24 (mulop -> DIV .)
+    NUMBER          reduce using rule 24 (mulop -> DIV .)
+
+
+state 27
+
+    (1) simpleExpr -> simpleExpr OR andExpr .
+    (3) andExpr -> andExpr . AND unaryRelExpr
+
+    OR              reduce using rule 1 (simpleExpr -> simpleExpr OR andExpr .)
+    $end            reduce using rule 1 (simpleExpr -> simpleExpr OR andExpr .)
+    AND             shift and go to state 12
+
+
+state 28
+
+    (3) andExpr -> andExpr AND unaryRelExpr .
+
+    AND             reduce using rule 3 (andExpr -> andExpr AND unaryRelExpr .)
+    OR              reduce using rule 3 (andExpr -> andExpr AND unaryRelExpr .)
+    $end            reduce using rule 3 (andExpr -> andExpr AND unaryRelExpr .)
+
+
+state 29
+
+    (7) relExpr -> sumExpr relop sumExpr .
+    (15) sumExpr -> sumExpr . sumop term
+    (17) sumop -> . SUM
+    (18) sumop -> . SUBST
+
+    AND             reduce using rule 7 (relExpr -> sumExpr relop sumExpr .)
+    OR              reduce using rule 7 (relExpr -> sumExpr relop sumExpr .)
+    $end            reduce using rule 7 (relExpr -> sumExpr relop sumExpr .)
+    SUM             shift and go to state 22
+    SUBST           shift and go to state 23
+
+    sumop                          shift and go to state 15
+
+state 30
+
+    (15) sumExpr -> sumExpr sumop term .
+    (19) term -> term . mulop opElement
+    (23) mulop -> . PROD
+    (24) mulop -> . DIV
+
+    LTE             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    LT              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    GTE             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    GT              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    EQ              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    NEQ             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    SUM             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    SUBST           reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    AND             reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    OR              reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    $end            reduce using rule 15 (sumExpr -> sumExpr sumop term .)
+    PROD            shift and go to state 25
+    DIV             shift and go to state 26
+
+    mulop                          shift and go to state 24
+
+state 31
+
+    (19) term -> term mulop opElement .
+
+    PROD            reduce using rule 19 (term -> term mulop opElement .)
+    DIV             reduce using rule 19 (term -> term mulop opElement .)
+    LTE             reduce using rule 19 (term -> term mulop opElement .)
+    LT              reduce using rule 19 (term -> term mulop opElement .)
+    GTE             reduce using rule 19 (term -> term mulop opElement .)
+    GT              reduce using rule 19 (term -> term mulop opElement .)
+    EQ              reduce using rule 19 (term -> term mulop opElement .)
+    NEQ             reduce using rule 19 (term -> term mulop opElement .)
+    SUM             reduce using rule 19 (term -> term mulop opElement .)
+    SUBST           reduce using rule 19 (term -> term mulop opElement .)
+    AND             reduce using rule 19 (term -> term mulop opElement .)
+    OR              reduce using rule 19 (term -> term mulop opElement .)
+    $end            reduce using rule 19 (term -> term mulop opElement .)
 

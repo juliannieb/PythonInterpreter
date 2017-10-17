@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'NAME NUMBER STRING LINE_COMMENT POINT EQ NEQ GT LT GET LET ASSIGN SUM SUBST PROD DIV LPARENT RPARENT COL SEMCOL INPUT PRINT IF ELSE WHILE CLASS AND OR NOTsumExpr  : sumExpr sumop term\n                | term\n    sumop    : SUM\n                | SUBST\n    term : term mulop opElement\n            | opElement\n    opElement    : name\n                    | number\n    mulop    : PROD\n                | DIV\n    inputStmt : INPUT LPARENT RPARENT\n    outputStmt : PRINT LPARENT STRING RPARENT\n    number : NUMBERstring : STRINGname : NAME'
+_lr_signature = 'NAME NUMBER STRING LINE_COMMENT POINT EQ NEQ GT LT GTE LTE ASSIGN SUM SUBST PROD DIV LPARENT RPARENT COL SEMCOL INPUT PRINT IF ELSE WHILE CLASS AND OR NOTsimpleExpr   : simpleExpr OR andExpr\n                    | andExpr\n    andExpr  : andExpr AND unaryRelExpr\n                | unaryRelExpr\n    unaryRelExpr : NOT unaryRelExpr\n                    | relExpr\n    relExpr  : sumExpr relop sumExpr\n                | sumExpr\n    relop    : LTE\n                | LT\n                | GTE\n                | GT\n                | EQ\n                | NEQ\n    sumExpr  : sumExpr sumop term\n                | term\n    sumop    : SUM\n                | SUBST\n    term : term mulop opElement\n            | opElement\n    opElement    : NAME\n                    | NUMBER\n    mulop    : PROD\n                | DIV\n    inputStmt : INPUT LPARENT RPARENT\n    outputStmt : PRINT LPARENT STRING RPARENT\n    name : NAME'
     
-_lr_action_items = {'NAME':([0,8,9,10,11,12,13,],[6,6,-3,-4,6,-9,-10,]),'NUMBER':([0,8,9,10,11,12,13,],[7,7,-3,-4,7,-9,-10,]),'$end':([1,2,3,4,5,6,7,14,15,],[0,-2,-6,-7,-8,-15,-13,-1,-5,]),'SUM':([1,2,3,4,5,6,7,14,15,],[9,-2,-6,-7,-8,-15,-13,-1,-5,]),'SUBST':([1,2,3,4,5,6,7,14,15,],[10,-2,-6,-7,-8,-15,-13,-1,-5,]),'PROD':([2,3,4,5,6,7,14,15,],[12,-6,-7,-8,-15,-13,12,-5,]),'DIV':([2,3,4,5,6,7,14,15,],[13,-6,-7,-8,-15,-13,13,-5,]),}
+_lr_action_items = {'NOT':([0,4,11,12,],[4,4,4,4,]),'NAME':([0,4,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,],[9,9,9,9,9,9,-9,-10,-11,-12,-13,-14,-17,-18,9,-23,-24,]),'NUMBER':([0,4,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,],[10,10,10,10,10,10,-9,-10,-11,-12,-13,-14,-17,-18,10,-23,-24,]),'$end':([1,2,3,5,6,7,8,9,10,13,27,28,29,30,31,],[0,-2,-4,-6,-8,-16,-20,-21,-22,-5,-1,-3,-7,-15,-19,]),'OR':([1,2,3,5,6,7,8,9,10,13,27,28,29,30,31,],[11,-2,-4,-6,-8,-16,-20,-21,-22,-5,-1,-3,-7,-15,-19,]),'AND':([2,3,5,6,7,8,9,10,13,27,28,29,30,31,],[12,-4,-6,-8,-16,-20,-21,-22,-5,12,-3,-7,-15,-19,]),'LTE':([6,7,8,9,10,30,31,],[16,-16,-20,-21,-22,-15,-19,]),'LT':([6,7,8,9,10,30,31,],[17,-16,-20,-21,-22,-15,-19,]),'GTE':([6,7,8,9,10,30,31,],[18,-16,-20,-21,-22,-15,-19,]),'GT':([6,7,8,9,10,30,31,],[19,-16,-20,-21,-22,-15,-19,]),'EQ':([6,7,8,9,10,30,31,],[20,-16,-20,-21,-22,-15,-19,]),'NEQ':([6,7,8,9,10,30,31,],[21,-16,-20,-21,-22,-15,-19,]),'SUM':([6,7,8,9,10,29,30,31,],[22,-16,-20,-21,-22,22,-15,-19,]),'SUBST':([6,7,8,9,10,29,30,31,],[23,-16,-20,-21,-22,23,-15,-19,]),'PROD':([7,8,9,10,30,31,],[25,-20,-21,-22,25,-19,]),'DIV':([7,8,9,10,30,31,],[26,-20,-21,-22,26,-19,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'sumExpr':([0,],[1,]),'term':([0,8,],[2,14,]),'opElement':([0,8,11,],[3,3,15,]),'name':([0,8,11,],[4,4,4,]),'number':([0,8,11,],[5,5,5,]),'sumop':([1,],[8,]),'mulop':([2,14,],[11,11,]),}
+_lr_goto_items = {'simpleExpr':([0,],[1,]),'andExpr':([0,11,],[2,27,]),'unaryRelExpr':([0,4,11,12,],[3,13,3,28,]),'relExpr':([0,4,11,12,],[5,5,5,5,]),'sumExpr':([0,4,11,12,14,],[6,6,6,6,29,]),'term':([0,4,11,12,14,15,],[7,7,7,7,7,30,]),'opElement':([0,4,11,12,14,15,24,],[8,8,8,8,8,8,31,]),'relop':([6,],[14,]),'sumop':([6,29,],[15,15,]),'mulop':([7,30,],[24,24,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -25,20 +25,32 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> sumExpr","S'",1,None,None,None),
-  ('sumExpr -> sumExpr sumop term','sumExpr',3,'p_sum_expr','pythonInterpreter.py',111),
-  ('sumExpr -> term','sumExpr',1,'p_sum_expr','pythonInterpreter.py',112),
-  ('sumop -> SUM','sumop',1,'p_sumop','pythonInterpreter.py',117),
-  ('sumop -> SUBST','sumop',1,'p_sumop','pythonInterpreter.py',118),
-  ('term -> term mulop opElement','term',3,'p_term','pythonInterpreter.py',123),
-  ('term -> opElement','term',1,'p_term','pythonInterpreter.py',124),
-  ('opElement -> name','opElement',1,'p_op_element','pythonInterpreter.py',129),
-  ('opElement -> number','opElement',1,'p_op_element','pythonInterpreter.py',130),
-  ('mulop -> PROD','mulop',1,'p_mulop','pythonInterpreter.py',135),
-  ('mulop -> DIV','mulop',1,'p_mulop','pythonInterpreter.py',136),
-  ('inputStmt -> INPUT LPARENT RPARENT','inputStmt',3,'p_input_stmt','pythonInterpreter.py',141),
-  ('outputStmt -> PRINT LPARENT STRING RPARENT','outputStmt',4,'p_output_stmt','pythonInterpreter.py',146),
-  ('number -> NUMBER','number',1,'p_number','pythonInterpreter.py',151),
-  ('string -> STRING','string',1,'p_string','pythonInterpreter.py',155),
-  ('name -> NAME','name',1,'p_name','pythonInterpreter.py',159),
+  ("S' -> simpleExpr","S'",1,None,None,None),
+  ('simpleExpr -> simpleExpr OR andExpr','simpleExpr',3,'p_simple_expr','pythonInterpreter.py',111),
+  ('simpleExpr -> andExpr','simpleExpr',1,'p_simple_expr','pythonInterpreter.py',112),
+  ('andExpr -> andExpr AND unaryRelExpr','andExpr',3,'p_and_expr','pythonInterpreter.py',117),
+  ('andExpr -> unaryRelExpr','andExpr',1,'p_and_expr','pythonInterpreter.py',118),
+  ('unaryRelExpr -> NOT unaryRelExpr','unaryRelExpr',2,'p_unary_rel_expr','pythonInterpreter.py',123),
+  ('unaryRelExpr -> relExpr','unaryRelExpr',1,'p_unary_rel_expr','pythonInterpreter.py',124),
+  ('relExpr -> sumExpr relop sumExpr','relExpr',3,'p_rel_expr','pythonInterpreter.py',129),
+  ('relExpr -> sumExpr','relExpr',1,'p_rel_expr','pythonInterpreter.py',130),
+  ('relop -> LTE','relop',1,'p_relop','pythonInterpreter.py',135),
+  ('relop -> LT','relop',1,'p_relop','pythonInterpreter.py',136),
+  ('relop -> GTE','relop',1,'p_relop','pythonInterpreter.py',137),
+  ('relop -> GT','relop',1,'p_relop','pythonInterpreter.py',138),
+  ('relop -> EQ','relop',1,'p_relop','pythonInterpreter.py',139),
+  ('relop -> NEQ','relop',1,'p_relop','pythonInterpreter.py',140),
+  ('sumExpr -> sumExpr sumop term','sumExpr',3,'p_sum_expr','pythonInterpreter.py',145),
+  ('sumExpr -> term','sumExpr',1,'p_sum_expr','pythonInterpreter.py',146),
+  ('sumop -> SUM','sumop',1,'p_sumop','pythonInterpreter.py',151),
+  ('sumop -> SUBST','sumop',1,'p_sumop','pythonInterpreter.py',152),
+  ('term -> term mulop opElement','term',3,'p_term','pythonInterpreter.py',157),
+  ('term -> opElement','term',1,'p_term','pythonInterpreter.py',158),
+  ('opElement -> NAME','opElement',1,'p_op_element','pythonInterpreter.py',163),
+  ('opElement -> NUMBER','opElement',1,'p_op_element','pythonInterpreter.py',164),
+  ('mulop -> PROD','mulop',1,'p_mulop','pythonInterpreter.py',169),
+  ('mulop -> DIV','mulop',1,'p_mulop','pythonInterpreter.py',170),
+  ('inputStmt -> INPUT LPARENT RPARENT','inputStmt',3,'p_input_stmt','pythonInterpreter.py',175),
+  ('outputStmt -> PRINT LPARENT STRING RPARENT','outputStmt',4,'p_output_stmt','pythonInterpreter.py',180),
+  ('name -> NAME','name',1,'p_name','pythonInterpreter.py',195),
 ]
