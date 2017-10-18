@@ -119,7 +119,7 @@ def p_suite(p):
 
 def p_stmt(p):
     """stmt : exprStmt
-            | declar SEMCOL
+            | declar
             | selectionStmt
             | iterationStmt
             | returnStmt SEMCOL
@@ -129,7 +129,7 @@ def p_stmt(p):
     """
 
 def p_declar(p):
-    """declar   : varDeclar
+    """declar   : varDeclar SEMCOL
                 | funcDeclar
                 | objDeclar
     """
@@ -144,7 +144,8 @@ def p_var_declar(p):
     pass
 
 def p_func_declar(p):
-    """funcDeclar   : DEF NAME LPARENT params RPARENT COL suite
+    """funcDeclar   : DEF NAME LPARENT RPARENT COL suite
+                    | DEF NAME LPARENT params RPARENT COL suite
     """
     pass
 
@@ -165,7 +166,8 @@ def p_obj_declaration(p):
     pass
 
 def p_obj_construct(p):
-    """objConstruct : NAME LPARENT params RPARENT
+    """objConstruct : NAME LPARENT RPARENT
+                    | NAME LPARENT params RPARENT
     """
     pass
 
