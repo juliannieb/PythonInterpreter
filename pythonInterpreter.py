@@ -120,6 +120,7 @@ def p_suite(p):
 def p_stmt(p):
     """stmt : exprStmt
             | declar
+            | call SEMCOL
             | selectionStmt
             | iterationStmt
             | returnStmt SEMCOL
@@ -168,6 +169,15 @@ def p_obj_declaration(p):
 def p_obj_construct(p):
     """objConstruct : NAME LPARENT RPARENT
                     | NAME LPARENT params RPARENT
+    """
+    pass
+
+def p_call(p):
+    """call : NAME
+            | NAME POINT call
+            | NAME LPARENT RPARENT
+            | NAME LPARENT params RPARENT
+            | call POINT call
     """
     pass
 
@@ -246,7 +256,7 @@ def p_term(p):
     pass
 
 def p_op_element(p):
-    """opElement    : NAME
+    """opElement    : call
                     | NUMBER
     """
     pass
