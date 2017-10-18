@@ -138,9 +138,7 @@ def p_declar(p):
 
 def p_var_declar(p):
     """varDeclar    : NAME ASSIGN STRING
-                    | NAME ASSIGN NUMBER
-                    | NAME ASSIGN NAME
-                    | NAME ASSIGN objConstruct
+                    | NAME ASSIGN exprStmt
     """
     pass
 
@@ -163,12 +161,6 @@ def p_params_list(p):
 
 def p_obj_declaration(p):
     """objDeclar    : CLASS NAME COL suite
-    """
-    pass
-
-def p_obj_construct(p):
-    """objConstruct : NAME LPARENT RPARENT
-                    | NAME LPARENT params RPARENT
     """
     pass
 
