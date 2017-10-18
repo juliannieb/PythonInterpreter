@@ -309,6 +309,7 @@ while 1:
         break
     if not s:
         continue
+    print(s)
     parser.parse(s)
     """
     try:

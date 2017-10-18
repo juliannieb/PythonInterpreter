@@ -1,12 +1,16 @@
-# Comment
-# This is a comment
-x = 5
-5 $!@= x
-y = 3
-z = "Hello, World!"
-if (x == 5):
-    input()
-    print()
-a = 34@
-input(a)
-(x == 5)whilee:
+# Success
+variable1 = 5;
+constante1 = 3;
+while variable1 > 5: if variable1 == 5: print("Empieza");
+if variable1 == 5: input(); print("Hola");
+while variable1 > 5: input(); print("Si"); variable1 = variable1 - 1; if variable1 == 3: print("Ahora vale 3"); else: print("No vale 3");
+# Fail
+= hola 5;
+"Esto es un string" = si;
+while: print("No");
+# Incorrect inputs but with success for now
+x = 5;
+x = "String";
+x.method1().method2();
+def function1(): variable2 = 2; variable2 x;
+variable2;
