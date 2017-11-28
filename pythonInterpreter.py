@@ -1,6 +1,7 @@
 # Julian Niebieskikwiat Godoy - A01207868
 
 import sys
+import re
 
 if sys.version_info[0] >= 3:
     raw_input = input
@@ -111,6 +112,22 @@ precedence = (
 # dictionary of names
 names = {}
 
+# symbol table
+class SymbolTable:
+    
+    def __init__(self):
+        self.symbol_table = dict()
+    
+    def __str__(self):
+        return "{0}".format(self.symbol_table)
+
+    def add_object(self, key, new_obj):
+        self.symbol_table[key] = new_obj
+        print(self.symbol_table)
+
+symbol_table = SymbolTable()
+
+
 def p_suite(p):
     """suite    : stmt
                 | stmt suite
@@ -140,7 +157,7 @@ def p_var_declar(p):
     """varDeclar    : NAME ASSIGN STRING
                     | NAME ASSIGN exprStmt
     """
-    pass
+    symbol_table.add_object(str(p[1]), p[3])
 
 def p_func_declar(p):
     """funcDeclar   : DEF NAME LPARENT RPARENT COL suite
@@ -171,7 +188,15 @@ def p_call(p):
             | NAME LPARENT params RPARENT
             | call POINT call
     """
-    pass
+    if (len(p) == 2):
+        lexer.input(str(p[1]))
+        if(lexer.token().type == 'NAME'):
+            try:
+                p[0] = symbol_table[str(p[1])]
+                print(p[0])
+            except LookupError:
+                print("Undefined name '%s'" % p[1])
+                p[0] = 0
 
 def p_expr_stmt(p):
     """exprStmt : simpleExpr
@@ -309,7 +334,8 @@ while 1:
         break
     if not s:
         continue
-    print(s)
+    # print(s)
+    lexer.input(s)
     parser.parse(s)
     """
     try:
