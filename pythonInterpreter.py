@@ -198,9 +198,7 @@ def p_call(p):
             | call POINT call
     """
     if (len(p) == 2):
-        lexer.input(str(p[1]))
-        if(lexer.token().type == 'NAME'):
-            symbol_table.get_object(str(p[1]))
+        p[0] = symbol_table.get_object(str(p[1]))
 
 def p_expr_stmt(p):
     """exprStmt : simpleExpr
