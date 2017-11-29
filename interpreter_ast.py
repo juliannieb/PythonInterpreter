@@ -308,7 +308,7 @@ class OutputStmt(Node):
         self.printElement = printElement
     
     def excecute(self):
-        if (self.printElement[0] == '"' or p[3][0] == "'"):
+        if (self.printElement[0] == '"' or self.printElement[0] == "'"):
             print(self.printElement)
         else:
             print(symbol_table.get_object(str(self.printElement)))

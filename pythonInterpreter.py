@@ -59,7 +59,7 @@ def t_NUMBER(t):
 
 line = r'.*'
 
-t_STRING = r'("' + line + '"|\'' + line + '\')'
+t_STRING = r'("[^\"]*"|\'[^\']*\')'
 
 t_LINE_COMMENT = r'\#' + line
 
@@ -142,7 +142,10 @@ def p_suite(p):
     """suite    : stmt
                 | stmt suite
     """
-    p[0] = iast.Suite(p[1])
+    if (len(p) == 3):
+        p[0] = iast.Suite(p[1], p[2])
+    else:
+        p[0] = iast.Suite(p[1])
     p[0].excecute()
 
 def p_stmt(p):
