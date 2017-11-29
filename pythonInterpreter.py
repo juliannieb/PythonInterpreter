@@ -280,7 +280,8 @@ def p_sum_expr(p):
                 | term
     """
     if (len(p) == 4):
-        p[0] = p[1] or p[3]
+        if p[2] == '+': p[0] = p[1] + p[3]
+        elif p[2] == '-': p[0] = p[1] - p[3]
     else:
         p[0] = p[1]
 
@@ -295,8 +296,8 @@ def p_term(p):
             | opElement
     """
     if (len(p) == 4):
-        # TODO: handle this shit
-        p[0] = p[1] or p[3]
+        if p[2] == '*': p[0] = p[1] * p[3]
+        elif p[2] == '/': p[0] = p[1] / p[3]
     else:
         p[0] = p[1]
 
