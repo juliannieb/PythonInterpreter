@@ -129,7 +129,7 @@ class SymbolTable:
         try:
             return self.symbol_table[key]
         except LookupError:
-            print("Undefined name '%s'" % p[1])
+            print("Undefined name '%s'" % key)
             return 0
 
 
@@ -318,9 +318,13 @@ def p_input_stmt(p):
     p[0] = input()
 
 def p_output_stmt(p):
-    """outputStmt : PRINT LPARENT STRING RPARENT
+    """outputStmt   : PRINT LPARENT STRING RPARENT
+                    | PRINT LPARENT NAME RPARENT
     """
-    pass
+    if (p[3][0] == '"' or p[3][0] == "'"):
+        print(p[3])
+    else:
+        print(symbol_table.get_object(str(p[3])))
 
 def p_comment_line(p):
     """commentLine  : LINE_COMMENT
