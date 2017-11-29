@@ -167,6 +167,7 @@ def p_var_declar(p):
                     | NAME ASSIGN inputStmt
     """
     symbol_table.add_object(str(p[1]), p[3])
+    p[0] = p[3]
 
 def p_func_declar(p):
     """funcDeclar   : DEF NAME LPARENT RPARENT COL suite
