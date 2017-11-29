@@ -163,15 +163,14 @@ def p_declar(p):
                 | funcDeclar
                 | objDeclar
     """
-    pass
+    p[0] = iast.Declar(p[1])
 
 def p_var_declar(p):
     """varDeclar    : NAME ASSIGN STRING
                     | NAME ASSIGN exprStmt
                     | NAME ASSIGN inputStmt
     """
-    symbol_table.add_object(str(p[1]), p[3])
-    p[0] = p[3]
+    p[0] = iast.VarDeclar(p[1], p[2], p[3])
 
 def p_func_declar(p):
     """funcDeclar   : DEF NAME LPARENT RPARENT COL suite
@@ -208,7 +207,7 @@ def p_call(p):
 def p_expr_stmt(p):
     """exprStmt : simpleExpr
     """
-    p[0] = p[1]
+    p[0] = iast.ExprStmt(p[1])
 
 def p_selection_stmt(p):
     """selectionStmt    : IF simpleExpr COL suite
@@ -319,7 +318,7 @@ def p_mulop(p):
 def p_input_stmt(p):
     """inputStmt : INPUT LPARENT RPARENT
     """
-    p[0] = input()
+    p[0] = iast.InputStmt()
 
 def p_output_stmt(p):
     """outputStmt   : PRINT LPARENT STRING RPARENT

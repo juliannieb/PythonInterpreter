@@ -60,7 +60,11 @@ class Declar(Node):
                 | funcDeclar
                 | objDeclar
     """
-    pass
+    def __init__(self, declar):
+        self.declar = declar
+    
+    def excecute(self):
+        return self.declar.excecute()
 
 class VarDeclar(Node):
     """varDeclar    : NAME ASSIGN STRING
@@ -73,7 +77,13 @@ class VarDeclar(Node):
         self.val = val
 
     def excecute(self):
-        symbol_table.add_object(str(name), val)
+        if str(self.val)[0] == "'" or str(self.val)[0] == '"':
+            symbol_table.add_object(str(self.name), self.val)
+            return self.val
+        else:
+            value = self.val.excecute()
+            symbol_table.add_object(str(self.name), value)
+            return value
 
 class FuncDeclar(Node):
     """funcDeclar   : DEF NAME LPARENT RPARENT COL suite
