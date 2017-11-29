@@ -22,7 +22,7 @@ symbol_table = SymbolTable()
 
 class Node(object):
 
-    def excecute(self):
+    def execute(self):
         raise NotImplementedError("Subclass must implement abstract method")
 
 class Suite(Node):
@@ -33,10 +33,10 @@ class Suite(Node):
         self.stmt = stmt
         self.suite = suite
     
-    def excecute(self):
-        self.stmt.excecute()
+    def execute(self):
+        self.stmt.execute()
         if self.suite:
-            self.suite.excecute()
+            self.suite.execute()
 
 class Stmt(Node):
     """stmt : exprStmt
@@ -52,8 +52,8 @@ class Stmt(Node):
     def __init__(self, stmt):
         self.stmt = stmt
     
-    def excecute(self):
-        self.stmt.excecute()
+    def execute(self):
+        self.stmt.execute()
 
 class Declar(Node):
     """declar   : varDeclar SEMCOL
@@ -63,8 +63,8 @@ class Declar(Node):
     def __init__(self, declar):
         self.declar = declar
     
-    def excecute(self):
-        return self.declar.excecute()
+    def execute(self):
+        return self.declar.execute()
 
 class VarDeclar(Node):
     """varDeclar    : NAME ASSIGN STRING
@@ -76,12 +76,12 @@ class VarDeclar(Node):
         self.assign = assign
         self.val = val
 
-    def excecute(self):
+    def execute(self):
         if str(self.val)[0] == "'" or str(self.val)[0] == '"':
             symbol_table.add_object(str(self.name), self.val)
             return self.val
         else:
-            value = self.val.excecute()
+            value = self.val.execute()
             symbol_table.add_object(str(self.name), value)
             return value
 
@@ -117,7 +117,7 @@ class Call(Node):
     def __init__(self, name=None):
         self.name = name
 
-    def excecute(self):
+    def execute(self):
         if self.name:
             return symbol_table.get_object(str(self.name))
 
@@ -127,8 +127,8 @@ class ExprStmt(Node):
     def __init__(self, simpleExpr):
         self.simpleExpr = simpleExpr
     
-    def excecute(self):
-        return self.simpleExpr.excecute()
+    def execute(self):
+        return self.simpleExpr.execute()
 
 class SelectionStmt(Node):
     """selectionStmt    : IF simpleExpr COL suite
@@ -156,11 +156,11 @@ class SimpleExpr(Node):
         self.orToken = orToken
         self.andExpr = andExpr
     
-    def excecute(self):
+    def execute(self):
         if self.orToken:
-            return self.simpleExpr.excecute() or self.andExpr.excecute()
+            return self.simpleExpr.execute() or self.andExpr.execute()
         else:
-            return self.andExpr.excecute()
+            return self.andExpr.execute()
 
 class AndExpr(Node):
     """andExpr  : andExpr AND unaryRelExpr
@@ -171,11 +171,11 @@ class AndExpr(Node):
         self.andToken = andToken
         self.unaryRelExpr = unaryRelExpr
     
-    def excecute(self):
+    def execute(self):
         if self.andToken:
-            return self.andExpr.excecute() and self.unaryRelExpr.excecute()
+            return self.andExpr.execute() and self.unaryRelExpr.execute()
         else:
-            return self.unaryRelExpr.excecute()
+            return self.unaryRelExpr.execute()
 
 class UnaryRelExpr(Node):
     """unaryRelExpr : NOT unaryRelExpr
@@ -186,11 +186,11 @@ class UnaryRelExpr(Node):
         self.unaryRelExpr = unaryRelExpr
         self.relExpr = relExpr
 
-    def excecute(self):
+    def execute(self):
         if self.notToken:
-            return not unaryRelExpr.excecute()
+            return not unaryRelExpr.execute()
         else:
-            return self.relExpr.excecute()
+            return self.relExpr.execute()
 
 class RelExpr(Node):
     """relExpr  : sumExpr relop sumExpr
@@ -201,16 +201,16 @@ class RelExpr(Node):
         self.relop = relop
         self.sumExpr2 = sumExpr2
     
-    def excecute(self):
+    def execute(self):
         if self.relop:
-            if self.relop.excecute() == '<=': return self.sumExpr1.excecute() <= self.sumExpr2.excecute()
-            elif self.relop.excecute() == '<': return self.sumExpr1.excecute() < self.sumExpr2.excecute()
-            elif self.relop.excecute() == '>=': return self.sumExpr1.excecute() >= self.sumExpr2.excecute()
-            elif self.relop.excecute() == '>': return self.sumExpr1.excecute() > self.sumExpr2.excecute()
-            elif self.relop.excecute() == '==': return self.sumExpr1.excecute() == self.sumExpr2.excecute()
-            elif self.relop.excecute() == '!=': return self.sumExpr1.excecute() != self.sumExpr2.excecute()
+            if self.relop.execute() == '<=': return self.sumExpr1.execute() <= self.sumExpr2.execute()
+            elif self.relop.execute() == '<': return self.sumExpr1.execute() < self.sumExpr2.execute()
+            elif self.relop.execute() == '>=': return self.sumExpr1.execute() >= self.sumExpr2.execute()
+            elif self.relop.execute() == '>': return self.sumExpr1.execute() > self.sumExpr2.execute()
+            elif self.relop.execute() == '==': return self.sumExpr1.execute() == self.sumExpr2.execute()
+            elif self.relop.execute() == '!=': return self.sumExpr1.execute() != self.sumExpr2.execute()
         else:
-            return self.sumExpr1.excecute()
+            return self.sumExpr1.execute()
 
 class Relop(Node):
     """relop    : LTE
@@ -223,7 +223,7 @@ class Relop(Node):
     def __init__(self, token):
         self.token = token
     
-    def excecute(self):
+    def execute(self):
         return self.token
 
 class SumExpr(Node):
@@ -235,12 +235,12 @@ class SumExpr(Node):
         self.sumop = sumop
         self.term = term
     
-    def excecute(self):
+    def execute(self):
         if self.sumop:
-            if self.sumop.excecute() == '+': return self.sumExpr.excecute() + self.term.excecute()
-            elif self.sumop.excecute() == '-': return self.sumExpr.excecute() - self.term.excecute()
+            if self.sumop.execute() == '+': return self.sumExpr.execute() + self.term.execute()
+            elif self.sumop.execute() == '-': return self.sumExpr.execute() - self.term.execute()
         else:
-            return self.term.excecute()
+            return self.term.execute()
 
 class Sumop(Node):
     """sumop    : SUM
@@ -249,7 +249,7 @@ class Sumop(Node):
     def __init__(self, token):
         self.token = token
     
-    def excecute(self):
+    def execute(self):
         return self.token
 
 class Term(Node):
@@ -261,12 +261,12 @@ class Term(Node):
         self.mulop = mulop
         self.opElement = opElement
 
-    def excecute(self):
+    def execute(self):
         if self.mulop:
-            if self.mulop.excecute() == '*': return self.term.excecute() * self.opElement.excecute()
-            elif self.mulop.excecute() == '/': return self.term.excecute() / self.opElement.excecute()
+            if self.mulop.execute() == '*': return self.term.execute() * self.opElement.execute()
+            elif self.mulop.execute() == '/': return self.term.execute() / self.opElement.execute()
         else:
-            return self.opElement.excecute()
+            return self.opElement.execute()
 
 class OpElement(Node):
     """opElement    : call
@@ -275,11 +275,11 @@ class OpElement(Node):
     def __init__(self, opElement):
         self.opElement = opElement
     
-    def excecute(self):
+    def execute(self):
         if str(self.opElement).isdigit():
             return self.opElement
         else:
-            return self.opElement.excecute()
+            return self.opElement.execute()
 
 class Mulop(Node):
     """mulop    : PROD
@@ -288,7 +288,7 @@ class Mulop(Node):
     def __init__(self, token):
         self.token = token
     
-    def excecute(self):
+    def execute(self):
         return self.token
 
 class InputStmt(Node):
@@ -297,7 +297,7 @@ class InputStmt(Node):
     def __init__(self):
         self.type = 'INPUT'
     
-    def excecute(self):
+    def execute(self):
         return input()
 
 class OutputStmt(Node):
@@ -307,7 +307,7 @@ class OutputStmt(Node):
     def __init__(self, printElement):
         self.printElement = printElement
     
-    def excecute(self):
+    def execute(self):
         if (self.printElement[0] == '"' or self.printElement[0] == "'"):
             print(self.printElement)
         else:

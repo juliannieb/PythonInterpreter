@@ -2,8 +2,8 @@ Created by PLY version 3.10 (http://www.dabeaz.com/ply)
 
 Grammar
 
-Rule 0     S' -> line
-Rule 1     line -> suite
+Rule 0     S' -> codeLine
+Rule 1     codeLine -> suite
 Rule 2     suite -> stmt
 Rule 3     suite -> stmt suite
 Rule 4     stmt -> exprStmt
@@ -107,13 +107,13 @@ Nonterminals, with rules where they appear
 
 andExpr              : 36 37 38
 call                 : 6 26 29 29 56
+codeLine             : 0
 commentLine          : 12
 declar               : 5
 exprStmt             : 4 17
 funcDeclar           : 14
 inputStmt            : 10 18
 iterationStmt        : 8
-line                 : 0
 mulop                : 54
 objDeclar            : 15
 opElement            : 54 55
@@ -137,8 +137,8 @@ Parsing method: LALR
 
 state 0
 
-    (0) S' -> . line
-    (1) line -> . suite
+    (0) S' -> . codeLine
+    (1) codeLine -> . suite
     (2) suite -> . stmt
     (3) suite -> . stmt suite
     (4) stmt -> . exprStmt
@@ -201,7 +201,7 @@ state 0
     NOT             shift and go to state 28
     NUMBER          shift and go to state 33
 
-    line                           shift and go to state 1
+    codeLine                       shift and go to state 1
     suite                          shift and go to state 2
     stmt                           shift and go to state 3
     exprStmt                       shift and go to state 4
@@ -226,15 +226,15 @@ state 0
 
 state 1
 
-    (0) S' -> line .
+    (0) S' -> codeLine .
 
 
 
 state 2
 
-    (1) line -> suite .
+    (1) codeLine -> suite .
 
-    $end            reduce using rule 1 (line -> suite .)
+    $end            reduce using rule 1 (codeLine -> suite .)
 
 
 state 3

@@ -139,9 +139,9 @@ symbol_table = SymbolTable()
 """
 
 def p_line(p):
-    """line : suite
+    """codeLine : suite
     """
-    p[1].excecute()
+    p[1].execute()
 
 def p_suite(p):
     """suite    : stmt
