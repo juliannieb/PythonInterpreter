@@ -138,6 +138,11 @@ class SymbolTable:
 symbol_table = SymbolTable()
 """
 
+def p_line(p):
+    """line : suite
+    """
+    p[1].excecute()
+
 def p_suite(p):
     """suite    : stmt
                 | stmt suite
@@ -146,7 +151,6 @@ def p_suite(p):
         p[0] = iast.Suite(p[1], p[2])
     else:
         p[0] = iast.Suite(p[1])
-    p[0].excecute()
 
 def p_stmt(p):
     """stmt : exprStmt
