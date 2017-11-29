@@ -238,7 +238,7 @@ def p_and_expr(p):
                 | unaryRelExpr
     """
     if (len(p) == 4):
-        p[0] = p[1] or p[3]
+        p[0] = p[1] and p[3]
     else:
         p[0] = p[1]
 
@@ -256,8 +256,12 @@ def p_rel_expr(p):
                 | sumExpr
     """
     if (len(p) == 4):
-        # TODO: handle this fucking shit
-        p[0] = p[1] or p[3]
+        if p[2] == '<=': p[0] = p[1] <= p[3]
+        elif p[2] == '<': p[0] = p[1] < p[3]
+        elif p[2] == '>=': p[0] = p[1] >= p[3]
+        elif p[2] == '>': p[0] = p[1] > p[3]
+        elif p[2] == '==': p[0] = p[1] == p[3]
+        elif p[2] == '!=': p[0] = p[1] != p[3]
     else:
         p[0] = p[1]
 
