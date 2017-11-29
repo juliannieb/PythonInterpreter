@@ -124,6 +124,14 @@ class SymbolTable:
     def add_object(self, key, new_obj):
         self.symbol_table[key] = new_obj
         print(self.symbol_table)
+    
+    def get_object(self, key):
+        try:
+            return self.symbol_table[key]
+        except LookupError:
+            print("Undefined name '%s'" % p[1])
+            return 0
+
 
 symbol_table = SymbolTable()
 
@@ -156,6 +164,7 @@ def p_declar(p):
 def p_var_declar(p):
     """varDeclar    : NAME ASSIGN STRING
                     | NAME ASSIGN exprStmt
+                    | NAME ASSIGN inputStmt
     """
     symbol_table.add_object(str(p[1]), p[3])
 
@@ -191,17 +200,12 @@ def p_call(p):
     if (len(p) == 2):
         lexer.input(str(p[1]))
         if(lexer.token().type == 'NAME'):
-            try:
-                p[0] = symbol_table[str(p[1])]
-                print(p[0])
-            except LookupError:
-                print("Undefined name '%s'" % p[1])
-                p[0] = 0
+            symbol_table.get_object(str(p[1]))
 
 def p_expr_stmt(p):
     """exprStmt : simpleExpr
     """
-    pass
+    p[0] = p[1]
 
 def p_selection_stmt(p):
     """selectionStmt    : IF simpleExpr COL suite
@@ -224,25 +228,38 @@ def p_simple_expr(p):
     """simpleExpr   : simpleExpr OR andExpr
                     | andExpr
     """
-    pass
+    if (len(p) == 4):
+        p[0] = p[1] or p[3]
+    else:
+        p[0] = p[1]
 
 def p_and_expr(p):
     """andExpr  : andExpr AND unaryRelExpr
                 | unaryRelExpr
     """
-    pass
+    if (len(p) == 4):
+        p[0] = p[1] or p[3]
+    else:
+        p[0] = p[1]
 
 def p_unary_rel_expr(p):
     """unaryRelExpr : NOT unaryRelExpr
                     | relExpr
     """
-    pass
+    if (len(p) == 3):
+        p[0] = not p[2]
+    else:
+        p[0] = p[1]
 
 def p_rel_expr(p):
     """relExpr  : sumExpr relop sumExpr
                 | sumExpr
     """
-    pass
+    if (len(p) == 4):
+        # TODO: handle this fucking shit
+        p[0] = p[1] or p[3]
+    else:
+        p[0] = p[1]
 
 def p_relop(p):
     """relop    : LTE
@@ -252,42 +269,49 @@ def p_relop(p):
                 | EQ
                 | NEQ
     """
-    pass
+    p[0] = p[1]
 
 def p_sum_expr(p):
     """sumExpr  : sumExpr sumop term
                 | term
     """
-    pass
+    if (len(p) == 4):
+        p[0] = p[1] or p[3]
+    else:
+        p[0] = p[1]
 
 def p_sumop(p):
     """sumop    : SUM
                 | SUBST
     """
-    pass
+    p[0] = p[1]
 
 def p_term(p):
     """term : term mulop opElement
             | opElement
     """
-    pass
+    if (len(p) == 4):
+        # TODO: handle this shit
+        p[0] = p[1] or p[3]
+    else:
+        p[0] = p[1]
 
 def p_op_element(p):
     """opElement    : call
                     | NUMBER
     """
-    pass
+    p[0] = p[1]
 
 def p_mulop(p):
     """mulop    : PROD
                 | DIV
     """
-    pass
+    p[0] = p[1]
 
 def p_input_stmt(p):
     """inputStmt : INPUT LPARENT RPARENT
     """
-    pass
+    p[0] = input()
 
 def p_output_stmt(p):
     """outputStmt : PRINT LPARENT STRING RPARENT

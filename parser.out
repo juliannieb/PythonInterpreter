@@ -19,114 +19,115 @@ Rule 13    declar -> funcDeclar
 Rule 14    declar -> objDeclar
 Rule 15    varDeclar -> NAME ASSIGN STRING
 Rule 16    varDeclar -> NAME ASSIGN exprStmt
-Rule 17    funcDeclar -> DEF NAME LPARENT RPARENT COL suite
-Rule 18    funcDeclar -> DEF NAME LPARENT params RPARENT COL suite
-Rule 19    params -> paramsList
-Rule 20    paramsList -> NAME COMA paramsList
-Rule 21    paramsList -> NAME
-Rule 22    objDeclar -> CLASS NAME COL suite
-Rule 23    call -> NAME
-Rule 24    call -> NAME POINT call
-Rule 25    call -> NAME LPARENT RPARENT
-Rule 26    call -> NAME LPARENT params RPARENT
-Rule 27    call -> call POINT call
-Rule 28    exprStmt -> simpleExpr
-Rule 29    selectionStmt -> IF simpleExpr COL suite
-Rule 30    selectionStmt -> IF simpleExpr COL suite ELSE COL suite
-Rule 31    iterationStmt -> WHILE simpleExpr COL suite
-Rule 32    returnStmt -> RETURN
-Rule 33    returnStmt -> RETURN simpleExpr
-Rule 34    simpleExpr -> simpleExpr OR andExpr
-Rule 35    simpleExpr -> andExpr
-Rule 36    andExpr -> andExpr AND unaryRelExpr
-Rule 37    andExpr -> unaryRelExpr
-Rule 38    unaryRelExpr -> NOT unaryRelExpr
-Rule 39    unaryRelExpr -> relExpr
-Rule 40    relExpr -> sumExpr relop sumExpr
-Rule 41    relExpr -> sumExpr
-Rule 42    relop -> LTE
-Rule 43    relop -> LT
-Rule 44    relop -> GTE
-Rule 45    relop -> GT
-Rule 46    relop -> EQ
-Rule 47    relop -> NEQ
-Rule 48    sumExpr -> sumExpr sumop term
-Rule 49    sumExpr -> term
-Rule 50    sumop -> SUM
-Rule 51    sumop -> SUBST
-Rule 52    term -> term mulop opElement
-Rule 53    term -> opElement
-Rule 54    opElement -> call
-Rule 55    opElement -> NUMBER
-Rule 56    mulop -> PROD
-Rule 57    mulop -> DIV
-Rule 58    inputStmt -> INPUT LPARENT RPARENT
-Rule 59    outputStmt -> PRINT LPARENT STRING RPARENT
-Rule 60    commentLine -> LINE_COMMENT
+Rule 17    varDeclar -> NAME ASSIGN inputStmt
+Rule 18    funcDeclar -> DEF NAME LPARENT RPARENT COL suite
+Rule 19    funcDeclar -> DEF NAME LPARENT params RPARENT COL suite
+Rule 20    params -> paramsList
+Rule 21    paramsList -> NAME COMA paramsList
+Rule 22    paramsList -> NAME
+Rule 23    objDeclar -> CLASS NAME COL suite
+Rule 24    call -> NAME
+Rule 25    call -> NAME POINT call
+Rule 26    call -> NAME LPARENT RPARENT
+Rule 27    call -> NAME LPARENT params RPARENT
+Rule 28    call -> call POINT call
+Rule 29    exprStmt -> simpleExpr
+Rule 30    selectionStmt -> IF simpleExpr COL suite
+Rule 31    selectionStmt -> IF simpleExpr COL suite ELSE COL suite
+Rule 32    iterationStmt -> WHILE simpleExpr COL suite
+Rule 33    returnStmt -> RETURN
+Rule 34    returnStmt -> RETURN simpleExpr
+Rule 35    simpleExpr -> simpleExpr OR andExpr
+Rule 36    simpleExpr -> andExpr
+Rule 37    andExpr -> andExpr AND unaryRelExpr
+Rule 38    andExpr -> unaryRelExpr
+Rule 39    unaryRelExpr -> NOT unaryRelExpr
+Rule 40    unaryRelExpr -> relExpr
+Rule 41    relExpr -> sumExpr relop sumExpr
+Rule 42    relExpr -> sumExpr
+Rule 43    relop -> LTE
+Rule 44    relop -> LT
+Rule 45    relop -> GTE
+Rule 46    relop -> GT
+Rule 47    relop -> EQ
+Rule 48    relop -> NEQ
+Rule 49    sumExpr -> sumExpr sumop term
+Rule 50    sumExpr -> term
+Rule 51    sumop -> SUM
+Rule 52    sumop -> SUBST
+Rule 53    term -> term mulop opElement
+Rule 54    term -> opElement
+Rule 55    opElement -> call
+Rule 56    opElement -> NUMBER
+Rule 57    mulop -> PROD
+Rule 58    mulop -> DIV
+Rule 59    inputStmt -> INPUT LPARENT RPARENT
+Rule 60    outputStmt -> PRINT LPARENT STRING RPARENT
+Rule 61    commentLine -> LINE_COMMENT
 
 Terminals, with rules where they appear
 
-AND                  : 36
-ASSIGN               : 15 16
-CLASS                : 22
-COL                  : 17 18 22 29 30 30 31
-COMA                 : 20
-DEF                  : 17 18
-DIV                  : 57
-ELSE                 : 30
-EQ                   : 46
-GT                   : 45
-GTE                  : 44
-IF                   : 29 30
-INPUT                : 58
-LINE_COMMENT         : 60
-LPARENT              : 17 18 25 26 58 59
-LT                   : 43
-LTE                  : 42
-NAME                 : 15 16 17 18 20 21 22 23 24 25 26
-NEQ                  : 47
-NOT                  : 38
-NUMBER               : 55
-OR                   : 34
-POINT                : 24 27
-PRINT                : 59
-PROD                 : 56
-RETURN               : 32 33
-RPARENT              : 17 18 25 26 58 59
+AND                  : 37
+ASSIGN               : 15 16 17
+CLASS                : 23
+COL                  : 18 19 23 30 31 31 32
+COMA                 : 21
+DEF                  : 18 19
+DIV                  : 58
+ELSE                 : 31
+EQ                   : 47
+GT                   : 46
+GTE                  : 45
+IF                   : 30 31
+INPUT                : 59
+LINE_COMMENT         : 61
+LPARENT              : 18 19 26 27 59 60
+LT                   : 44
+LTE                  : 43
+NAME                 : 15 16 17 18 19 21 22 23 24 25 26 27
+NEQ                  : 48
+NOT                  : 39
+NUMBER               : 56
+OR                   : 35
+POINT                : 25 28
+PRINT                : 60
+PROD                 : 57
+RETURN               : 33 34
+RPARENT              : 18 19 26 27 59 60
 SEMCOL               : 5 8 9 10 12
-STRING               : 15 59
-SUBST                : 51
-SUM                  : 50
-WHILE                : 31
+STRING               : 15 60
+SUBST                : 52
+SUM                  : 51
+WHILE                : 32
 error                : 
 
 Nonterminals, with rules where they appear
 
-andExpr              : 34 35 36
-call                 : 5 24 27 27 54
+andExpr              : 35 36 37
+call                 : 5 25 28 28 55
 commentLine          : 11
 declar               : 4
 exprStmt             : 3 16
 funcDeclar           : 13
-inputStmt            : 9
+inputStmt            : 9 17
 iterationStmt        : 7
-mulop                : 52
+mulop                : 53
 objDeclar            : 14
-opElement            : 52 53
+opElement            : 53 54
 outputStmt           : 10
-params               : 18 26
-paramsList           : 19 20
-relExpr              : 39
-relop                : 40
+params               : 19 27
+paramsList           : 20 21
+relExpr              : 40
+relop                : 41
 returnStmt           : 8
 selectionStmt        : 6
-simpleExpr           : 28 29 30 31 33 34
+simpleExpr           : 29 30 31 32 34 35
 stmt                 : 1 2
-suite                : 2 17 18 22 29 30 30 31 0
-sumExpr              : 40 40 41 48
-sumop                : 48
-term                 : 48 49 52
-unaryRelExpr         : 36 37 38
+suite                : 2 18 19 23 30 31 31 32 0
+sumExpr              : 41 41 42 49
+sumop                : 49
+term                 : 49 50 53
+unaryRelExpr         : 37 38 39
 varDeclar            : 12
 
 Parsing method: LALR
@@ -145,42 +146,43 @@ state 0
     (9) stmt -> . inputStmt SEMCOL
     (10) stmt -> . outputStmt SEMCOL
     (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
+    (29) exprStmt -> . simpleExpr
     (12) declar -> . varDeclar SEMCOL
     (13) declar -> . funcDeclar
     (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
     (15) varDeclar -> . NAME ASSIGN STRING
     (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
 
     NAME            shift and go to state 16
     IF              shift and go to state 17
@@ -237,42 +239,43 @@ state 2
     (9) stmt -> . inputStmt SEMCOL
     (10) stmt -> . outputStmt SEMCOL
     (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
+    (29) exprStmt -> . simpleExpr
     (12) declar -> . varDeclar SEMCOL
     (13) declar -> . funcDeclar
     (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
     (15) varDeclar -> . NAME ASSIGN STRING
     (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
 
   ! shift/reduce conflict for NAME resolved as shift
   ! shift/reduce conflict for IF resolved as shift
@@ -374,36 +377,36 @@ state 4
 state 5
 
     (5) stmt -> call . SEMCOL
-    (27) call -> call . POINT call
-    (54) opElement -> call .
+    (28) call -> call . POINT call
+    (55) opElement -> call .
 
     SEMCOL          shift and go to state 34
     POINT           shift and go to state 35
-    PROD            reduce using rule 54 (opElement -> call .)
-    DIV             reduce using rule 54 (opElement -> call .)
-    LTE             reduce using rule 54 (opElement -> call .)
-    LT              reduce using rule 54 (opElement -> call .)
-    GTE             reduce using rule 54 (opElement -> call .)
-    GT              reduce using rule 54 (opElement -> call .)
-    EQ              reduce using rule 54 (opElement -> call .)
-    NEQ             reduce using rule 54 (opElement -> call .)
-    SUM             reduce using rule 54 (opElement -> call .)
-    SUBST           reduce using rule 54 (opElement -> call .)
-    AND             reduce using rule 54 (opElement -> call .)
-    OR              reduce using rule 54 (opElement -> call .)
-    NAME            reduce using rule 54 (opElement -> call .)
-    IF              reduce using rule 54 (opElement -> call .)
-    WHILE           reduce using rule 54 (opElement -> call .)
-    RETURN          reduce using rule 54 (opElement -> call .)
-    INPUT           reduce using rule 54 (opElement -> call .)
-    PRINT           reduce using rule 54 (opElement -> call .)
-    LINE_COMMENT    reduce using rule 54 (opElement -> call .)
-    DEF             reduce using rule 54 (opElement -> call .)
-    CLASS           reduce using rule 54 (opElement -> call .)
-    NOT             reduce using rule 54 (opElement -> call .)
-    NUMBER          reduce using rule 54 (opElement -> call .)
-    $end            reduce using rule 54 (opElement -> call .)
-    ELSE            reduce using rule 54 (opElement -> call .)
+    PROD            reduce using rule 55 (opElement -> call .)
+    DIV             reduce using rule 55 (opElement -> call .)
+    LTE             reduce using rule 55 (opElement -> call .)
+    LT              reduce using rule 55 (opElement -> call .)
+    GTE             reduce using rule 55 (opElement -> call .)
+    GT              reduce using rule 55 (opElement -> call .)
+    EQ              reduce using rule 55 (opElement -> call .)
+    NEQ             reduce using rule 55 (opElement -> call .)
+    SUM             reduce using rule 55 (opElement -> call .)
+    SUBST           reduce using rule 55 (opElement -> call .)
+    AND             reduce using rule 55 (opElement -> call .)
+    OR              reduce using rule 55 (opElement -> call .)
+    NAME            reduce using rule 55 (opElement -> call .)
+    IF              reduce using rule 55 (opElement -> call .)
+    WHILE           reduce using rule 55 (opElement -> call .)
+    RETURN          reduce using rule 55 (opElement -> call .)
+    INPUT           reduce using rule 55 (opElement -> call .)
+    PRINT           reduce using rule 55 (opElement -> call .)
+    LINE_COMMENT    reduce using rule 55 (opElement -> call .)
+    DEF             reduce using rule 55 (opElement -> call .)
+    CLASS           reduce using rule 55 (opElement -> call .)
+    NOT             reduce using rule 55 (opElement -> call .)
+    NUMBER          reduce using rule 55 (opElement -> call .)
+    $end            reduce using rule 55 (opElement -> call .)
+    ELSE            reduce using rule 55 (opElement -> call .)
 
 
 state 6
@@ -486,23 +489,23 @@ state 11
 
 state 12
 
-    (28) exprStmt -> simpleExpr .
-    (34) simpleExpr -> simpleExpr . OR andExpr
+    (29) exprStmt -> simpleExpr .
+    (35) simpleExpr -> simpleExpr . OR andExpr
 
-    NAME            reduce using rule 28 (exprStmt -> simpleExpr .)
-    IF              reduce using rule 28 (exprStmt -> simpleExpr .)
-    WHILE           reduce using rule 28 (exprStmt -> simpleExpr .)
-    RETURN          reduce using rule 28 (exprStmt -> simpleExpr .)
-    INPUT           reduce using rule 28 (exprStmt -> simpleExpr .)
-    PRINT           reduce using rule 28 (exprStmt -> simpleExpr .)
-    LINE_COMMENT    reduce using rule 28 (exprStmt -> simpleExpr .)
-    DEF             reduce using rule 28 (exprStmt -> simpleExpr .)
-    CLASS           reduce using rule 28 (exprStmt -> simpleExpr .)
-    NOT             reduce using rule 28 (exprStmt -> simpleExpr .)
-    NUMBER          reduce using rule 28 (exprStmt -> simpleExpr .)
-    $end            reduce using rule 28 (exprStmt -> simpleExpr .)
-    ELSE            reduce using rule 28 (exprStmt -> simpleExpr .)
-    SEMCOL          reduce using rule 28 (exprStmt -> simpleExpr .)
+    NAME            reduce using rule 29 (exprStmt -> simpleExpr .)
+    IF              reduce using rule 29 (exprStmt -> simpleExpr .)
+    WHILE           reduce using rule 29 (exprStmt -> simpleExpr .)
+    RETURN          reduce using rule 29 (exprStmt -> simpleExpr .)
+    INPUT           reduce using rule 29 (exprStmt -> simpleExpr .)
+    PRINT           reduce using rule 29 (exprStmt -> simpleExpr .)
+    LINE_COMMENT    reduce using rule 29 (exprStmt -> simpleExpr .)
+    DEF             reduce using rule 29 (exprStmt -> simpleExpr .)
+    CLASS           reduce using rule 29 (exprStmt -> simpleExpr .)
+    NOT             reduce using rule 29 (exprStmt -> simpleExpr .)
+    NUMBER          reduce using rule 29 (exprStmt -> simpleExpr .)
+    $end            reduce using rule 29 (exprStmt -> simpleExpr .)
+    ELSE            reduce using rule 29 (exprStmt -> simpleExpr .)
+    SEMCOL          reduce using rule 29 (exprStmt -> simpleExpr .)
     OR              shift and go to state 39
 
 
@@ -553,70 +556,71 @@ state 15
 
 state 16
 
-    (23) call -> NAME .
-    (24) call -> NAME . POINT call
-    (25) call -> NAME . LPARENT RPARENT
-    (26) call -> NAME . LPARENT params RPARENT
+    (24) call -> NAME .
+    (25) call -> NAME . POINT call
+    (26) call -> NAME . LPARENT RPARENT
+    (27) call -> NAME . LPARENT params RPARENT
     (15) varDeclar -> NAME . ASSIGN STRING
     (16) varDeclar -> NAME . ASSIGN exprStmt
+    (17) varDeclar -> NAME . ASSIGN inputStmt
 
   ! shift/reduce conflict for POINT resolved as shift
-    SEMCOL          reduce using rule 23 (call -> NAME .)
-    PROD            reduce using rule 23 (call -> NAME .)
-    DIV             reduce using rule 23 (call -> NAME .)
-    LTE             reduce using rule 23 (call -> NAME .)
-    LT              reduce using rule 23 (call -> NAME .)
-    GTE             reduce using rule 23 (call -> NAME .)
-    GT              reduce using rule 23 (call -> NAME .)
-    EQ              reduce using rule 23 (call -> NAME .)
-    NEQ             reduce using rule 23 (call -> NAME .)
-    SUM             reduce using rule 23 (call -> NAME .)
-    SUBST           reduce using rule 23 (call -> NAME .)
-    AND             reduce using rule 23 (call -> NAME .)
-    OR              reduce using rule 23 (call -> NAME .)
-    NAME            reduce using rule 23 (call -> NAME .)
-    IF              reduce using rule 23 (call -> NAME .)
-    WHILE           reduce using rule 23 (call -> NAME .)
-    RETURN          reduce using rule 23 (call -> NAME .)
-    INPUT           reduce using rule 23 (call -> NAME .)
-    PRINT           reduce using rule 23 (call -> NAME .)
-    LINE_COMMENT    reduce using rule 23 (call -> NAME .)
-    DEF             reduce using rule 23 (call -> NAME .)
-    CLASS           reduce using rule 23 (call -> NAME .)
-    NOT             reduce using rule 23 (call -> NAME .)
-    NUMBER          reduce using rule 23 (call -> NAME .)
-    $end            reduce using rule 23 (call -> NAME .)
-    ELSE            reduce using rule 23 (call -> NAME .)
+    SEMCOL          reduce using rule 24 (call -> NAME .)
+    PROD            reduce using rule 24 (call -> NAME .)
+    DIV             reduce using rule 24 (call -> NAME .)
+    LTE             reduce using rule 24 (call -> NAME .)
+    LT              reduce using rule 24 (call -> NAME .)
+    GTE             reduce using rule 24 (call -> NAME .)
+    GT              reduce using rule 24 (call -> NAME .)
+    EQ              reduce using rule 24 (call -> NAME .)
+    NEQ             reduce using rule 24 (call -> NAME .)
+    SUM             reduce using rule 24 (call -> NAME .)
+    SUBST           reduce using rule 24 (call -> NAME .)
+    AND             reduce using rule 24 (call -> NAME .)
+    OR              reduce using rule 24 (call -> NAME .)
+    NAME            reduce using rule 24 (call -> NAME .)
+    IF              reduce using rule 24 (call -> NAME .)
+    WHILE           reduce using rule 24 (call -> NAME .)
+    RETURN          reduce using rule 24 (call -> NAME .)
+    INPUT           reduce using rule 24 (call -> NAME .)
+    PRINT           reduce using rule 24 (call -> NAME .)
+    LINE_COMMENT    reduce using rule 24 (call -> NAME .)
+    DEF             reduce using rule 24 (call -> NAME .)
+    CLASS           reduce using rule 24 (call -> NAME .)
+    NOT             reduce using rule 24 (call -> NAME .)
+    NUMBER          reduce using rule 24 (call -> NAME .)
+    $end            reduce using rule 24 (call -> NAME .)
+    ELSE            reduce using rule 24 (call -> NAME .)
     POINT           shift and go to state 41
     LPARENT         shift and go to state 42
     ASSIGN          shift and go to state 43
 
-  ! POINT           [ reduce using rule 23 (call -> NAME .) ]
+  ! POINT           [ reduce using rule 24 (call -> NAME .) ]
 
 
 state 17
 
-    (29) selectionStmt -> IF . simpleExpr COL suite
-    (30) selectionStmt -> IF . simpleExpr COL suite ELSE COL suite
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (30) selectionStmt -> IF . simpleExpr COL suite
+    (31) selectionStmt -> IF . simpleExpr COL suite ELSE COL suite
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
@@ -633,26 +637,26 @@ state 17
 
 state 18
 
-    (31) iterationStmt -> WHILE . simpleExpr COL suite
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (32) iterationStmt -> WHILE . simpleExpr COL suite
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
@@ -669,29 +673,29 @@ state 18
 
 state 19
 
-    (32) returnStmt -> RETURN .
-    (33) returnStmt -> RETURN . simpleExpr
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (33) returnStmt -> RETURN .
+    (34) returnStmt -> RETURN . simpleExpr
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
-    SEMCOL          reduce using rule 32 (returnStmt -> RETURN .)
+    SEMCOL          reduce using rule 33 (returnStmt -> RETURN .)
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
     NAME            shift and go to state 46
@@ -707,117 +711,117 @@ state 19
 
 state 20
 
-    (58) inputStmt -> INPUT . LPARENT RPARENT
+    (59) inputStmt -> INPUT . LPARENT RPARENT
 
     LPARENT         shift and go to state 49
 
 
 state 21
 
-    (59) outputStmt -> PRINT . LPARENT STRING RPARENT
+    (60) outputStmt -> PRINT . LPARENT STRING RPARENT
 
     LPARENT         shift and go to state 50
 
 
 state 22
 
-    (60) commentLine -> LINE_COMMENT .
+    (61) commentLine -> LINE_COMMENT .
 
-    NAME            reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    IF              reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    WHILE           reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    RETURN          reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    INPUT           reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    PRINT           reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    LINE_COMMENT    reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    DEF             reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    CLASS           reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    NOT             reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    NUMBER          reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    $end            reduce using rule 60 (commentLine -> LINE_COMMENT .)
-    ELSE            reduce using rule 60 (commentLine -> LINE_COMMENT .)
+    NAME            reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    IF              reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    WHILE           reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    RETURN          reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    INPUT           reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    PRINT           reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    LINE_COMMENT    reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    DEF             reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    CLASS           reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    NOT             reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    NUMBER          reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    $end            reduce using rule 61 (commentLine -> LINE_COMMENT .)
+    ELSE            reduce using rule 61 (commentLine -> LINE_COMMENT .)
 
 
 state 23
 
-    (35) simpleExpr -> andExpr .
-    (36) andExpr -> andExpr . AND unaryRelExpr
+    (36) simpleExpr -> andExpr .
+    (37) andExpr -> andExpr . AND unaryRelExpr
 
-    OR              reduce using rule 35 (simpleExpr -> andExpr .)
-    NAME            reduce using rule 35 (simpleExpr -> andExpr .)
-    IF              reduce using rule 35 (simpleExpr -> andExpr .)
-    WHILE           reduce using rule 35 (simpleExpr -> andExpr .)
-    RETURN          reduce using rule 35 (simpleExpr -> andExpr .)
-    INPUT           reduce using rule 35 (simpleExpr -> andExpr .)
-    PRINT           reduce using rule 35 (simpleExpr -> andExpr .)
-    LINE_COMMENT    reduce using rule 35 (simpleExpr -> andExpr .)
-    DEF             reduce using rule 35 (simpleExpr -> andExpr .)
-    CLASS           reduce using rule 35 (simpleExpr -> andExpr .)
-    NOT             reduce using rule 35 (simpleExpr -> andExpr .)
-    NUMBER          reduce using rule 35 (simpleExpr -> andExpr .)
-    $end            reduce using rule 35 (simpleExpr -> andExpr .)
-    ELSE            reduce using rule 35 (simpleExpr -> andExpr .)
-    COL             reduce using rule 35 (simpleExpr -> andExpr .)
-    SEMCOL          reduce using rule 35 (simpleExpr -> andExpr .)
+    OR              reduce using rule 36 (simpleExpr -> andExpr .)
+    NAME            reduce using rule 36 (simpleExpr -> andExpr .)
+    IF              reduce using rule 36 (simpleExpr -> andExpr .)
+    WHILE           reduce using rule 36 (simpleExpr -> andExpr .)
+    RETURN          reduce using rule 36 (simpleExpr -> andExpr .)
+    INPUT           reduce using rule 36 (simpleExpr -> andExpr .)
+    PRINT           reduce using rule 36 (simpleExpr -> andExpr .)
+    LINE_COMMENT    reduce using rule 36 (simpleExpr -> andExpr .)
+    DEF             reduce using rule 36 (simpleExpr -> andExpr .)
+    CLASS           reduce using rule 36 (simpleExpr -> andExpr .)
+    NOT             reduce using rule 36 (simpleExpr -> andExpr .)
+    NUMBER          reduce using rule 36 (simpleExpr -> andExpr .)
+    $end            reduce using rule 36 (simpleExpr -> andExpr .)
+    ELSE            reduce using rule 36 (simpleExpr -> andExpr .)
+    COL             reduce using rule 36 (simpleExpr -> andExpr .)
+    SEMCOL          reduce using rule 36 (simpleExpr -> andExpr .)
     AND             shift and go to state 51
 
 
 state 24
 
-    (17) funcDeclar -> DEF . NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> DEF . NAME LPARENT params RPARENT COL suite
+    (18) funcDeclar -> DEF . NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> DEF . NAME LPARENT params RPARENT COL suite
 
     NAME            shift and go to state 52
 
 
 state 25
 
-    (22) objDeclar -> CLASS . NAME COL suite
+    (23) objDeclar -> CLASS . NAME COL suite
 
     NAME            shift and go to state 53
 
 
 state 26
 
-    (37) andExpr -> unaryRelExpr .
+    (38) andExpr -> unaryRelExpr .
 
-    AND             reduce using rule 37 (andExpr -> unaryRelExpr .)
-    OR              reduce using rule 37 (andExpr -> unaryRelExpr .)
-    NAME            reduce using rule 37 (andExpr -> unaryRelExpr .)
-    IF              reduce using rule 37 (andExpr -> unaryRelExpr .)
-    WHILE           reduce using rule 37 (andExpr -> unaryRelExpr .)
-    RETURN          reduce using rule 37 (andExpr -> unaryRelExpr .)
-    INPUT           reduce using rule 37 (andExpr -> unaryRelExpr .)
-    PRINT           reduce using rule 37 (andExpr -> unaryRelExpr .)
-    LINE_COMMENT    reduce using rule 37 (andExpr -> unaryRelExpr .)
-    DEF             reduce using rule 37 (andExpr -> unaryRelExpr .)
-    CLASS           reduce using rule 37 (andExpr -> unaryRelExpr .)
-    NOT             reduce using rule 37 (andExpr -> unaryRelExpr .)
-    NUMBER          reduce using rule 37 (andExpr -> unaryRelExpr .)
-    $end            reduce using rule 37 (andExpr -> unaryRelExpr .)
-    ELSE            reduce using rule 37 (andExpr -> unaryRelExpr .)
-    COL             reduce using rule 37 (andExpr -> unaryRelExpr .)
-    SEMCOL          reduce using rule 37 (andExpr -> unaryRelExpr .)
+    AND             reduce using rule 38 (andExpr -> unaryRelExpr .)
+    OR              reduce using rule 38 (andExpr -> unaryRelExpr .)
+    NAME            reduce using rule 38 (andExpr -> unaryRelExpr .)
+    IF              reduce using rule 38 (andExpr -> unaryRelExpr .)
+    WHILE           reduce using rule 38 (andExpr -> unaryRelExpr .)
+    RETURN          reduce using rule 38 (andExpr -> unaryRelExpr .)
+    INPUT           reduce using rule 38 (andExpr -> unaryRelExpr .)
+    PRINT           reduce using rule 38 (andExpr -> unaryRelExpr .)
+    LINE_COMMENT    reduce using rule 38 (andExpr -> unaryRelExpr .)
+    DEF             reduce using rule 38 (andExpr -> unaryRelExpr .)
+    CLASS           reduce using rule 38 (andExpr -> unaryRelExpr .)
+    NOT             reduce using rule 38 (andExpr -> unaryRelExpr .)
+    NUMBER          reduce using rule 38 (andExpr -> unaryRelExpr .)
+    $end            reduce using rule 38 (andExpr -> unaryRelExpr .)
+    ELSE            reduce using rule 38 (andExpr -> unaryRelExpr .)
+    COL             reduce using rule 38 (andExpr -> unaryRelExpr .)
+    SEMCOL          reduce using rule 38 (andExpr -> unaryRelExpr .)
 
 
 state 27
 
-    (38) unaryRelExpr -> NOT . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (39) unaryRelExpr -> NOT . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
@@ -832,58 +836,58 @@ state 27
 
 state 28
 
-    (39) unaryRelExpr -> relExpr .
+    (40) unaryRelExpr -> relExpr .
 
-    AND             reduce using rule 39 (unaryRelExpr -> relExpr .)
-    OR              reduce using rule 39 (unaryRelExpr -> relExpr .)
-    NAME            reduce using rule 39 (unaryRelExpr -> relExpr .)
-    IF              reduce using rule 39 (unaryRelExpr -> relExpr .)
-    WHILE           reduce using rule 39 (unaryRelExpr -> relExpr .)
-    RETURN          reduce using rule 39 (unaryRelExpr -> relExpr .)
-    INPUT           reduce using rule 39 (unaryRelExpr -> relExpr .)
-    PRINT           reduce using rule 39 (unaryRelExpr -> relExpr .)
-    LINE_COMMENT    reduce using rule 39 (unaryRelExpr -> relExpr .)
-    DEF             reduce using rule 39 (unaryRelExpr -> relExpr .)
-    CLASS           reduce using rule 39 (unaryRelExpr -> relExpr .)
-    NOT             reduce using rule 39 (unaryRelExpr -> relExpr .)
-    NUMBER          reduce using rule 39 (unaryRelExpr -> relExpr .)
-    $end            reduce using rule 39 (unaryRelExpr -> relExpr .)
-    ELSE            reduce using rule 39 (unaryRelExpr -> relExpr .)
-    COL             reduce using rule 39 (unaryRelExpr -> relExpr .)
-    SEMCOL          reduce using rule 39 (unaryRelExpr -> relExpr .)
+    AND             reduce using rule 40 (unaryRelExpr -> relExpr .)
+    OR              reduce using rule 40 (unaryRelExpr -> relExpr .)
+    NAME            reduce using rule 40 (unaryRelExpr -> relExpr .)
+    IF              reduce using rule 40 (unaryRelExpr -> relExpr .)
+    WHILE           reduce using rule 40 (unaryRelExpr -> relExpr .)
+    RETURN          reduce using rule 40 (unaryRelExpr -> relExpr .)
+    INPUT           reduce using rule 40 (unaryRelExpr -> relExpr .)
+    PRINT           reduce using rule 40 (unaryRelExpr -> relExpr .)
+    LINE_COMMENT    reduce using rule 40 (unaryRelExpr -> relExpr .)
+    DEF             reduce using rule 40 (unaryRelExpr -> relExpr .)
+    CLASS           reduce using rule 40 (unaryRelExpr -> relExpr .)
+    NOT             reduce using rule 40 (unaryRelExpr -> relExpr .)
+    NUMBER          reduce using rule 40 (unaryRelExpr -> relExpr .)
+    $end            reduce using rule 40 (unaryRelExpr -> relExpr .)
+    ELSE            reduce using rule 40 (unaryRelExpr -> relExpr .)
+    COL             reduce using rule 40 (unaryRelExpr -> relExpr .)
+    SEMCOL          reduce using rule 40 (unaryRelExpr -> relExpr .)
 
 
 state 29
 
-    (40) relExpr -> sumExpr . relop sumExpr
-    (41) relExpr -> sumExpr .
-    (48) sumExpr -> sumExpr . sumop term
-    (42) relop -> . LTE
-    (43) relop -> . LT
-    (44) relop -> . GTE
-    (45) relop -> . GT
-    (46) relop -> . EQ
-    (47) relop -> . NEQ
-    (50) sumop -> . SUM
-    (51) sumop -> . SUBST
+    (41) relExpr -> sumExpr . relop sumExpr
+    (42) relExpr -> sumExpr .
+    (49) sumExpr -> sumExpr . sumop term
+    (43) relop -> . LTE
+    (44) relop -> . LT
+    (45) relop -> . GTE
+    (46) relop -> . GT
+    (47) relop -> . EQ
+    (48) relop -> . NEQ
+    (51) sumop -> . SUM
+    (52) sumop -> . SUBST
 
-    AND             reduce using rule 41 (relExpr -> sumExpr .)
-    OR              reduce using rule 41 (relExpr -> sumExpr .)
-    NAME            reduce using rule 41 (relExpr -> sumExpr .)
-    IF              reduce using rule 41 (relExpr -> sumExpr .)
-    WHILE           reduce using rule 41 (relExpr -> sumExpr .)
-    RETURN          reduce using rule 41 (relExpr -> sumExpr .)
-    INPUT           reduce using rule 41 (relExpr -> sumExpr .)
-    PRINT           reduce using rule 41 (relExpr -> sumExpr .)
-    LINE_COMMENT    reduce using rule 41 (relExpr -> sumExpr .)
-    DEF             reduce using rule 41 (relExpr -> sumExpr .)
-    CLASS           reduce using rule 41 (relExpr -> sumExpr .)
-    NOT             reduce using rule 41 (relExpr -> sumExpr .)
-    NUMBER          reduce using rule 41 (relExpr -> sumExpr .)
-    $end            reduce using rule 41 (relExpr -> sumExpr .)
-    ELSE            reduce using rule 41 (relExpr -> sumExpr .)
-    COL             reduce using rule 41 (relExpr -> sumExpr .)
-    SEMCOL          reduce using rule 41 (relExpr -> sumExpr .)
+    AND             reduce using rule 42 (relExpr -> sumExpr .)
+    OR              reduce using rule 42 (relExpr -> sumExpr .)
+    NAME            reduce using rule 42 (relExpr -> sumExpr .)
+    IF              reduce using rule 42 (relExpr -> sumExpr .)
+    WHILE           reduce using rule 42 (relExpr -> sumExpr .)
+    RETURN          reduce using rule 42 (relExpr -> sumExpr .)
+    INPUT           reduce using rule 42 (relExpr -> sumExpr .)
+    PRINT           reduce using rule 42 (relExpr -> sumExpr .)
+    LINE_COMMENT    reduce using rule 42 (relExpr -> sumExpr .)
+    DEF             reduce using rule 42 (relExpr -> sumExpr .)
+    CLASS           reduce using rule 42 (relExpr -> sumExpr .)
+    NOT             reduce using rule 42 (relExpr -> sumExpr .)
+    NUMBER          reduce using rule 42 (relExpr -> sumExpr .)
+    $end            reduce using rule 42 (relExpr -> sumExpr .)
+    ELSE            reduce using rule 42 (relExpr -> sumExpr .)
+    COL             reduce using rule 42 (relExpr -> sumExpr .)
+    SEMCOL          reduce using rule 42 (relExpr -> sumExpr .)
     LTE             shift and go to state 57
     LT              shift and go to state 58
     GTE             shift and go to state 59
@@ -898,36 +902,36 @@ state 29
 
 state 30
 
-    (49) sumExpr -> term .
-    (52) term -> term . mulop opElement
-    (56) mulop -> . PROD
-    (57) mulop -> . DIV
+    (50) sumExpr -> term .
+    (53) term -> term . mulop opElement
+    (57) mulop -> . PROD
+    (58) mulop -> . DIV
 
-    LTE             reduce using rule 49 (sumExpr -> term .)
-    LT              reduce using rule 49 (sumExpr -> term .)
-    GTE             reduce using rule 49 (sumExpr -> term .)
-    GT              reduce using rule 49 (sumExpr -> term .)
-    EQ              reduce using rule 49 (sumExpr -> term .)
-    NEQ             reduce using rule 49 (sumExpr -> term .)
-    SUM             reduce using rule 49 (sumExpr -> term .)
-    SUBST           reduce using rule 49 (sumExpr -> term .)
-    AND             reduce using rule 49 (sumExpr -> term .)
-    OR              reduce using rule 49 (sumExpr -> term .)
-    NAME            reduce using rule 49 (sumExpr -> term .)
-    IF              reduce using rule 49 (sumExpr -> term .)
-    WHILE           reduce using rule 49 (sumExpr -> term .)
-    RETURN          reduce using rule 49 (sumExpr -> term .)
-    INPUT           reduce using rule 49 (sumExpr -> term .)
-    PRINT           reduce using rule 49 (sumExpr -> term .)
-    LINE_COMMENT    reduce using rule 49 (sumExpr -> term .)
-    DEF             reduce using rule 49 (sumExpr -> term .)
-    CLASS           reduce using rule 49 (sumExpr -> term .)
-    NOT             reduce using rule 49 (sumExpr -> term .)
-    NUMBER          reduce using rule 49 (sumExpr -> term .)
-    $end            reduce using rule 49 (sumExpr -> term .)
-    ELSE            reduce using rule 49 (sumExpr -> term .)
-    COL             reduce using rule 49 (sumExpr -> term .)
-    SEMCOL          reduce using rule 49 (sumExpr -> term .)
+    LTE             reduce using rule 50 (sumExpr -> term .)
+    LT              reduce using rule 50 (sumExpr -> term .)
+    GTE             reduce using rule 50 (sumExpr -> term .)
+    GT              reduce using rule 50 (sumExpr -> term .)
+    EQ              reduce using rule 50 (sumExpr -> term .)
+    NEQ             reduce using rule 50 (sumExpr -> term .)
+    SUM             reduce using rule 50 (sumExpr -> term .)
+    SUBST           reduce using rule 50 (sumExpr -> term .)
+    AND             reduce using rule 50 (sumExpr -> term .)
+    OR              reduce using rule 50 (sumExpr -> term .)
+    NAME            reduce using rule 50 (sumExpr -> term .)
+    IF              reduce using rule 50 (sumExpr -> term .)
+    WHILE           reduce using rule 50 (sumExpr -> term .)
+    RETURN          reduce using rule 50 (sumExpr -> term .)
+    INPUT           reduce using rule 50 (sumExpr -> term .)
+    PRINT           reduce using rule 50 (sumExpr -> term .)
+    LINE_COMMENT    reduce using rule 50 (sumExpr -> term .)
+    DEF             reduce using rule 50 (sumExpr -> term .)
+    CLASS           reduce using rule 50 (sumExpr -> term .)
+    NOT             reduce using rule 50 (sumExpr -> term .)
+    NUMBER          reduce using rule 50 (sumExpr -> term .)
+    $end            reduce using rule 50 (sumExpr -> term .)
+    ELSE            reduce using rule 50 (sumExpr -> term .)
+    COL             reduce using rule 50 (sumExpr -> term .)
+    SEMCOL          reduce using rule 50 (sumExpr -> term .)
     PROD            shift and go to state 66
     DIV             shift and go to state 67
 
@@ -935,68 +939,68 @@ state 30
 
 state 31
 
-    (53) term -> opElement .
+    (54) term -> opElement .
 
-    PROD            reduce using rule 53 (term -> opElement .)
-    DIV             reduce using rule 53 (term -> opElement .)
-    LTE             reduce using rule 53 (term -> opElement .)
-    LT              reduce using rule 53 (term -> opElement .)
-    GTE             reduce using rule 53 (term -> opElement .)
-    GT              reduce using rule 53 (term -> opElement .)
-    EQ              reduce using rule 53 (term -> opElement .)
-    NEQ             reduce using rule 53 (term -> opElement .)
-    SUM             reduce using rule 53 (term -> opElement .)
-    SUBST           reduce using rule 53 (term -> opElement .)
-    AND             reduce using rule 53 (term -> opElement .)
-    OR              reduce using rule 53 (term -> opElement .)
-    NAME            reduce using rule 53 (term -> opElement .)
-    IF              reduce using rule 53 (term -> opElement .)
-    WHILE           reduce using rule 53 (term -> opElement .)
-    RETURN          reduce using rule 53 (term -> opElement .)
-    INPUT           reduce using rule 53 (term -> opElement .)
-    PRINT           reduce using rule 53 (term -> opElement .)
-    LINE_COMMENT    reduce using rule 53 (term -> opElement .)
-    DEF             reduce using rule 53 (term -> opElement .)
-    CLASS           reduce using rule 53 (term -> opElement .)
-    NOT             reduce using rule 53 (term -> opElement .)
-    NUMBER          reduce using rule 53 (term -> opElement .)
-    $end            reduce using rule 53 (term -> opElement .)
-    ELSE            reduce using rule 53 (term -> opElement .)
-    COL             reduce using rule 53 (term -> opElement .)
-    SEMCOL          reduce using rule 53 (term -> opElement .)
+    PROD            reduce using rule 54 (term -> opElement .)
+    DIV             reduce using rule 54 (term -> opElement .)
+    LTE             reduce using rule 54 (term -> opElement .)
+    LT              reduce using rule 54 (term -> opElement .)
+    GTE             reduce using rule 54 (term -> opElement .)
+    GT              reduce using rule 54 (term -> opElement .)
+    EQ              reduce using rule 54 (term -> opElement .)
+    NEQ             reduce using rule 54 (term -> opElement .)
+    SUM             reduce using rule 54 (term -> opElement .)
+    SUBST           reduce using rule 54 (term -> opElement .)
+    AND             reduce using rule 54 (term -> opElement .)
+    OR              reduce using rule 54 (term -> opElement .)
+    NAME            reduce using rule 54 (term -> opElement .)
+    IF              reduce using rule 54 (term -> opElement .)
+    WHILE           reduce using rule 54 (term -> opElement .)
+    RETURN          reduce using rule 54 (term -> opElement .)
+    INPUT           reduce using rule 54 (term -> opElement .)
+    PRINT           reduce using rule 54 (term -> opElement .)
+    LINE_COMMENT    reduce using rule 54 (term -> opElement .)
+    DEF             reduce using rule 54 (term -> opElement .)
+    CLASS           reduce using rule 54 (term -> opElement .)
+    NOT             reduce using rule 54 (term -> opElement .)
+    NUMBER          reduce using rule 54 (term -> opElement .)
+    $end            reduce using rule 54 (term -> opElement .)
+    ELSE            reduce using rule 54 (term -> opElement .)
+    COL             reduce using rule 54 (term -> opElement .)
+    SEMCOL          reduce using rule 54 (term -> opElement .)
 
 
 state 32
 
-    (55) opElement -> NUMBER .
+    (56) opElement -> NUMBER .
 
-    PROD            reduce using rule 55 (opElement -> NUMBER .)
-    DIV             reduce using rule 55 (opElement -> NUMBER .)
-    LTE             reduce using rule 55 (opElement -> NUMBER .)
-    LT              reduce using rule 55 (opElement -> NUMBER .)
-    GTE             reduce using rule 55 (opElement -> NUMBER .)
-    GT              reduce using rule 55 (opElement -> NUMBER .)
-    EQ              reduce using rule 55 (opElement -> NUMBER .)
-    NEQ             reduce using rule 55 (opElement -> NUMBER .)
-    SUM             reduce using rule 55 (opElement -> NUMBER .)
-    SUBST           reduce using rule 55 (opElement -> NUMBER .)
-    AND             reduce using rule 55 (opElement -> NUMBER .)
-    OR              reduce using rule 55 (opElement -> NUMBER .)
-    NAME            reduce using rule 55 (opElement -> NUMBER .)
-    IF              reduce using rule 55 (opElement -> NUMBER .)
-    WHILE           reduce using rule 55 (opElement -> NUMBER .)
-    RETURN          reduce using rule 55 (opElement -> NUMBER .)
-    INPUT           reduce using rule 55 (opElement -> NUMBER .)
-    PRINT           reduce using rule 55 (opElement -> NUMBER .)
-    LINE_COMMENT    reduce using rule 55 (opElement -> NUMBER .)
-    DEF             reduce using rule 55 (opElement -> NUMBER .)
-    CLASS           reduce using rule 55 (opElement -> NUMBER .)
-    NOT             reduce using rule 55 (opElement -> NUMBER .)
-    NUMBER          reduce using rule 55 (opElement -> NUMBER .)
-    $end            reduce using rule 55 (opElement -> NUMBER .)
-    ELSE            reduce using rule 55 (opElement -> NUMBER .)
-    COL             reduce using rule 55 (opElement -> NUMBER .)
-    SEMCOL          reduce using rule 55 (opElement -> NUMBER .)
+    PROD            reduce using rule 56 (opElement -> NUMBER .)
+    DIV             reduce using rule 56 (opElement -> NUMBER .)
+    LTE             reduce using rule 56 (opElement -> NUMBER .)
+    LT              reduce using rule 56 (opElement -> NUMBER .)
+    GTE             reduce using rule 56 (opElement -> NUMBER .)
+    GT              reduce using rule 56 (opElement -> NUMBER .)
+    EQ              reduce using rule 56 (opElement -> NUMBER .)
+    NEQ             reduce using rule 56 (opElement -> NUMBER .)
+    SUM             reduce using rule 56 (opElement -> NUMBER .)
+    SUBST           reduce using rule 56 (opElement -> NUMBER .)
+    AND             reduce using rule 56 (opElement -> NUMBER .)
+    OR              reduce using rule 56 (opElement -> NUMBER .)
+    NAME            reduce using rule 56 (opElement -> NUMBER .)
+    IF              reduce using rule 56 (opElement -> NUMBER .)
+    WHILE           reduce using rule 56 (opElement -> NUMBER .)
+    RETURN          reduce using rule 56 (opElement -> NUMBER .)
+    INPUT           reduce using rule 56 (opElement -> NUMBER .)
+    PRINT           reduce using rule 56 (opElement -> NUMBER .)
+    LINE_COMMENT    reduce using rule 56 (opElement -> NUMBER .)
+    DEF             reduce using rule 56 (opElement -> NUMBER .)
+    CLASS           reduce using rule 56 (opElement -> NUMBER .)
+    NOT             reduce using rule 56 (opElement -> NUMBER .)
+    NUMBER          reduce using rule 56 (opElement -> NUMBER .)
+    $end            reduce using rule 56 (opElement -> NUMBER .)
+    ELSE            reduce using rule 56 (opElement -> NUMBER .)
+    COL             reduce using rule 56 (opElement -> NUMBER .)
+    SEMCOL          reduce using rule 56 (opElement -> NUMBER .)
 
 
 state 33
@@ -1039,12 +1043,12 @@ state 34
 
 state 35
 
-    (27) call -> call POINT . call
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (28) call -> call POINT . call
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NAME            shift and go to state 46
 
@@ -1109,24 +1113,24 @@ state 38
 
 state 39
 
-    (34) simpleExpr -> simpleExpr OR . andExpr
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (35) simpleExpr -> simpleExpr OR . andExpr
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
@@ -1161,12 +1165,12 @@ state 40
 
 state 41
 
-    (24) call -> NAME POINT . call
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (25) call -> NAME POINT . call
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NAME            shift and go to state 46
 
@@ -1174,11 +1178,11 @@ state 41
 
 state 42
 
-    (25) call -> NAME LPARENT . RPARENT
-    (26) call -> NAME LPARENT . params RPARENT
-    (19) params -> . paramsList
-    (20) paramsList -> . NAME COMA paramsList
-    (21) paramsList -> . NAME
+    (26) call -> NAME LPARENT . RPARENT
+    (27) call -> NAME LPARENT . params RPARENT
+    (20) params -> . paramsList
+    (21) paramsList -> . NAME COMA paramsList
+    (22) paramsList -> . NAME
 
     RPARENT         shift and go to state 72
     NAME            shift and go to state 71
@@ -1190,33 +1194,37 @@ state 43
 
     (15) varDeclar -> NAME ASSIGN . STRING
     (16) varDeclar -> NAME ASSIGN . exprStmt
-    (28) exprStmt -> . simpleExpr
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (17) varDeclar -> NAME ASSIGN . inputStmt
+    (29) exprStmt -> . simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     STRING          shift and go to state 75
+    INPUT           shift and go to state 20
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
     NAME            shift and go to state 46
 
     exprStmt                       shift and go to state 76
+    inputStmt                      shift and go to state 77
     simpleExpr                     shift and go to state 12
     andExpr                        shift and go to state 23
     unaryRelExpr                   shift and go to state 26
@@ -1228,146 +1236,146 @@ state 43
 
 state 44
 
-    (29) selectionStmt -> IF simpleExpr . COL suite
-    (30) selectionStmt -> IF simpleExpr . COL suite ELSE COL suite
-    (34) simpleExpr -> simpleExpr . OR andExpr
-
-    COL             shift and go to state 77
-    OR              shift and go to state 39
-
-
-state 45
-
-    (54) opElement -> call .
-    (27) call -> call . POINT call
-
-    PROD            reduce using rule 54 (opElement -> call .)
-    DIV             reduce using rule 54 (opElement -> call .)
-    LTE             reduce using rule 54 (opElement -> call .)
-    LT              reduce using rule 54 (opElement -> call .)
-    GTE             reduce using rule 54 (opElement -> call .)
-    GT              reduce using rule 54 (opElement -> call .)
-    EQ              reduce using rule 54 (opElement -> call .)
-    NEQ             reduce using rule 54 (opElement -> call .)
-    SUM             reduce using rule 54 (opElement -> call .)
-    SUBST           reduce using rule 54 (opElement -> call .)
-    AND             reduce using rule 54 (opElement -> call .)
-    COL             reduce using rule 54 (opElement -> call .)
-    OR              reduce using rule 54 (opElement -> call .)
-    SEMCOL          reduce using rule 54 (opElement -> call .)
-    NAME            reduce using rule 54 (opElement -> call .)
-    IF              reduce using rule 54 (opElement -> call .)
-    WHILE           reduce using rule 54 (opElement -> call .)
-    RETURN          reduce using rule 54 (opElement -> call .)
-    INPUT           reduce using rule 54 (opElement -> call .)
-    PRINT           reduce using rule 54 (opElement -> call .)
-    LINE_COMMENT    reduce using rule 54 (opElement -> call .)
-    DEF             reduce using rule 54 (opElement -> call .)
-    CLASS           reduce using rule 54 (opElement -> call .)
-    NOT             reduce using rule 54 (opElement -> call .)
-    NUMBER          reduce using rule 54 (opElement -> call .)
-    $end            reduce using rule 54 (opElement -> call .)
-    ELSE            reduce using rule 54 (opElement -> call .)
-    POINT           shift and go to state 35
-
-
-state 46
-
-    (23) call -> NAME .
-    (24) call -> NAME . POINT call
-    (25) call -> NAME . LPARENT RPARENT
-    (26) call -> NAME . LPARENT params RPARENT
-
-  ! shift/reduce conflict for POINT resolved as shift
-    PROD            reduce using rule 23 (call -> NAME .)
-    DIV             reduce using rule 23 (call -> NAME .)
-    LTE             reduce using rule 23 (call -> NAME .)
-    LT              reduce using rule 23 (call -> NAME .)
-    GTE             reduce using rule 23 (call -> NAME .)
-    GT              reduce using rule 23 (call -> NAME .)
-    EQ              reduce using rule 23 (call -> NAME .)
-    NEQ             reduce using rule 23 (call -> NAME .)
-    SUM             reduce using rule 23 (call -> NAME .)
-    SUBST           reduce using rule 23 (call -> NAME .)
-    AND             reduce using rule 23 (call -> NAME .)
-    COL             reduce using rule 23 (call -> NAME .)
-    OR              reduce using rule 23 (call -> NAME .)
-    SEMCOL          reduce using rule 23 (call -> NAME .)
-    NAME            reduce using rule 23 (call -> NAME .)
-    IF              reduce using rule 23 (call -> NAME .)
-    WHILE           reduce using rule 23 (call -> NAME .)
-    RETURN          reduce using rule 23 (call -> NAME .)
-    INPUT           reduce using rule 23 (call -> NAME .)
-    PRINT           reduce using rule 23 (call -> NAME .)
-    LINE_COMMENT    reduce using rule 23 (call -> NAME .)
-    DEF             reduce using rule 23 (call -> NAME .)
-    CLASS           reduce using rule 23 (call -> NAME .)
-    NOT             reduce using rule 23 (call -> NAME .)
-    NUMBER          reduce using rule 23 (call -> NAME .)
-    $end            reduce using rule 23 (call -> NAME .)
-    ELSE            reduce using rule 23 (call -> NAME .)
-    POINT           shift and go to state 41
-    LPARENT         shift and go to state 42
-
-  ! POINT           [ reduce using rule 23 (call -> NAME .) ]
-
-
-state 47
-
-    (31) iterationStmt -> WHILE simpleExpr . COL suite
-    (34) simpleExpr -> simpleExpr . OR andExpr
+    (30) selectionStmt -> IF simpleExpr . COL suite
+    (31) selectionStmt -> IF simpleExpr . COL suite ELSE COL suite
+    (35) simpleExpr -> simpleExpr . OR andExpr
 
     COL             shift and go to state 78
     OR              shift and go to state 39
 
 
+state 45
+
+    (55) opElement -> call .
+    (28) call -> call . POINT call
+
+    PROD            reduce using rule 55 (opElement -> call .)
+    DIV             reduce using rule 55 (opElement -> call .)
+    LTE             reduce using rule 55 (opElement -> call .)
+    LT              reduce using rule 55 (opElement -> call .)
+    GTE             reduce using rule 55 (opElement -> call .)
+    GT              reduce using rule 55 (opElement -> call .)
+    EQ              reduce using rule 55 (opElement -> call .)
+    NEQ             reduce using rule 55 (opElement -> call .)
+    SUM             reduce using rule 55 (opElement -> call .)
+    SUBST           reduce using rule 55 (opElement -> call .)
+    AND             reduce using rule 55 (opElement -> call .)
+    COL             reduce using rule 55 (opElement -> call .)
+    OR              reduce using rule 55 (opElement -> call .)
+    SEMCOL          reduce using rule 55 (opElement -> call .)
+    NAME            reduce using rule 55 (opElement -> call .)
+    IF              reduce using rule 55 (opElement -> call .)
+    WHILE           reduce using rule 55 (opElement -> call .)
+    RETURN          reduce using rule 55 (opElement -> call .)
+    INPUT           reduce using rule 55 (opElement -> call .)
+    PRINT           reduce using rule 55 (opElement -> call .)
+    LINE_COMMENT    reduce using rule 55 (opElement -> call .)
+    DEF             reduce using rule 55 (opElement -> call .)
+    CLASS           reduce using rule 55 (opElement -> call .)
+    NOT             reduce using rule 55 (opElement -> call .)
+    NUMBER          reduce using rule 55 (opElement -> call .)
+    $end            reduce using rule 55 (opElement -> call .)
+    ELSE            reduce using rule 55 (opElement -> call .)
+    POINT           shift and go to state 35
+
+
+state 46
+
+    (24) call -> NAME .
+    (25) call -> NAME . POINT call
+    (26) call -> NAME . LPARENT RPARENT
+    (27) call -> NAME . LPARENT params RPARENT
+
+  ! shift/reduce conflict for POINT resolved as shift
+    PROD            reduce using rule 24 (call -> NAME .)
+    DIV             reduce using rule 24 (call -> NAME .)
+    LTE             reduce using rule 24 (call -> NAME .)
+    LT              reduce using rule 24 (call -> NAME .)
+    GTE             reduce using rule 24 (call -> NAME .)
+    GT              reduce using rule 24 (call -> NAME .)
+    EQ              reduce using rule 24 (call -> NAME .)
+    NEQ             reduce using rule 24 (call -> NAME .)
+    SUM             reduce using rule 24 (call -> NAME .)
+    SUBST           reduce using rule 24 (call -> NAME .)
+    AND             reduce using rule 24 (call -> NAME .)
+    COL             reduce using rule 24 (call -> NAME .)
+    OR              reduce using rule 24 (call -> NAME .)
+    SEMCOL          reduce using rule 24 (call -> NAME .)
+    NAME            reduce using rule 24 (call -> NAME .)
+    IF              reduce using rule 24 (call -> NAME .)
+    WHILE           reduce using rule 24 (call -> NAME .)
+    RETURN          reduce using rule 24 (call -> NAME .)
+    INPUT           reduce using rule 24 (call -> NAME .)
+    PRINT           reduce using rule 24 (call -> NAME .)
+    LINE_COMMENT    reduce using rule 24 (call -> NAME .)
+    DEF             reduce using rule 24 (call -> NAME .)
+    CLASS           reduce using rule 24 (call -> NAME .)
+    NOT             reduce using rule 24 (call -> NAME .)
+    NUMBER          reduce using rule 24 (call -> NAME .)
+    $end            reduce using rule 24 (call -> NAME .)
+    ELSE            reduce using rule 24 (call -> NAME .)
+    POINT           shift and go to state 41
+    LPARENT         shift and go to state 42
+
+  ! POINT           [ reduce using rule 24 (call -> NAME .) ]
+
+
+state 47
+
+    (32) iterationStmt -> WHILE simpleExpr . COL suite
+    (35) simpleExpr -> simpleExpr . OR andExpr
+
+    COL             shift and go to state 79
+    OR              shift and go to state 39
+
+
 state 48
 
-    (33) returnStmt -> RETURN simpleExpr .
-    (34) simpleExpr -> simpleExpr . OR andExpr
+    (34) returnStmt -> RETURN simpleExpr .
+    (35) simpleExpr -> simpleExpr . OR andExpr
 
-    SEMCOL          reduce using rule 33 (returnStmt -> RETURN simpleExpr .)
+    SEMCOL          reduce using rule 34 (returnStmt -> RETURN simpleExpr .)
     OR              shift and go to state 39
 
 
 state 49
 
-    (58) inputStmt -> INPUT LPARENT . RPARENT
+    (59) inputStmt -> INPUT LPARENT . RPARENT
 
-    RPARENT         shift and go to state 79
+    RPARENT         shift and go to state 80
 
 
 state 50
 
-    (59) outputStmt -> PRINT LPARENT . STRING RPARENT
+    (60) outputStmt -> PRINT LPARENT . STRING RPARENT
 
-    STRING          shift and go to state 80
+    STRING          shift and go to state 81
 
 
 state 51
 
-    (36) andExpr -> andExpr AND . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (37) andExpr -> andExpr AND . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
     NAME            shift and go to state 46
 
-    unaryRelExpr                   shift and go to state 81
+    unaryRelExpr                   shift and go to state 82
     relExpr                        shift and go to state 28
     sumExpr                        shift and go to state 29
     term                           shift and go to state 30
@@ -1376,337 +1384,337 @@ state 51
 
 state 52
 
-    (17) funcDeclar -> DEF NAME . LPARENT RPARENT COL suite
-    (18) funcDeclar -> DEF NAME . LPARENT params RPARENT COL suite
+    (18) funcDeclar -> DEF NAME . LPARENT RPARENT COL suite
+    (19) funcDeclar -> DEF NAME . LPARENT params RPARENT COL suite
 
-    LPARENT         shift and go to state 82
+    LPARENT         shift and go to state 83
 
 
 state 53
 
-    (22) objDeclar -> CLASS NAME . COL suite
+    (23) objDeclar -> CLASS NAME . COL suite
 
-    COL             shift and go to state 83
+    COL             shift and go to state 84
 
 
 state 54
 
-    (38) unaryRelExpr -> NOT unaryRelExpr .
+    (39) unaryRelExpr -> NOT unaryRelExpr .
 
-    AND             reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    OR              reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    NAME            reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    IF              reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    WHILE           reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    RETURN          reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    INPUT           reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    PRINT           reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    LINE_COMMENT    reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    DEF             reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    CLASS           reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    NOT             reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    NUMBER          reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    $end            reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    ELSE            reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    COL             reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
-    SEMCOL          reduce using rule 38 (unaryRelExpr -> NOT unaryRelExpr .)
+    AND             reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    OR              reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    NAME            reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    IF              reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    WHILE           reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    RETURN          reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    INPUT           reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    PRINT           reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    LINE_COMMENT    reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    DEF             reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    CLASS           reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    NOT             reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    NUMBER          reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    $end            reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    ELSE            reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    COL             reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
+    SEMCOL          reduce using rule 39 (unaryRelExpr -> NOT unaryRelExpr .)
 
 
 state 55
 
-    (40) relExpr -> sumExpr relop . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (41) relExpr -> sumExpr relop . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NUMBER          shift and go to state 32
     NAME            shift and go to state 46
 
-    sumExpr                        shift and go to state 84
+    sumExpr                        shift and go to state 85
     term                           shift and go to state 30
     opElement                      shift and go to state 31
     call                           shift and go to state 45
 
 state 56
 
-    (48) sumExpr -> sumExpr sumop . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (49) sumExpr -> sumExpr sumop . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NUMBER          shift and go to state 32
     NAME            shift and go to state 46
 
-    term                           shift and go to state 85
+    term                           shift and go to state 86
     opElement                      shift and go to state 31
     call                           shift and go to state 45
 
 state 57
 
-    (42) relop -> LTE .
+    (43) relop -> LTE .
 
-    NUMBER          reduce using rule 42 (relop -> LTE .)
-    NAME            reduce using rule 42 (relop -> LTE .)
+    NUMBER          reduce using rule 43 (relop -> LTE .)
+    NAME            reduce using rule 43 (relop -> LTE .)
 
 
 state 58
 
-    (43) relop -> LT .
+    (44) relop -> LT .
 
-    NUMBER          reduce using rule 43 (relop -> LT .)
-    NAME            reduce using rule 43 (relop -> LT .)
+    NUMBER          reduce using rule 44 (relop -> LT .)
+    NAME            reduce using rule 44 (relop -> LT .)
 
 
 state 59
 
-    (44) relop -> GTE .
+    (45) relop -> GTE .
 
-    NUMBER          reduce using rule 44 (relop -> GTE .)
-    NAME            reduce using rule 44 (relop -> GTE .)
+    NUMBER          reduce using rule 45 (relop -> GTE .)
+    NAME            reduce using rule 45 (relop -> GTE .)
 
 
 state 60
 
-    (45) relop -> GT .
+    (46) relop -> GT .
 
-    NUMBER          reduce using rule 45 (relop -> GT .)
-    NAME            reduce using rule 45 (relop -> GT .)
+    NUMBER          reduce using rule 46 (relop -> GT .)
+    NAME            reduce using rule 46 (relop -> GT .)
 
 
 state 61
 
-    (46) relop -> EQ .
+    (47) relop -> EQ .
 
-    NUMBER          reduce using rule 46 (relop -> EQ .)
-    NAME            reduce using rule 46 (relop -> EQ .)
+    NUMBER          reduce using rule 47 (relop -> EQ .)
+    NAME            reduce using rule 47 (relop -> EQ .)
 
 
 state 62
 
-    (47) relop -> NEQ .
+    (48) relop -> NEQ .
 
-    NUMBER          reduce using rule 47 (relop -> NEQ .)
-    NAME            reduce using rule 47 (relop -> NEQ .)
+    NUMBER          reduce using rule 48 (relop -> NEQ .)
+    NAME            reduce using rule 48 (relop -> NEQ .)
 
 
 state 63
 
-    (50) sumop -> SUM .
+    (51) sumop -> SUM .
 
-    NUMBER          reduce using rule 50 (sumop -> SUM .)
-    NAME            reduce using rule 50 (sumop -> SUM .)
+    NUMBER          reduce using rule 51 (sumop -> SUM .)
+    NAME            reduce using rule 51 (sumop -> SUM .)
 
 
 state 64
 
-    (51) sumop -> SUBST .
+    (52) sumop -> SUBST .
 
-    NUMBER          reduce using rule 51 (sumop -> SUBST .)
-    NAME            reduce using rule 51 (sumop -> SUBST .)
+    NUMBER          reduce using rule 52 (sumop -> SUBST .)
+    NAME            reduce using rule 52 (sumop -> SUBST .)
 
 
 state 65
 
-    (52) term -> term mulop . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
+    (53) term -> term mulop . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
 
     NUMBER          shift and go to state 32
     NAME            shift and go to state 46
 
-    opElement                      shift and go to state 86
+    opElement                      shift and go to state 87
     call                           shift and go to state 45
 
 state 66
 
-    (56) mulop -> PROD .
+    (57) mulop -> PROD .
 
-    NUMBER          reduce using rule 56 (mulop -> PROD .)
-    NAME            reduce using rule 56 (mulop -> PROD .)
+    NUMBER          reduce using rule 57 (mulop -> PROD .)
+    NAME            reduce using rule 57 (mulop -> PROD .)
 
 
 state 67
 
-    (57) mulop -> DIV .
+    (58) mulop -> DIV .
 
-    NUMBER          reduce using rule 57 (mulop -> DIV .)
-    NAME            reduce using rule 57 (mulop -> DIV .)
+    NUMBER          reduce using rule 58 (mulop -> DIV .)
+    NAME            reduce using rule 58 (mulop -> DIV .)
 
 
 state 68
 
-    (27) call -> call POINT call .
-    (27) call -> call . POINT call
+    (28) call -> call POINT call .
+    (28) call -> call . POINT call
 
   ! shift/reduce conflict for POINT resolved as shift
-    SEMCOL          reduce using rule 27 (call -> call POINT call .)
-    PROD            reduce using rule 27 (call -> call POINT call .)
-    DIV             reduce using rule 27 (call -> call POINT call .)
-    LTE             reduce using rule 27 (call -> call POINT call .)
-    LT              reduce using rule 27 (call -> call POINT call .)
-    GTE             reduce using rule 27 (call -> call POINT call .)
-    GT              reduce using rule 27 (call -> call POINT call .)
-    EQ              reduce using rule 27 (call -> call POINT call .)
-    NEQ             reduce using rule 27 (call -> call POINT call .)
-    SUM             reduce using rule 27 (call -> call POINT call .)
-    SUBST           reduce using rule 27 (call -> call POINT call .)
-    AND             reduce using rule 27 (call -> call POINT call .)
-    OR              reduce using rule 27 (call -> call POINT call .)
-    NAME            reduce using rule 27 (call -> call POINT call .)
-    IF              reduce using rule 27 (call -> call POINT call .)
-    WHILE           reduce using rule 27 (call -> call POINT call .)
-    RETURN          reduce using rule 27 (call -> call POINT call .)
-    INPUT           reduce using rule 27 (call -> call POINT call .)
-    PRINT           reduce using rule 27 (call -> call POINT call .)
-    LINE_COMMENT    reduce using rule 27 (call -> call POINT call .)
-    DEF             reduce using rule 27 (call -> call POINT call .)
-    CLASS           reduce using rule 27 (call -> call POINT call .)
-    NOT             reduce using rule 27 (call -> call POINT call .)
-    NUMBER          reduce using rule 27 (call -> call POINT call .)
-    $end            reduce using rule 27 (call -> call POINT call .)
-    ELSE            reduce using rule 27 (call -> call POINT call .)
-    COL             reduce using rule 27 (call -> call POINT call .)
+    SEMCOL          reduce using rule 28 (call -> call POINT call .)
+    PROD            reduce using rule 28 (call -> call POINT call .)
+    DIV             reduce using rule 28 (call -> call POINT call .)
+    LTE             reduce using rule 28 (call -> call POINT call .)
+    LT              reduce using rule 28 (call -> call POINT call .)
+    GTE             reduce using rule 28 (call -> call POINT call .)
+    GT              reduce using rule 28 (call -> call POINT call .)
+    EQ              reduce using rule 28 (call -> call POINT call .)
+    NEQ             reduce using rule 28 (call -> call POINT call .)
+    SUM             reduce using rule 28 (call -> call POINT call .)
+    SUBST           reduce using rule 28 (call -> call POINT call .)
+    AND             reduce using rule 28 (call -> call POINT call .)
+    OR              reduce using rule 28 (call -> call POINT call .)
+    NAME            reduce using rule 28 (call -> call POINT call .)
+    IF              reduce using rule 28 (call -> call POINT call .)
+    WHILE           reduce using rule 28 (call -> call POINT call .)
+    RETURN          reduce using rule 28 (call -> call POINT call .)
+    INPUT           reduce using rule 28 (call -> call POINT call .)
+    PRINT           reduce using rule 28 (call -> call POINT call .)
+    LINE_COMMENT    reduce using rule 28 (call -> call POINT call .)
+    DEF             reduce using rule 28 (call -> call POINT call .)
+    CLASS           reduce using rule 28 (call -> call POINT call .)
+    NOT             reduce using rule 28 (call -> call POINT call .)
+    NUMBER          reduce using rule 28 (call -> call POINT call .)
+    $end            reduce using rule 28 (call -> call POINT call .)
+    ELSE            reduce using rule 28 (call -> call POINT call .)
+    COL             reduce using rule 28 (call -> call POINT call .)
     POINT           shift and go to state 35
 
-  ! POINT           [ reduce using rule 27 (call -> call POINT call .) ]
+  ! POINT           [ reduce using rule 28 (call -> call POINT call .) ]
 
 
 state 69
 
-    (34) simpleExpr -> simpleExpr OR andExpr .
-    (36) andExpr -> andExpr . AND unaryRelExpr
+    (35) simpleExpr -> simpleExpr OR andExpr .
+    (37) andExpr -> andExpr . AND unaryRelExpr
 
-    OR              reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    NAME            reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    IF              reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    WHILE           reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    RETURN          reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    INPUT           reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    PRINT           reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    LINE_COMMENT    reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    DEF             reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    CLASS           reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    NOT             reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    NUMBER          reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    $end            reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    ELSE            reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    COL             reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
-    SEMCOL          reduce using rule 34 (simpleExpr -> simpleExpr OR andExpr .)
+    OR              reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    NAME            reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    IF              reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    WHILE           reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    RETURN          reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    INPUT           reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    PRINT           reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    LINE_COMMENT    reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    DEF             reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    CLASS           reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    NOT             reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    NUMBER          reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    $end            reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    ELSE            reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    COL             reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
+    SEMCOL          reduce using rule 35 (simpleExpr -> simpleExpr OR andExpr .)
     AND             shift and go to state 51
 
 
 state 70
 
-    (24) call -> NAME POINT call .
-    (27) call -> call . POINT call
+    (25) call -> NAME POINT call .
+    (28) call -> call . POINT call
 
   ! shift/reduce conflict for POINT resolved as shift
-    SEMCOL          reduce using rule 24 (call -> NAME POINT call .)
-    PROD            reduce using rule 24 (call -> NAME POINT call .)
-    DIV             reduce using rule 24 (call -> NAME POINT call .)
-    LTE             reduce using rule 24 (call -> NAME POINT call .)
-    LT              reduce using rule 24 (call -> NAME POINT call .)
-    GTE             reduce using rule 24 (call -> NAME POINT call .)
-    GT              reduce using rule 24 (call -> NAME POINT call .)
-    EQ              reduce using rule 24 (call -> NAME POINT call .)
-    NEQ             reduce using rule 24 (call -> NAME POINT call .)
-    SUM             reduce using rule 24 (call -> NAME POINT call .)
-    SUBST           reduce using rule 24 (call -> NAME POINT call .)
-    AND             reduce using rule 24 (call -> NAME POINT call .)
-    OR              reduce using rule 24 (call -> NAME POINT call .)
-    NAME            reduce using rule 24 (call -> NAME POINT call .)
-    IF              reduce using rule 24 (call -> NAME POINT call .)
-    WHILE           reduce using rule 24 (call -> NAME POINT call .)
-    RETURN          reduce using rule 24 (call -> NAME POINT call .)
-    INPUT           reduce using rule 24 (call -> NAME POINT call .)
-    PRINT           reduce using rule 24 (call -> NAME POINT call .)
-    LINE_COMMENT    reduce using rule 24 (call -> NAME POINT call .)
-    DEF             reduce using rule 24 (call -> NAME POINT call .)
-    CLASS           reduce using rule 24 (call -> NAME POINT call .)
-    NOT             reduce using rule 24 (call -> NAME POINT call .)
-    NUMBER          reduce using rule 24 (call -> NAME POINT call .)
-    $end            reduce using rule 24 (call -> NAME POINT call .)
-    ELSE            reduce using rule 24 (call -> NAME POINT call .)
-    COL             reduce using rule 24 (call -> NAME POINT call .)
+    SEMCOL          reduce using rule 25 (call -> NAME POINT call .)
+    PROD            reduce using rule 25 (call -> NAME POINT call .)
+    DIV             reduce using rule 25 (call -> NAME POINT call .)
+    LTE             reduce using rule 25 (call -> NAME POINT call .)
+    LT              reduce using rule 25 (call -> NAME POINT call .)
+    GTE             reduce using rule 25 (call -> NAME POINT call .)
+    GT              reduce using rule 25 (call -> NAME POINT call .)
+    EQ              reduce using rule 25 (call -> NAME POINT call .)
+    NEQ             reduce using rule 25 (call -> NAME POINT call .)
+    SUM             reduce using rule 25 (call -> NAME POINT call .)
+    SUBST           reduce using rule 25 (call -> NAME POINT call .)
+    AND             reduce using rule 25 (call -> NAME POINT call .)
+    OR              reduce using rule 25 (call -> NAME POINT call .)
+    NAME            reduce using rule 25 (call -> NAME POINT call .)
+    IF              reduce using rule 25 (call -> NAME POINT call .)
+    WHILE           reduce using rule 25 (call -> NAME POINT call .)
+    RETURN          reduce using rule 25 (call -> NAME POINT call .)
+    INPUT           reduce using rule 25 (call -> NAME POINT call .)
+    PRINT           reduce using rule 25 (call -> NAME POINT call .)
+    LINE_COMMENT    reduce using rule 25 (call -> NAME POINT call .)
+    DEF             reduce using rule 25 (call -> NAME POINT call .)
+    CLASS           reduce using rule 25 (call -> NAME POINT call .)
+    NOT             reduce using rule 25 (call -> NAME POINT call .)
+    NUMBER          reduce using rule 25 (call -> NAME POINT call .)
+    $end            reduce using rule 25 (call -> NAME POINT call .)
+    ELSE            reduce using rule 25 (call -> NAME POINT call .)
+    COL             reduce using rule 25 (call -> NAME POINT call .)
     POINT           shift and go to state 35
 
-  ! POINT           [ reduce using rule 24 (call -> NAME POINT call .) ]
+  ! POINT           [ reduce using rule 25 (call -> NAME POINT call .) ]
 
 
 state 71
 
-    (20) paramsList -> NAME . COMA paramsList
-    (21) paramsList -> NAME .
+    (21) paramsList -> NAME . COMA paramsList
+    (22) paramsList -> NAME .
 
-    COMA            shift and go to state 87
-    RPARENT         reduce using rule 21 (paramsList -> NAME .)
+    COMA            shift and go to state 88
+    RPARENT         reduce using rule 22 (paramsList -> NAME .)
 
 
 state 72
 
-    (25) call -> NAME LPARENT RPARENT .
+    (26) call -> NAME LPARENT RPARENT .
 
-    SEMCOL          reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    POINT           reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    PROD            reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    DIV             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    LTE             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    LT              reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    GTE             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    GT              reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    EQ              reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    NEQ             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    SUM             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    SUBST           reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    AND             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    OR              reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    NAME            reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    IF              reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    WHILE           reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    RETURN          reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    INPUT           reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    PRINT           reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    LINE_COMMENT    reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    DEF             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    CLASS           reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    NOT             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    NUMBER          reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    $end            reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    ELSE            reduce using rule 25 (call -> NAME LPARENT RPARENT .)
-    COL             reduce using rule 25 (call -> NAME LPARENT RPARENT .)
+    SEMCOL          reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    POINT           reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    PROD            reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    DIV             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    LTE             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    LT              reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    GTE             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    GT              reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    EQ              reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    NEQ             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    SUM             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    SUBST           reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    AND             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    OR              reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    NAME            reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    IF              reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    WHILE           reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    RETURN          reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    INPUT           reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    PRINT           reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    LINE_COMMENT    reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    DEF             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    CLASS           reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    NOT             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    NUMBER          reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    $end            reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    ELSE            reduce using rule 26 (call -> NAME LPARENT RPARENT .)
+    COL             reduce using rule 26 (call -> NAME LPARENT RPARENT .)
 
 
 state 73
 
-    (26) call -> NAME LPARENT params . RPARENT
+    (27) call -> NAME LPARENT params . RPARENT
 
-    RPARENT         shift and go to state 88
+    RPARENT         shift and go to state 89
 
 
 state 74
 
-    (19) params -> paramsList .
+    (20) params -> paramsList .
 
-    RPARENT         reduce using rule 19 (params -> paramsList .)
+    RPARENT         reduce using rule 20 (params -> paramsList .)
 
 
 state 75
@@ -1725,93 +1733,15 @@ state 76
 
 state 77
 
-    (29) selectionStmt -> IF simpleExpr COL . suite
-    (30) selectionStmt -> IF simpleExpr COL . suite ELSE COL suite
-    (1) suite -> . stmt
-    (2) suite -> . stmt suite
-    (3) stmt -> . exprStmt
-    (4) stmt -> . declar
-    (5) stmt -> . call SEMCOL
-    (6) stmt -> . selectionStmt
-    (7) stmt -> . iterationStmt
-    (8) stmt -> . returnStmt SEMCOL
-    (9) stmt -> . inputStmt SEMCOL
-    (10) stmt -> . outputStmt SEMCOL
-    (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
-    (12) declar -> . varDeclar SEMCOL
-    (13) declar -> . funcDeclar
-    (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
-    (15) varDeclar -> . NAME ASSIGN STRING
-    (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
+    (17) varDeclar -> NAME ASSIGN inputStmt .
 
-    NAME            shift and go to state 16
-    IF              shift and go to state 17
-    WHILE           shift and go to state 18
-    RETURN          shift and go to state 19
-    INPUT           shift and go to state 20
-    PRINT           shift and go to state 21
-    LINE_COMMENT    shift and go to state 22
-    DEF             shift and go to state 24
-    CLASS           shift and go to state 25
-    NOT             shift and go to state 27
-    NUMBER          shift and go to state 32
+    SEMCOL          reduce using rule 17 (varDeclar -> NAME ASSIGN inputStmt .)
 
-    simpleExpr                     shift and go to state 12
-    suite                          shift and go to state 89
-    stmt                           shift and go to state 2
-    exprStmt                       shift and go to state 3
-    declar                         shift and go to state 4
-    call                           shift and go to state 5
-    selectionStmt                  shift and go to state 6
-    iterationStmt                  shift and go to state 7
-    returnStmt                     shift and go to state 8
-    inputStmt                      shift and go to state 9
-    outputStmt                     shift and go to state 10
-    commentLine                    shift and go to state 11
-    varDeclar                      shift and go to state 13
-    funcDeclar                     shift and go to state 14
-    objDeclar                      shift and go to state 15
-    andExpr                        shift and go to state 23
-    unaryRelExpr                   shift and go to state 26
-    relExpr                        shift and go to state 28
-    sumExpr                        shift and go to state 29
-    term                           shift and go to state 30
-    opElement                      shift and go to state 31
 
 state 78
 
-    (31) iterationStmt -> WHILE simpleExpr COL . suite
+    (30) selectionStmt -> IF simpleExpr COL . suite
+    (31) selectionStmt -> IF simpleExpr COL . suite ELSE COL suite
     (1) suite -> . stmt
     (2) suite -> . stmt suite
     (3) stmt -> . exprStmt
@@ -1823,42 +1753,43 @@ state 78
     (9) stmt -> . inputStmt SEMCOL
     (10) stmt -> . outputStmt SEMCOL
     (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
+    (29) exprStmt -> . simpleExpr
     (12) declar -> . varDeclar SEMCOL
     (13) declar -> . funcDeclar
     (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
     (15) varDeclar -> . NAME ASSIGN STRING
     (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
 
     NAME            shift and go to state 16
     IF              shift and go to state 17
@@ -1896,58 +1827,7 @@ state 78
 
 state 79
 
-    (58) inputStmt -> INPUT LPARENT RPARENT .
-
-    SEMCOL          reduce using rule 58 (inputStmt -> INPUT LPARENT RPARENT .)
-
-
-state 80
-
-    (59) outputStmt -> PRINT LPARENT STRING . RPARENT
-
-    RPARENT         shift and go to state 91
-
-
-state 81
-
-    (36) andExpr -> andExpr AND unaryRelExpr .
-
-    AND             reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    OR              reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    NAME            reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    IF              reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    WHILE           reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    RETURN          reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    INPUT           reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    PRINT           reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    LINE_COMMENT    reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    DEF             reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    CLASS           reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    NOT             reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    NUMBER          reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    $end            reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    ELSE            reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    COL             reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-    SEMCOL          reduce using rule 36 (andExpr -> andExpr AND unaryRelExpr .)
-
-
-state 82
-
-    (17) funcDeclar -> DEF NAME LPARENT . RPARENT COL suite
-    (18) funcDeclar -> DEF NAME LPARENT . params RPARENT COL suite
-    (19) params -> . paramsList
-    (20) paramsList -> . NAME COMA paramsList
-    (21) paramsList -> . NAME
-
-    RPARENT         shift and go to state 92
-    NAME            shift and go to state 71
-
-    params                         shift and go to state 93
-    paramsList                     shift and go to state 74
-
-state 83
-
-    (22) objDeclar -> CLASS NAME COL . suite
+    (32) iterationStmt -> WHILE simpleExpr COL . suite
     (1) suite -> . stmt
     (2) suite -> . stmt suite
     (3) stmt -> . exprStmt
@@ -1959,42 +1839,43 @@ state 83
     (9) stmt -> . inputStmt SEMCOL
     (10) stmt -> . outputStmt SEMCOL
     (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
+    (29) exprStmt -> . simpleExpr
     (12) declar -> . varDeclar SEMCOL
     (13) declar -> . funcDeclar
     (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
     (15) varDeclar -> . NAME ASSIGN STRING
     (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
 
     NAME            shift and go to state 16
     IF              shift and go to state 17
@@ -2008,7 +1889,144 @@ state 83
     NOT             shift and go to state 27
     NUMBER          shift and go to state 32
 
-    suite                          shift and go to state 94
+    simpleExpr                     shift and go to state 12
+    suite                          shift and go to state 91
+    stmt                           shift and go to state 2
+    exprStmt                       shift and go to state 3
+    declar                         shift and go to state 4
+    call                           shift and go to state 5
+    selectionStmt                  shift and go to state 6
+    iterationStmt                  shift and go to state 7
+    returnStmt                     shift and go to state 8
+    inputStmt                      shift and go to state 9
+    outputStmt                     shift and go to state 10
+    commentLine                    shift and go to state 11
+    varDeclar                      shift and go to state 13
+    funcDeclar                     shift and go to state 14
+    objDeclar                      shift and go to state 15
+    andExpr                        shift and go to state 23
+    unaryRelExpr                   shift and go to state 26
+    relExpr                        shift and go to state 28
+    sumExpr                        shift and go to state 29
+    term                           shift and go to state 30
+    opElement                      shift and go to state 31
+
+state 80
+
+    (59) inputStmt -> INPUT LPARENT RPARENT .
+
+    SEMCOL          reduce using rule 59 (inputStmt -> INPUT LPARENT RPARENT .)
+
+
+state 81
+
+    (60) outputStmt -> PRINT LPARENT STRING . RPARENT
+
+    RPARENT         shift and go to state 92
+
+
+state 82
+
+    (37) andExpr -> andExpr AND unaryRelExpr .
+
+    AND             reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    OR              reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    NAME            reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    IF              reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    WHILE           reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    RETURN          reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    INPUT           reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    PRINT           reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    LINE_COMMENT    reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    DEF             reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    CLASS           reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    NOT             reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    NUMBER          reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    $end            reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    ELSE            reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    COL             reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+    SEMCOL          reduce using rule 37 (andExpr -> andExpr AND unaryRelExpr .)
+
+
+state 83
+
+    (18) funcDeclar -> DEF NAME LPARENT . RPARENT COL suite
+    (19) funcDeclar -> DEF NAME LPARENT . params RPARENT COL suite
+    (20) params -> . paramsList
+    (21) paramsList -> . NAME COMA paramsList
+    (22) paramsList -> . NAME
+
+    RPARENT         shift and go to state 93
+    NAME            shift and go to state 71
+
+    params                         shift and go to state 94
+    paramsList                     shift and go to state 74
+
+state 84
+
+    (23) objDeclar -> CLASS NAME COL . suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . exprStmt
+    (4) stmt -> . declar
+    (5) stmt -> . call SEMCOL
+    (6) stmt -> . selectionStmt
+    (7) stmt -> . iterationStmt
+    (8) stmt -> . returnStmt SEMCOL
+    (9) stmt -> . inputStmt SEMCOL
+    (10) stmt -> . outputStmt SEMCOL
+    (11) stmt -> . commentLine
+    (29) exprStmt -> . simpleExpr
+    (12) declar -> . varDeclar SEMCOL
+    (13) declar -> . funcDeclar
+    (14) declar -> . objDeclar
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
+    (15) varDeclar -> . NAME ASSIGN STRING
+    (16) varDeclar -> . NAME ASSIGN exprStmt
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+
+    NAME            shift and go to state 16
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    INPUT           shift and go to state 20
+    PRINT           shift and go to state 21
+    LINE_COMMENT    shift and go to state 22
+    DEF             shift and go to state 24
+    CLASS           shift and go to state 25
+    NOT             shift and go to state 27
+    NUMBER          shift and go to state 32
+
+    suite                          shift and go to state 95
     stmt                           shift and go to state 2
     exprStmt                       shift and go to state 3
     declar                         shift and go to state 4
@@ -2030,340 +2048,248 @@ state 83
     term                           shift and go to state 30
     opElement                      shift and go to state 31
 
-state 84
+state 85
 
-    (40) relExpr -> sumExpr relop sumExpr .
-    (48) sumExpr -> sumExpr . sumop term
-    (50) sumop -> . SUM
-    (51) sumop -> . SUBST
+    (41) relExpr -> sumExpr relop sumExpr .
+    (49) sumExpr -> sumExpr . sumop term
+    (51) sumop -> . SUM
+    (52) sumop -> . SUBST
 
-    AND             reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    OR              reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    NAME            reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    IF              reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    WHILE           reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    RETURN          reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    INPUT           reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    PRINT           reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    LINE_COMMENT    reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    DEF             reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    CLASS           reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    NOT             reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    NUMBER          reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    $end            reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    ELSE            reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    COL             reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
-    SEMCOL          reduce using rule 40 (relExpr -> sumExpr relop sumExpr .)
+    AND             reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    OR              reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    NAME            reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    IF              reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    WHILE           reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    RETURN          reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    INPUT           reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    PRINT           reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    LINE_COMMENT    reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    DEF             reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    CLASS           reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    NOT             reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    NUMBER          reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    $end            reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    ELSE            reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    COL             reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
+    SEMCOL          reduce using rule 41 (relExpr -> sumExpr relop sumExpr .)
     SUM             shift and go to state 63
     SUBST           shift and go to state 64
 
     sumop                          shift and go to state 56
 
-state 85
+state 86
 
-    (48) sumExpr -> sumExpr sumop term .
-    (52) term -> term . mulop opElement
-    (56) mulop -> . PROD
-    (57) mulop -> . DIV
+    (49) sumExpr -> sumExpr sumop term .
+    (53) term -> term . mulop opElement
+    (57) mulop -> . PROD
+    (58) mulop -> . DIV
 
-    LTE             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    LT              reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    GTE             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    GT              reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    EQ              reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    NEQ             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    SUM             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    SUBST           reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    AND             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    OR              reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    NAME            reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    IF              reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    WHILE           reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    RETURN          reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    INPUT           reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    PRINT           reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    LINE_COMMENT    reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    DEF             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    CLASS           reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    NOT             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    NUMBER          reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    $end            reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    ELSE            reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    COL             reduce using rule 48 (sumExpr -> sumExpr sumop term .)
-    SEMCOL          reduce using rule 48 (sumExpr -> sumExpr sumop term .)
+    LTE             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    LT              reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    GTE             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    GT              reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    EQ              reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    NEQ             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    SUM             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    SUBST           reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    AND             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    OR              reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    NAME            reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    IF              reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    WHILE           reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    RETURN          reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    INPUT           reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    PRINT           reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    LINE_COMMENT    reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    DEF             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    CLASS           reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    NOT             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    NUMBER          reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    $end            reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    ELSE            reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    COL             reduce using rule 49 (sumExpr -> sumExpr sumop term .)
+    SEMCOL          reduce using rule 49 (sumExpr -> sumExpr sumop term .)
     PROD            shift and go to state 66
     DIV             shift and go to state 67
 
     mulop                          shift and go to state 65
 
-state 86
-
-    (52) term -> term mulop opElement .
-
-    PROD            reduce using rule 52 (term -> term mulop opElement .)
-    DIV             reduce using rule 52 (term -> term mulop opElement .)
-    LTE             reduce using rule 52 (term -> term mulop opElement .)
-    LT              reduce using rule 52 (term -> term mulop opElement .)
-    GTE             reduce using rule 52 (term -> term mulop opElement .)
-    GT              reduce using rule 52 (term -> term mulop opElement .)
-    EQ              reduce using rule 52 (term -> term mulop opElement .)
-    NEQ             reduce using rule 52 (term -> term mulop opElement .)
-    SUM             reduce using rule 52 (term -> term mulop opElement .)
-    SUBST           reduce using rule 52 (term -> term mulop opElement .)
-    AND             reduce using rule 52 (term -> term mulop opElement .)
-    OR              reduce using rule 52 (term -> term mulop opElement .)
-    NAME            reduce using rule 52 (term -> term mulop opElement .)
-    IF              reduce using rule 52 (term -> term mulop opElement .)
-    WHILE           reduce using rule 52 (term -> term mulop opElement .)
-    RETURN          reduce using rule 52 (term -> term mulop opElement .)
-    INPUT           reduce using rule 52 (term -> term mulop opElement .)
-    PRINT           reduce using rule 52 (term -> term mulop opElement .)
-    LINE_COMMENT    reduce using rule 52 (term -> term mulop opElement .)
-    DEF             reduce using rule 52 (term -> term mulop opElement .)
-    CLASS           reduce using rule 52 (term -> term mulop opElement .)
-    NOT             reduce using rule 52 (term -> term mulop opElement .)
-    NUMBER          reduce using rule 52 (term -> term mulop opElement .)
-    $end            reduce using rule 52 (term -> term mulop opElement .)
-    ELSE            reduce using rule 52 (term -> term mulop opElement .)
-    COL             reduce using rule 52 (term -> term mulop opElement .)
-    SEMCOL          reduce using rule 52 (term -> term mulop opElement .)
-
-
 state 87
 
-    (20) paramsList -> NAME COMA . paramsList
-    (20) paramsList -> . NAME COMA paramsList
-    (21) paramsList -> . NAME
+    (53) term -> term mulop opElement .
 
-    NAME            shift and go to state 71
+    PROD            reduce using rule 53 (term -> term mulop opElement .)
+    DIV             reduce using rule 53 (term -> term mulop opElement .)
+    LTE             reduce using rule 53 (term -> term mulop opElement .)
+    LT              reduce using rule 53 (term -> term mulop opElement .)
+    GTE             reduce using rule 53 (term -> term mulop opElement .)
+    GT              reduce using rule 53 (term -> term mulop opElement .)
+    EQ              reduce using rule 53 (term -> term mulop opElement .)
+    NEQ             reduce using rule 53 (term -> term mulop opElement .)
+    SUM             reduce using rule 53 (term -> term mulop opElement .)
+    SUBST           reduce using rule 53 (term -> term mulop opElement .)
+    AND             reduce using rule 53 (term -> term mulop opElement .)
+    OR              reduce using rule 53 (term -> term mulop opElement .)
+    NAME            reduce using rule 53 (term -> term mulop opElement .)
+    IF              reduce using rule 53 (term -> term mulop opElement .)
+    WHILE           reduce using rule 53 (term -> term mulop opElement .)
+    RETURN          reduce using rule 53 (term -> term mulop opElement .)
+    INPUT           reduce using rule 53 (term -> term mulop opElement .)
+    PRINT           reduce using rule 53 (term -> term mulop opElement .)
+    LINE_COMMENT    reduce using rule 53 (term -> term mulop opElement .)
+    DEF             reduce using rule 53 (term -> term mulop opElement .)
+    CLASS           reduce using rule 53 (term -> term mulop opElement .)
+    NOT             reduce using rule 53 (term -> term mulop opElement .)
+    NUMBER          reduce using rule 53 (term -> term mulop opElement .)
+    $end            reduce using rule 53 (term -> term mulop opElement .)
+    ELSE            reduce using rule 53 (term -> term mulop opElement .)
+    COL             reduce using rule 53 (term -> term mulop opElement .)
+    SEMCOL          reduce using rule 53 (term -> term mulop opElement .)
 
-    paramsList                     shift and go to state 95
 
 state 88
 
-    (26) call -> NAME LPARENT params RPARENT .
+    (21) paramsList -> NAME COMA . paramsList
+    (21) paramsList -> . NAME COMA paramsList
+    (22) paramsList -> . NAME
 
-    SEMCOL          reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    POINT           reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    PROD            reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    DIV             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    LTE             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    LT              reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    GTE             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    GT              reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    EQ              reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    NEQ             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    SUM             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    SUBST           reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    AND             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    OR              reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    NAME            reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    IF              reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    WHILE           reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    RETURN          reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    INPUT           reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    PRINT           reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    LINE_COMMENT    reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    DEF             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    CLASS           reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    NOT             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    NUMBER          reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    $end            reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    ELSE            reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
-    COL             reduce using rule 26 (call -> NAME LPARENT params RPARENT .)
+    NAME            shift and go to state 71
 
+    paramsList                     shift and go to state 96
 
 state 89
 
-    (29) selectionStmt -> IF simpleExpr COL suite .
-    (30) selectionStmt -> IF simpleExpr COL suite . ELSE COL suite
+    (27) call -> NAME LPARENT params RPARENT .
 
-  ! shift/reduce conflict for ELSE resolved as shift
-    NAME            reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    IF              reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    WHILE           reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    RETURN          reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    INPUT           reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    PRINT           reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    LINE_COMMENT    reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    DEF             reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    CLASS           reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    NOT             reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    NUMBER          reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    $end            reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .)
-    ELSE            shift and go to state 96
-
-  ! ELSE            [ reduce using rule 29 (selectionStmt -> IF simpleExpr COL suite .) ]
+    SEMCOL          reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    POINT           reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    PROD            reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    DIV             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    LTE             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    LT              reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    GTE             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    GT              reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    EQ              reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    NEQ             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    SUM             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    SUBST           reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    AND             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    OR              reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    NAME            reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    IF              reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    WHILE           reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    RETURN          reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    INPUT           reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    PRINT           reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    LINE_COMMENT    reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    DEF             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    CLASS           reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    NOT             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    NUMBER          reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    $end            reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    ELSE            reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
+    COL             reduce using rule 27 (call -> NAME LPARENT params RPARENT .)
 
 
 state 90
 
-    (31) iterationStmt -> WHILE simpleExpr COL suite .
+    (30) selectionStmt -> IF simpleExpr COL suite .
+    (31) selectionStmt -> IF simpleExpr COL suite . ELSE COL suite
 
-    NAME            reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    IF              reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    WHILE           reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    RETURN          reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    INPUT           reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    PRINT           reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    LINE_COMMENT    reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    DEF             reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    CLASS           reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    NOT             reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    NUMBER          reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    $end            reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
-    ELSE            reduce using rule 31 (iterationStmt -> WHILE simpleExpr COL suite .)
+  ! shift/reduce conflict for ELSE resolved as shift
+    NAME            reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    IF              reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    WHILE           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    RETURN          reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    INPUT           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    PRINT           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    LINE_COMMENT    reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    DEF             reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    CLASS           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    NOT             reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    NUMBER          reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    $end            reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .)
+    ELSE            shift and go to state 97
+
+  ! ELSE            [ reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite .) ]
 
 
 state 91
 
-    (59) outputStmt -> PRINT LPARENT STRING RPARENT .
+    (32) iterationStmt -> WHILE simpleExpr COL suite .
 
-    SEMCOL          reduce using rule 59 (outputStmt -> PRINT LPARENT STRING RPARENT .)
+    NAME            reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    IF              reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    WHILE           reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    RETURN          reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    INPUT           reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    PRINT           reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    LINE_COMMENT    reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    DEF             reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    CLASS           reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    NOT             reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    NUMBER          reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    $end            reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
+    ELSE            reduce using rule 32 (iterationStmt -> WHILE simpleExpr COL suite .)
 
 
 state 92
 
-    (17) funcDeclar -> DEF NAME LPARENT RPARENT . COL suite
+    (60) outputStmt -> PRINT LPARENT STRING RPARENT .
 
-    COL             shift and go to state 97
+    SEMCOL          reduce using rule 60 (outputStmt -> PRINT LPARENT STRING RPARENT .)
 
 
 state 93
 
-    (18) funcDeclar -> DEF NAME LPARENT params . RPARENT COL suite
+    (18) funcDeclar -> DEF NAME LPARENT RPARENT . COL suite
 
-    RPARENT         shift and go to state 98
+    COL             shift and go to state 98
 
 
 state 94
 
-    (22) objDeclar -> CLASS NAME COL suite .
+    (19) funcDeclar -> DEF NAME LPARENT params . RPARENT COL suite
 
-    NAME            reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    IF              reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    WHILE           reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    RETURN          reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    INPUT           reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    PRINT           reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    LINE_COMMENT    reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    DEF             reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    CLASS           reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    NOT             reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    NUMBER          reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    $end            reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
-    ELSE            reduce using rule 22 (objDeclar -> CLASS NAME COL suite .)
+    RPARENT         shift and go to state 99
 
 
 state 95
 
-    (20) paramsList -> NAME COMA paramsList .
+    (23) objDeclar -> CLASS NAME COL suite .
 
-    RPARENT         reduce using rule 20 (paramsList -> NAME COMA paramsList .)
+    NAME            reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    IF              reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    WHILE           reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    RETURN          reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    INPUT           reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    PRINT           reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    LINE_COMMENT    reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    DEF             reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    CLASS           reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    NOT             reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    NUMBER          reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    $end            reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
+    ELSE            reduce using rule 23 (objDeclar -> CLASS NAME COL suite .)
 
 
 state 96
 
-    (30) selectionStmt -> IF simpleExpr COL suite ELSE . COL suite
+    (21) paramsList -> NAME COMA paramsList .
 
-    COL             shift and go to state 99
+    RPARENT         reduce using rule 21 (paramsList -> NAME COMA paramsList .)
 
 
 state 97
 
-    (17) funcDeclar -> DEF NAME LPARENT RPARENT COL . suite
-    (1) suite -> . stmt
-    (2) suite -> . stmt suite
-    (3) stmt -> . exprStmt
-    (4) stmt -> . declar
-    (5) stmt -> . call SEMCOL
-    (6) stmt -> . selectionStmt
-    (7) stmt -> . iterationStmt
-    (8) stmt -> . returnStmt SEMCOL
-    (9) stmt -> . inputStmt SEMCOL
-    (10) stmt -> . outputStmt SEMCOL
-    (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
-    (12) declar -> . varDeclar SEMCOL
-    (13) declar -> . funcDeclar
-    (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
-    (15) varDeclar -> . NAME ASSIGN STRING
-    (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
+    (31) selectionStmt -> IF simpleExpr COL suite ELSE . COL suite
 
-    NAME            shift and go to state 16
-    IF              shift and go to state 17
-    WHILE           shift and go to state 18
-    RETURN          shift and go to state 19
-    INPUT           shift and go to state 20
-    PRINT           shift and go to state 21
-    LINE_COMMENT    shift and go to state 22
-    DEF             shift and go to state 24
-    CLASS           shift and go to state 25
-    NOT             shift and go to state 27
-    NUMBER          shift and go to state 32
+    COL             shift and go to state 100
 
-    suite                          shift and go to state 100
-    stmt                           shift and go to state 2
-    exprStmt                       shift and go to state 3
-    declar                         shift and go to state 4
-    call                           shift and go to state 5
-    selectionStmt                  shift and go to state 6
-    iterationStmt                  shift and go to state 7
-    returnStmt                     shift and go to state 8
-    inputStmt                      shift and go to state 9
-    outputStmt                     shift and go to state 10
-    commentLine                    shift and go to state 11
-    simpleExpr                     shift and go to state 12
-    varDeclar                      shift and go to state 13
-    funcDeclar                     shift and go to state 14
-    objDeclar                      shift and go to state 15
-    andExpr                        shift and go to state 23
-    unaryRelExpr                   shift and go to state 26
-    relExpr                        shift and go to state 28
-    sumExpr                        shift and go to state 29
-    term                           shift and go to state 30
-    opElement                      shift and go to state 31
 
 state 98
 
-    (18) funcDeclar -> DEF NAME LPARENT params RPARENT . COL suite
-
-    COL             shift and go to state 101
-
-
-state 99
-
-    (30) selectionStmt -> IF simpleExpr COL suite ELSE COL . suite
+    (18) funcDeclar -> DEF NAME LPARENT RPARENT COL . suite
     (1) suite -> . stmt
     (2) suite -> . stmt suite
     (3) stmt -> . exprStmt
@@ -2375,42 +2301,136 @@ state 99
     (9) stmt -> . inputStmt SEMCOL
     (10) stmt -> . outputStmt SEMCOL
     (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
+    (29) exprStmt -> . simpleExpr
     (12) declar -> . varDeclar SEMCOL
     (13) declar -> . funcDeclar
     (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
     (15) varDeclar -> . NAME ASSIGN STRING
     (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+
+    NAME            shift and go to state 16
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    INPUT           shift and go to state 20
+    PRINT           shift and go to state 21
+    LINE_COMMENT    shift and go to state 22
+    DEF             shift and go to state 24
+    CLASS           shift and go to state 25
+    NOT             shift and go to state 27
+    NUMBER          shift and go to state 32
+
+    suite                          shift and go to state 101
+    stmt                           shift and go to state 2
+    exprStmt                       shift and go to state 3
+    declar                         shift and go to state 4
+    call                           shift and go to state 5
+    selectionStmt                  shift and go to state 6
+    iterationStmt                  shift and go to state 7
+    returnStmt                     shift and go to state 8
+    inputStmt                      shift and go to state 9
+    outputStmt                     shift and go to state 10
+    commentLine                    shift and go to state 11
+    simpleExpr                     shift and go to state 12
+    varDeclar                      shift and go to state 13
+    funcDeclar                     shift and go to state 14
+    objDeclar                      shift and go to state 15
+    andExpr                        shift and go to state 23
+    unaryRelExpr                   shift and go to state 26
+    relExpr                        shift and go to state 28
+    sumExpr                        shift and go to state 29
+    term                           shift and go to state 30
+    opElement                      shift and go to state 31
+
+state 99
+
+    (19) funcDeclar -> DEF NAME LPARENT params RPARENT . COL suite
+
+    COL             shift and go to state 102
+
+
+state 100
+
+    (31) selectionStmt -> IF simpleExpr COL suite ELSE COL . suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . exprStmt
+    (4) stmt -> . declar
+    (5) stmt -> . call SEMCOL
+    (6) stmt -> . selectionStmt
+    (7) stmt -> . iterationStmt
+    (8) stmt -> . returnStmt SEMCOL
+    (9) stmt -> . inputStmt SEMCOL
+    (10) stmt -> . outputStmt SEMCOL
+    (11) stmt -> . commentLine
+    (29) exprStmt -> . simpleExpr
+    (12) declar -> . varDeclar SEMCOL
+    (13) declar -> . funcDeclar
+    (14) declar -> . objDeclar
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
+    (15) varDeclar -> . NAME ASSIGN STRING
+    (16) varDeclar -> . NAME ASSIGN exprStmt
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
 
     NAME            shift and go to state 16
     IF              shift and go to state 17
@@ -2425,109 +2445,6 @@ state 99
     NUMBER          shift and go to state 32
 
     simpleExpr                     shift and go to state 12
-    suite                          shift and go to state 102
-    stmt                           shift and go to state 2
-    exprStmt                       shift and go to state 3
-    declar                         shift and go to state 4
-    call                           shift and go to state 5
-    selectionStmt                  shift and go to state 6
-    iterationStmt                  shift and go to state 7
-    returnStmt                     shift and go to state 8
-    inputStmt                      shift and go to state 9
-    outputStmt                     shift and go to state 10
-    commentLine                    shift and go to state 11
-    varDeclar                      shift and go to state 13
-    funcDeclar                     shift and go to state 14
-    objDeclar                      shift and go to state 15
-    andExpr                        shift and go to state 23
-    unaryRelExpr                   shift and go to state 26
-    relExpr                        shift and go to state 28
-    sumExpr                        shift and go to state 29
-    term                           shift and go to state 30
-    opElement                      shift and go to state 31
-
-state 100
-
-    (17) funcDeclar -> DEF NAME LPARENT RPARENT COL suite .
-
-    NAME            reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    IF              reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    WHILE           reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    RETURN          reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    INPUT           reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    PRINT           reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    LINE_COMMENT    reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    DEF             reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    CLASS           reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    NOT             reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    NUMBER          reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    $end            reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-    ELSE            reduce using rule 17 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
-
-
-state 101
-
-    (18) funcDeclar -> DEF NAME LPARENT params RPARENT COL . suite
-    (1) suite -> . stmt
-    (2) suite -> . stmt suite
-    (3) stmt -> . exprStmt
-    (4) stmt -> . declar
-    (5) stmt -> . call SEMCOL
-    (6) stmt -> . selectionStmt
-    (7) stmt -> . iterationStmt
-    (8) stmt -> . returnStmt SEMCOL
-    (9) stmt -> . inputStmt SEMCOL
-    (10) stmt -> . outputStmt SEMCOL
-    (11) stmt -> . commentLine
-    (28) exprStmt -> . simpleExpr
-    (12) declar -> . varDeclar SEMCOL
-    (13) declar -> . funcDeclar
-    (14) declar -> . objDeclar
-    (23) call -> . NAME
-    (24) call -> . NAME POINT call
-    (25) call -> . NAME LPARENT RPARENT
-    (26) call -> . NAME LPARENT params RPARENT
-    (27) call -> . call POINT call
-    (29) selectionStmt -> . IF simpleExpr COL suite
-    (30) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
-    (31) iterationStmt -> . WHILE simpleExpr COL suite
-    (32) returnStmt -> . RETURN
-    (33) returnStmt -> . RETURN simpleExpr
-    (58) inputStmt -> . INPUT LPARENT RPARENT
-    (59) outputStmt -> . PRINT LPARENT STRING RPARENT
-    (60) commentLine -> . LINE_COMMENT
-    (34) simpleExpr -> . simpleExpr OR andExpr
-    (35) simpleExpr -> . andExpr
-    (15) varDeclar -> . NAME ASSIGN STRING
-    (16) varDeclar -> . NAME ASSIGN exprStmt
-    (17) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
-    (18) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
-    (22) objDeclar -> . CLASS NAME COL suite
-    (36) andExpr -> . andExpr AND unaryRelExpr
-    (37) andExpr -> . unaryRelExpr
-    (38) unaryRelExpr -> . NOT unaryRelExpr
-    (39) unaryRelExpr -> . relExpr
-    (40) relExpr -> . sumExpr relop sumExpr
-    (41) relExpr -> . sumExpr
-    (48) sumExpr -> . sumExpr sumop term
-    (49) sumExpr -> . term
-    (52) term -> . term mulop opElement
-    (53) term -> . opElement
-    (54) opElement -> . call
-    (55) opElement -> . NUMBER
-
-    NAME            shift and go to state 16
-    IF              shift and go to state 17
-    WHILE           shift and go to state 18
-    RETURN          shift and go to state 19
-    INPUT           shift and go to state 20
-    PRINT           shift and go to state 21
-    LINE_COMMENT    shift and go to state 22
-    DEF             shift and go to state 24
-    CLASS           shift and go to state 25
-    NOT             shift and go to state 27
-    NUMBER          shift and go to state 32
-
     suite                          shift and go to state 103
     stmt                           shift and go to state 2
     exprStmt                       shift and go to state 3
@@ -2539,6 +2456,110 @@ state 101
     inputStmt                      shift and go to state 9
     outputStmt                     shift and go to state 10
     commentLine                    shift and go to state 11
+    varDeclar                      shift and go to state 13
+    funcDeclar                     shift and go to state 14
+    objDeclar                      shift and go to state 15
+    andExpr                        shift and go to state 23
+    unaryRelExpr                   shift and go to state 26
+    relExpr                        shift and go to state 28
+    sumExpr                        shift and go to state 29
+    term                           shift and go to state 30
+    opElement                      shift and go to state 31
+
+state 101
+
+    (18) funcDeclar -> DEF NAME LPARENT RPARENT COL suite .
+
+    NAME            reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    IF              reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    WHILE           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    RETURN          reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    INPUT           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    PRINT           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    LINE_COMMENT    reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    DEF             reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    CLASS           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    NOT             reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    NUMBER          reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    $end            reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+    ELSE            reduce using rule 18 (funcDeclar -> DEF NAME LPARENT RPARENT COL suite .)
+
+
+state 102
+
+    (19) funcDeclar -> DEF NAME LPARENT params RPARENT COL . suite
+    (1) suite -> . stmt
+    (2) suite -> . stmt suite
+    (3) stmt -> . exprStmt
+    (4) stmt -> . declar
+    (5) stmt -> . call SEMCOL
+    (6) stmt -> . selectionStmt
+    (7) stmt -> . iterationStmt
+    (8) stmt -> . returnStmt SEMCOL
+    (9) stmt -> . inputStmt SEMCOL
+    (10) stmt -> . outputStmt SEMCOL
+    (11) stmt -> . commentLine
+    (29) exprStmt -> . simpleExpr
+    (12) declar -> . varDeclar SEMCOL
+    (13) declar -> . funcDeclar
+    (14) declar -> . objDeclar
+    (24) call -> . NAME
+    (25) call -> . NAME POINT call
+    (26) call -> . NAME LPARENT RPARENT
+    (27) call -> . NAME LPARENT params RPARENT
+    (28) call -> . call POINT call
+    (30) selectionStmt -> . IF simpleExpr COL suite
+    (31) selectionStmt -> . IF simpleExpr COL suite ELSE COL suite
+    (32) iterationStmt -> . WHILE simpleExpr COL suite
+    (33) returnStmt -> . RETURN
+    (34) returnStmt -> . RETURN simpleExpr
+    (59) inputStmt -> . INPUT LPARENT RPARENT
+    (60) outputStmt -> . PRINT LPARENT STRING RPARENT
+    (61) commentLine -> . LINE_COMMENT
+    (35) simpleExpr -> . simpleExpr OR andExpr
+    (36) simpleExpr -> . andExpr
+    (15) varDeclar -> . NAME ASSIGN STRING
+    (16) varDeclar -> . NAME ASSIGN exprStmt
+    (17) varDeclar -> . NAME ASSIGN inputStmt
+    (18) funcDeclar -> . DEF NAME LPARENT RPARENT COL suite
+    (19) funcDeclar -> . DEF NAME LPARENT params RPARENT COL suite
+    (23) objDeclar -> . CLASS NAME COL suite
+    (37) andExpr -> . andExpr AND unaryRelExpr
+    (38) andExpr -> . unaryRelExpr
+    (39) unaryRelExpr -> . NOT unaryRelExpr
+    (40) unaryRelExpr -> . relExpr
+    (41) relExpr -> . sumExpr relop sumExpr
+    (42) relExpr -> . sumExpr
+    (49) sumExpr -> . sumExpr sumop term
+    (50) sumExpr -> . term
+    (53) term -> . term mulop opElement
+    (54) term -> . opElement
+    (55) opElement -> . call
+    (56) opElement -> . NUMBER
+
+    NAME            shift and go to state 16
+    IF              shift and go to state 17
+    WHILE           shift and go to state 18
+    RETURN          shift and go to state 19
+    INPUT           shift and go to state 20
+    PRINT           shift and go to state 21
+    LINE_COMMENT    shift and go to state 22
+    DEF             shift and go to state 24
+    CLASS           shift and go to state 25
+    NOT             shift and go to state 27
+    NUMBER          shift and go to state 32
+
+    suite                          shift and go to state 104
+    stmt                           shift and go to state 2
+    exprStmt                       shift and go to state 3
+    declar                         shift and go to state 4
+    call                           shift and go to state 5
+    selectionStmt                  shift and go to state 6
+    iterationStmt                  shift and go to state 7
+    returnStmt                     shift and go to state 8
+    inputStmt                      shift and go to state 9
+    outputStmt                     shift and go to state 10
+    commentLine                    shift and go to state 11
     simpleExpr                     shift and go to state 12
     varDeclar                      shift and go to state 13
     funcDeclar                     shift and go to state 14
@@ -2550,42 +2571,42 @@ state 101
     term                           shift and go to state 30
     opElement                      shift and go to state 31
 
-state 102
-
-    (30) selectionStmt -> IF simpleExpr COL suite ELSE COL suite .
-
-    NAME            reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    IF              reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    WHILE           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    RETURN          reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    INPUT           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    PRINT           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    LINE_COMMENT    reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    DEF             reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    CLASS           reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    NOT             reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    NUMBER          reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    $end            reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-    ELSE            reduce using rule 30 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
-
-
 state 103
 
-    (18) funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .
+    (31) selectionStmt -> IF simpleExpr COL suite ELSE COL suite .
 
-    NAME            reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    IF              reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    WHILE           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    RETURN          reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    INPUT           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    PRINT           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    LINE_COMMENT    reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    DEF             reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    CLASS           reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    NOT             reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    NUMBER          reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    $end            reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
-    ELSE            reduce using rule 18 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    NAME            reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    IF              reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    WHILE           reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    RETURN          reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    INPUT           reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    PRINT           reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    LINE_COMMENT    reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    DEF             reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    CLASS           reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    NOT             reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    NUMBER          reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    $end            reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+    ELSE            reduce using rule 31 (selectionStmt -> IF simpleExpr COL suite ELSE COL suite .)
+
+
+state 104
+
+    (19) funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .
+
+    NAME            reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    IF              reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    WHILE           reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    RETURN          reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    INPUT           reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    PRINT           reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    LINE_COMMENT    reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    DEF             reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    CLASS           reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    NOT             reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    NUMBER          reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    $end            reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
+    ELSE            reduce using rule 19 (funcDeclar -> DEF NAME LPARENT params RPARENT COL suite .)
 
 WARNING: 
 WARNING: Conflicts:
@@ -2605,4 +2626,4 @@ WARNING: shift/reduce conflict for POINT in state 16 resolved as shift
 WARNING: shift/reduce conflict for POINT in state 46 resolved as shift
 WARNING: shift/reduce conflict for POINT in state 68 resolved as shift
 WARNING: shift/reduce conflict for POINT in state 70 resolved as shift
-WARNING: shift/reduce conflict for ELSE in state 89 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 90 resolved as shift
