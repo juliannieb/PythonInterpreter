@@ -202,7 +202,7 @@ def p_call(p):
             | call POINT call
     """
     if (len(p) == 2):
-        p[0] = symbol_table.get_object(str(p[1]))
+        p[0] = iast.Call(p[1])
 
 def p_expr_stmt(p):
     """exprStmt : simpleExpr
@@ -231,41 +231,36 @@ def p_simple_expr(p):
                     | andExpr
     """
     if (len(p) == 4):
-        p[0] = p[1] or p[3]
+        p[0] = iast.SimpleExpr(simpleExpr=p[1], orToken=p[2], andExpr=p[3])
     else:
-        p[0] = p[1]
+        p[0] = iast.SimpleExpr(andExpr=p[1])
 
 def p_and_expr(p):
     """andExpr  : andExpr AND unaryRelExpr
                 | unaryRelExpr
     """
     if (len(p) == 4):
-        p[0] = p[1] and p[3]
+        p[0] = iast.AndExpr(andExpr=p[1], andToken=p[2], unaryRelExpr=p[3])
     else:
-        p[0] = p[1]
+        p[0] = iast.AndExpr(unaryRelExpr=p[1])
 
 def p_unary_rel_expr(p):
     """unaryRelExpr : NOT unaryRelExpr
                     | relExpr
     """
     if (len(p) == 3):
-        p[0] = not p[2]
+        p[0] = iast.UnaryRelExpr(notToken=p[1], unaryRelExpr=p[2])
     else:
-        p[0] = p[1]
+        p[0] = iast.UnaryRelExpr(relExpr=p[1])
 
 def p_rel_expr(p):
     """relExpr  : sumExpr relop sumExpr
                 | sumExpr
     """
     if (len(p) == 4):
-        if p[2] == '<=': p[0] = p[1] <= p[3]
-        elif p[2] == '<': p[0] = p[1] < p[3]
-        elif p[2] == '>=': p[0] = p[1] >= p[3]
-        elif p[2] == '>': p[0] = p[1] > p[3]
-        elif p[2] == '==': p[0] = p[1] == p[3]
-        elif p[2] == '!=': p[0] = p[1] != p[3]
+        p[0] = iast.RelExpr(sumExpr1=p[1], relop=p[2], sumExpr2=p[3])
     else:
-        p[0] = p[1]
+        p[0] = iast.RelExpr(sumExpr1=p[1])
 
 def p_relop(p):
     """relop    : LTE
@@ -282,38 +277,36 @@ def p_sum_expr(p):
                 | term
     """
     if (len(p) == 4):
-        if p[2] == '+': p[0] = p[1] + p[3]
-        elif p[2] == '-': p[0] = p[1] - p[3]
+        p[0] = iast.SumExpr(sumExpr=p[1], sumop=p[2], term=p[3])
     else:
-        p[0] = p[1]
+        p[0] = iast.SumExpr(term=p[1])
 
 def p_sumop(p):
     """sumop    : SUM
                 | SUBST
     """
-    p[0] = p[1]
+    p[0] = iast.Sumop(p[1])
 
 def p_term(p):
     """term : term mulop opElement
             | opElement
     """
     if (len(p) == 4):
-        if p[2] == '*': p[0] = p[1] * p[3]
-        elif p[2] == '/': p[0] = p[1] / p[3]
+        p[0] = iast.Term(term=p[1], mulop=p[2], opElement=p[3])
     else:
-        p[0] = p[1]
+        p[0] = iast.Term(opElement=p[1])
 
 def p_op_element(p):
     """opElement    : call
                     | NUMBER
     """
-    p[0] = p[1]
+    p[0] = iast.OpElement(p[1])
 
 def p_mulop(p):
     """mulop    : PROD
                 | DIV
     """
-    p[0] = p[1]
+    p[0] = iast.Mulop(p[1])
 
 def p_input_stmt(p):
     """inputStmt : INPUT LPARENT RPARENT

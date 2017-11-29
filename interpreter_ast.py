@@ -119,7 +119,7 @@ class Call(Node):
 
     def excecute(self):
         if self.name:
-            return symbol_table.get_object(str(name))
+            return symbol_table.get_object(str(self.name))
 
 class ExprStmt(Node):
     """exprStmt : simpleExpr
@@ -157,7 +157,7 @@ class SimpleExpr(Node):
         self.andExpr = andExpr
     
     def excecute(self):
-        if orToken:
+        if self.orToken:
             return self.simpleExpr.excecute() or self.andExpr.excecute()
         else:
             return self.andExpr.excecute()
@@ -172,7 +172,7 @@ class AndExpr(Node):
         self.unaryRelExpr = unaryRelExpr
     
     def excecute(self):
-        if andToken:
+        if self.andToken:
             return self.andExpr.excecute() and self.unaryRelExpr.excecute()
         else:
             return self.unaryRelExpr.excecute()
@@ -187,7 +187,7 @@ class UnaryRelExpr(Node):
         self.relExpr = relExpr
 
     def excecute(self):
-        if notToken:
+        if self.notToken:
             return not unaryRelExpr.excecute()
         else:
             return self.relExpr.excecute()
@@ -202,7 +202,7 @@ class RelExpr(Node):
         self.sumExpr2 = sumExpr2
     
     def excecute(self):
-        if relop:
+        if self.relop:
             if self.relop.excecute() == '<=': return self.sumExpr1.excecute() <= self.sumExpr2.excecute()
             elif self.relop.excecute() == '<': return self.sumExpr1.excecute() < self.sumExpr2.excecute()
             elif self.relop.excecute() == '>=': return self.sumExpr1.excecute() >= self.sumExpr2.excecute()
@@ -236,7 +236,7 @@ class SumExpr(Node):
         self.term = term
     
     def excecute(self):
-        if sumop:
+        if self.sumop:
             if self.sumop.excecute() == '+': return self.sumExpr.excecute() + self.term.excecute()
             elif self.sumop.excecute() == '-': return self.sumExpr.excecute() - self.term.excecute()
         else:
@@ -262,7 +262,7 @@ class Term(Node):
         self.opElement = opElement
 
     def excecute(self):
-        if mulop:
+        if self.mulop:
             if self.mulop.excecute() == '*': return self.term.excecute() * self.opElement.excecute()
             elif self.mulop.excecute() == '/': return self.term.excecute() / self.opElement.excecute()
         else:
