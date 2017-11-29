@@ -2,6 +2,7 @@
 
 import sys
 import re
+import interpreter_ast as iast
 
 if sys.version_info[0] >= 3:
     raw_input = input
@@ -113,6 +114,7 @@ precedence = (
 names = {}
 
 # symbol table
+"""
 class SymbolTable:
     
     def __init__(self):
@@ -134,13 +136,14 @@ class SymbolTable:
 
 
 symbol_table = SymbolTable()
-
+"""
 
 def p_suite(p):
     """suite    : stmt
                 | stmt suite
     """
-    pass
+    p[0] = iast.Suite(p[1])
+    p[0].excecute()
 
 def p_stmt(p):
     """stmt : exprStmt
@@ -153,6 +156,7 @@ def p_stmt(p):
             | outputStmt SEMCOL
             | commentLine
     """
+    p[0] = iast.Stmt(p[1])
 
 def p_declar(p):
     """declar   : varDeclar SEMCOL
@@ -321,10 +325,7 @@ def p_output_stmt(p):
     """outputStmt   : PRINT LPARENT STRING RPARENT
                     | PRINT LPARENT NAME RPARENT
     """
-    if (p[3][0] == '"' or p[3][0] == "'"):
-        print(p[3])
-    else:
-        print(symbol_table.get_object(str(p[3])))
+    p[0] = iast.OutputStmt(p[3])
 
 def p_comment_line(p):
     """commentLine  : LINE_COMMENT
