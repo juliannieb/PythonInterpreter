@@ -197,7 +197,7 @@ class UnaryRelExpr(Node):
 
     def execute(self):
         if self.notToken:
-            return not unaryRelExpr.execute()
+            return not self.unaryRelExpr.execute()
         else:
             return self.relExpr.execute()
 
