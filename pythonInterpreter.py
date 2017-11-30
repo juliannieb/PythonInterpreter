@@ -372,6 +372,7 @@ while 1:
     # print(s)
     lexer.input(s)
     parser.parse(s)
+    iast.symbol_table.delete_scoped_variables(0)
     """
     try:
         s = raw_input('python 5.0 > ')

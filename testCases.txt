@@ -8,6 +8,7 @@ if variable1 == 0: print("variable1 = 0");
 if not variable1 == 5: print("variable1 != 5");
 variable1 = 4;
 while variable1 > 0: print("Si"); variable1 = variable1 - 1; if variable1 == 3: print("Ahora vale 3"); else: print("No vale 3");
+while x > 0: x = x - 1; y = 2; while y > 0: print(y); y = y - 1;
 
 
 # Fail
