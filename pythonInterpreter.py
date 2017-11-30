@@ -220,7 +220,10 @@ def p_selection_stmt(p):
     """selectionStmt    : IF simpleExpr COL suite
                         | IF simpleExpr COL suite ELSE COL suite
     """
-    pass
+    if (len(p) == 5):
+        p[0] = iast.SelectionStmt(simpleExpr=p[2], suite1=p[4])
+    else:
+        p[0] = p[0] = iast.SelectionStmt(simpleExpr=p[2], suite1=p[4], suite2=p[7])
 
 def p_iteration_stmt(p):
     """iterationStmt    : WHILE simpleExpr COL suite
@@ -277,7 +280,7 @@ def p_relop(p):
                 | EQ
                 | NEQ
     """
-    p[0] = p[1]
+    p[0] = iast.Relop(p[1])
 
 def p_sum_expr(p):
     """sumExpr  : sumExpr sumop term

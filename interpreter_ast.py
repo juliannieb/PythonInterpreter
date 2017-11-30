@@ -134,7 +134,16 @@ class SelectionStmt(Node):
     """selectionStmt    : IF simpleExpr COL suite
                         | IF simpleExpr COL suite ELSE COL suite
     """
-    pass
+    def __init__(self, simpleExpr, suite1, suite2=None):
+        self.simpleExpr = simpleExpr
+        self.suite1 = suite1
+        self.suite2 = suite2
+    
+    def execute(self):
+        if self.simpleExpr.execute():
+            self.suite1.execute()
+        elif self.suite2:
+            self.suite2.execute()
 
 class IterationStmt(Node):
     """iterationStmt    : WHILE simpleExpr COL suite
