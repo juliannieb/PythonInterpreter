@@ -333,4 +333,8 @@ class OutputStmt(Node):
 class CommentLine(Node):
     """commentLine  : LINE_COMMENT
     """
-    pass
+    def __init__(self):
+        self.type = 'COMMENT'
+    
+    def execute(self):
+        return

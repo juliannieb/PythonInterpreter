@@ -332,7 +332,7 @@ def p_output_stmt(p):
 def p_comment_line(p):
     """commentLine  : LINE_COMMENT
     """
-    pass
+    p[0] = iast.CommentLine()
 
 """
 def p_number(p):
