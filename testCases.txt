@@ -1,9 +1,15 @@
 # Success
 variable1 = 5;
+vinput1 = input();
 constante1 = 3;
-while variable1 > 5: if variable1 == 5: print("Empieza");
-if variable1 == 5: input(); print("Hola");
-while variable1 > 5: input(); print("Si"); variable1 = variable1 - 1; if variable1 == 3: print("Ahora vale 3"); else: print("No vale 3");
+while variable1 > 0: print(variable1); variable1 = variable1 - 1; if variable1 == 4: print("variable1 = 4");
+if variable1 == 5: print("variable1 = 5");
+if variable1 == 0: print("variable1 = 0");
+if not variable1 == 5: print("variable1 != 5");
+variable1 = 4;
+while variable1 > 0: print("Si"); variable1 = variable1 - 1; if variable1 == 3: print("Ahora vale 3"); else: print("No vale 3");
+
+
 # Fail
 = hola 5;
 "Esto es un string" = si;

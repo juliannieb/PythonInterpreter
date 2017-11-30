@@ -7,12 +7,14 @@ class SymbolTable:
         return "{0}".format(self.symbol_table)
 
     def add_object(self, key, new_obj):
-        self.symbol_table[key] = new_obj
-        print(self.symbol_table)
+        self.symbol_table[key] = dict()
+        self.symbol_table[key]["val"] = new_obj
+        self.symbol_table[key]["type"] = type(new_obj)
+        # print(self.symbol_table)
     
-    def get_object(self, key):
+    def get_object_val(self, key):
         try:
-            return self.symbol_table[key]
+            return self.symbol_table[key]["val"]
         except LookupError:
             print("Undefined name '%s'" % key)
             return 0
@@ -119,7 +121,7 @@ class Call(Node):
 
     def execute(self):
         if self.name:
-            return symbol_table.get_object(str(self.name))
+            return symbol_table.get_object_val(str(self.name))
 
 class ExprStmt(Node):
     """exprStmt : simpleExpr
@@ -326,7 +328,7 @@ class OutputStmt(Node):
         if (self.printElement[0] == '"' or self.printElement[0] == "'"):
             print(self.printElement)
         else:
-            print(symbol_table.get_object(str(self.printElement)))
+            print(symbol_table.get_object_val(str(self.printElement)))
 
 class CommentLine(Node):
     """commentLine  : LINE_COMMENT
