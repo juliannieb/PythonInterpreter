@@ -148,7 +148,13 @@ class SelectionStmt(Node):
 class IterationStmt(Node):
     """iterationStmt    : WHILE simpleExpr COL suite
     """
-    pass
+    def __init__(self, simpleExpr, suite):
+        self.simpleExpr = simpleExpr
+        self.suite = suite
+    
+    def execute(self):
+        while self.simpleExpr.execute():
+            self.suite.execute()
 
 class Return(Node):
     """returnStmt   : RETURN

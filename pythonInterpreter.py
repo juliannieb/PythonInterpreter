@@ -228,7 +228,7 @@ def p_selection_stmt(p):
 def p_iteration_stmt(p):
     """iterationStmt    : WHILE simpleExpr COL suite
     """
-    pass
+    p[0] = iast.IterationStmt(p[2], p[4])
 
 def p_return(p):
     """returnStmt   : RETURN
